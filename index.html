@@ -26,40 +26,24 @@
 
     <!-- Premium Preloader -->
     <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
-        <div class="preloader-panel preloader-panel-top"></div>
-        <div class="preloader-panel preloader-panel-bottom"></div>
-
         <div class="preloader-inner" role="status" aria-label="Website loading">
-            <div class="preloader-visual">
-                <svg class="preloader-orbit-svg" viewBox="0 0 220 220" aria-hidden="true">
-                    <circle class="preloader-orbit-track" cx="110" cy="110" r="84"></circle>
-                    <circle class="preloader-orbit-progress" cx="110" cy="110" r="84"></circle>
-                    <circle class="preloader-metal-ring" cx="110" cy="110" r="70"></circle>
-                    <path class="preloader-route-line" d="M62 119 C88 74, 138 72, 160 110 C141 137, 100 145, 72 125"></path>
-                    <ellipse class="preloader-globe-lat lat-1" cx="110" cy="110" rx="48" ry="18"></ellipse>
-                    <ellipse class="preloader-globe-lat lat-2" cx="110" cy="110" rx="48" ry="34"></ellipse>
-                    <line class="preloader-globe-long long-1" x1="110" y1="58" x2="110" y2="162"></line>
-                    <ellipse class="preloader-globe-long long-2" cx="110" cy="110" rx="18" ry="52"></ellipse>
-                    <ellipse class="preloader-globe-long long-3" cx="110" cy="110" rx="32" ry="52"></ellipse>
-                    <g class="preloader-globe-core">
-                        <circle class="preloader-globe-fill" cx="110" cy="110" r="50"></circle>
-                        <path class="preloader-continent" d="M87 86 C97 76, 118 77, 128 90 C136 101, 133 120, 118 129 C102 138, 86 132, 80 116 C76 103, 78 93, 87 86 Z"></path>
-                        <path class="preloader-continent continent-2" d="M121 126 C128 121, 137 122, 142 128 C146 134, 143 144, 135 147 C127 150, 120 145, 118 138 Z"></path>
-                        <path class="preloader-leaf-stem" d="M92 70 C86 60, 84 50, 86 40"></path>
-                        <path class="preloader-leaf" d="M88 42 C72 46, 64 59, 67 75 C82 74, 94 66, 98 50 C99 46, 95 42, 88 42 Z"></path>
-                    </g>
-                </svg>
-
-                <span class="preloader-dot dot-steel" aria-hidden="true"></span>
-                <span class="preloader-dot dot-metals" aria-hidden="true"></span>
-                <span class="preloader-dot dot-rubber" aria-hidden="true"></span>
-                <span class="preloader-dot dot-plastics" aria-hidden="true"></span>
+            <div class="loader-visual-wrapper">
+                <div class="loader-pulse-glow"></div>
+                <div class="loader-ring loader-ring-outer"></div>
+                <div class="loader-ring loader-ring-inner"></div>
+                <div class="loader-leaf-container">
+                    <i class="fa-solid fa-leaf loader-leaf-icon"></i>
+                </div>
             </div>
 
-            <div class="preloader-progress-wrap">
-                <div class="preloader-progress-value" id="preloader-progress-value">0%</div>
+            <div class="loader-text-wrapper">
                 <div class="preloader-company">Green Earth Commodity FZ LLC</div>
-                <p class="preloader-tagline">Connecting Resources. Creating Sustainable Value.</p>
+                <p class="preloader-tagline">Sustainable Global Commodity Trading</p>
+                <div class="loader-dots">
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                </div>
             </div>
         </div>
     </div>

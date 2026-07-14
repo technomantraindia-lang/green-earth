@@ -5,136 +5,231 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('site-preloader');
-    const preloaderProgressValue = document.getElementById('preloader-progress-value');
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hasSeenPreloader = sessionStorage.getItem('greenearth_preloader_seen') === 'true';
-    let preloaderClosed = false;
-    let preloaderProgress = 0;
-    let progressTimer = null;
-    let safetyTimer = null;
+
+    // Elements to animate on page reveal
+    const header = document.querySelector('custom-header');
+    const heading = document.querySelector('#about-us .about-heading');
+    const paragraph = document.querySelector('#about-us .about-lead-green');
+    const btn = document.querySelector('#about-us .about-btn-pill');
+    const heroImage = document.querySelector('.about-img-box img');
+    
+    // Additional secondary elements we can animate for a complete feel:
+    const tag = document.querySelector('#about-us .about-tag-container');
+    const textEls = document.querySelectorAll('#about-us .about-text');
+    const badge = document.querySelector('#about-us .about-badge-card-overlay');
+    const border = document.querySelector('#about-us .about-border-overlay');
+    const features = document.querySelector('#about-us .about-features-card');
+    const blobs = document.querySelectorAll('.bg-blob');
 
     if (preloader) {
-        startPreloader();
+        initPreloader();
     }
 
-    function startPreloader() {
+    function initPreloader() {
+        // Prevent scrolling while loader is active
+        document.body.classList.add('preloader-active');
+
         if (isReducedMotion) {
-            preloader.classList.add('is-animating');
-        } else {
-            requestAnimationFrame(() => {
-                preloader.classList.add('is-animating');
-            });
+            // Skips complex animations for reduced-motion users
+            setTimeout(() => {
+                closePreloader(300);
+            }, 500);
+            return;
         }
 
-        const minimumDuration = isReducedMotion ? 350 : (hasSeenPreloader ? 360 : 1650);
-        const maximumDuration = isReducedMotion ? 900 : (hasSeenPreloader ? 900 : 2300);
+        if (hasSeenPreloader) {
+            // Same-session transition: 250-400ms fade-out of overlay
+            setTimeout(() => {
+                closePreloader(350);
+            }, 100);
+            return;
+        }
+
+        // First visit: Keep loader visible for approximately 3.0 seconds (3000ms)
+        // Wait for page load or a safety timeout (max 3700ms)
         const startTime = Date.now();
+        const minDuration = 3000;
+        let preloaderFinished = false;
 
-        progressTimer = window.setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const cappedTarget = hasSeenPreloader ? 92 : 96;
-            const durationFactor = Math.min(elapsed / minimumDuration, 1);
-            const nextValue = Math.min(cappedTarget, Math.round(durationFactor * cappedTarget));
-            updatePreloaderProgress(nextValue);
-        }, isReducedMotion ? 120 : 40);
+        function finishPreloader() {
+            if (preloaderFinished) return;
+            preloaderFinished = true;
 
-        const completeWhenReady = () => {
             const elapsed = Date.now() - startTime;
-            const waitRemaining = Math.max(minimumDuration - elapsed, 0);
-            window.setTimeout(() => finishPreloader(), waitRemaining);
-        };
+            const remaining = Math.max(0, minDuration - elapsed);
+
+            setTimeout(() => {
+                sessionStorage.setItem('greenearth_preloader_seen', 'true');
+                closePreloader(600); // 600ms fade out transition matching CSS
+            }, remaining);
+        }
 
         if (document.readyState === 'complete') {
-            completeWhenReady();
-        } else {
-            window.addEventListener('load', completeWhenReady, { once: true });
-        }
-
-        safetyTimer = window.setTimeout(() => {
             finishPreloader();
-        }, maximumDuration);
+        } else {
+            window.addEventListener('load', finishPreloader, { once: true });
+        }
+
+        // Safety timeout in case load event gets delayed
+        setTimeout(finishPreloader, 3700);
     }
 
-    function updatePreloaderProgress(value) {
-        preloaderProgress = Math.max(preloaderProgress, Math.min(100, value));
-        if (preloaderProgressValue) {
-            preloaderProgressValue.textContent = `${preloaderProgress}%`;
-        }
-        const preloaderOrbitProgress = document.querySelector('.preloader-orbit-progress');
-        if (preloaderOrbitProgress) {
-            const circumference = 528;
-            const offset = circumference - ((preloaderProgress / 100) * circumference);
-            preloaderOrbitProgress.style.strokeDashoffset = `${offset}`;
-        }
-    }
+    function closePreloader(fadeDuration) {
+        if (!preloader) return;
+        
+        // Hide the loader visually by adding the CSS fade-out class
+        preloader.classList.add('fade-out');
 
-    function finishPreloader() {
-        if (!preloader || preloaderClosed) return;
-        preloaderClosed = true;
-
-        if (progressTimer) window.clearInterval(progressTimer);
-        if (safetyTimer) window.clearTimeout(safetyTimer);
-
-        updatePreloaderProgress(100);
-        sessionStorage.setItem('greenearth_preloader_seen', 'true');
-
-        preloader.classList.add('is-complete');
-
-        window.setTimeout(() => {
+        // Apply a smooth reveal sequence after fade-out transition finishes
+        setTimeout(() => {
             document.body.classList.remove('preloader-active');
-            preloader.classList.add('is-hidden');
+            preloader.style.display = 'none';
+            preloader.remove(); // Cleanly remove from DOM to prevent blocking
             animatePageEntry();
-
-            window.setTimeout(() => {
-                preloader.remove();
-            }, isReducedMotion ? 120 : 700);
-        }, isReducedMotion ? 120 : (hasSeenPreloader ? 260 : 620));
+        }, fadeDuration);
     }
 
     function animatePageEntry() {
         if (isReducedMotion) {
-            document.querySelectorAll('.reveal').forEach((element) => {
-                element.classList.add('active');
-            });
+            // Instant display for reduced motion
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            if (header) { header.style.opacity = '1'; header.style.transform = 'none'; }
+            if (heading) { heading.style.opacity = '1'; heading.style.transform = 'none'; }
+            if (paragraph) { paragraph.style.opacity = '1'; paragraph.style.transform = 'none'; }
+            if (btn) { btn.style.opacity = '1'; btn.style.transform = 'none'; }
+            if (heroImage) { heroImage.style.opacity = '1'; heroImage.style.transform = 'none'; }
             return;
         }
 
-        if (typeof gsap !== 'undefined') {
-            const entryTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        // 1. Prepare initial style properties programmatically for smooth transitions
+        const duration = hasSeenPreloader ? '0.4s' : '0.7s';
+        const delayFactor = hasSeenPreloader ? 0.5 : 1;
 
-            entryTimeline.fromTo('custom-header',
-                { y: -26, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.45 }
-            );
-
-            entryTimeline.fromTo('.bg-blob',
-                { opacity: 0, scale: 0.9 },
-                { opacity: 0.4, scale: 1, duration: 0.6, stagger: 0.08 },
-                0
-            );
-
-            entryTimeline.fromTo('.hero-bg-video',
-                { scale: 1.06, opacity: 0.72 },
-                { scale: 1.02, opacity: 1, duration: 0.95 },
-                0.05
-            );
-
-            entryTimeline.fromTo(['#about-us .about-tag-container', '#about-us .about-heading', '#about-us .about-lead-green'],
-                { y: 24, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.55, stagger: 0.08 },
-                0.18
-            );
-
-            entryTimeline.fromTo(['#about-us .about-text', '#about-us .about-features-card', '#about-us .about-btn-pill', '#about-us .about-visual-block'],
-                { y: 28, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 },
-                0.32
-            );
+        if (header) {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-15px)';
+            header.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
         }
+        
+        if (heading) {
+            heading.style.opacity = '0';
+            heading.style.transform = 'translateY(20px)';
+            heading.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        }
+
+        if (tag) {
+            tag.style.opacity = '0';
+            tag.style.transform = 'translateY(15px)';
+            tag.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        }
+
+        if (paragraph) {
+            paragraph.style.opacity = '0';
+            paragraph.style.transform = 'translateY(12px)';
+            paragraph.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        }
+
+        if (btn) {
+            btn.style.opacity = '0';
+            btn.style.transform = 'translateY(12px)';
+            btn.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        }
+
+        if (heroImage) {
+            heroImage.style.opacity = '0';
+            heroImage.style.transform = 'scale(1.03)';
+            heroImage.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        }
+
+        blobs.forEach(blob => {
+            blob.style.opacity = '0';
+            blob.style.transform = 'scale(0.92)';
+            blob.style.transition = `opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1)`;
+        });
+
+        // Other elements (paragraphs, badges) prepare
+        textEls.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(12px)';
+            el.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+        });
+        [badge, border, features].forEach(el => {
+            if (el) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(12px)';
+                el.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
+            }
+        });
+
+        // 2. Sequential reveal timeline (vanilla JS timeouts)
+        // A. Header fades down, blobs fade in softly
+        setTimeout(() => {
+            if (header) {
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }
+            blobs.forEach(blob => {
+                blob.style.opacity = '0.4';
+                blob.style.transform = 'scale(1)';
+            });
+        }, 50 * delayFactor);
+
+        // B. Hero tag and Hero heading fade upward
+        setTimeout(() => {
+            if (tag) {
+                tag.style.opacity = '1';
+                tag.style.transform = 'translateY(0)';
+            }
+            if (heading) {
+                heading.style.opacity = '1';
+                heading.style.transform = 'translateY(0)';
+            }
+        }, 150 * delayFactor);
+
+        // C. Hero image gently scales from 1.03 to 1 and fades in
+        setTimeout(() => {
+            if (heroImage) {
+                heroImage.style.opacity = '1';
+                heroImage.style.transform = 'scale(1)';
+            }
+        }, 220 * delayFactor);
+
+        // D. Hero paragraph reveals with small delay
+        setTimeout(() => {
+            if (paragraph) {
+                paragraph.style.opacity = '1';
+                paragraph.style.transform = 'translateY(0)';
+            }
+        }, 280 * delayFactor);
+
+        // E. CTA buttons and other text elements fade in
+        setTimeout(() => {
+            if (btn) {
+                btn.style.opacity = '1';
+                btn.style.transform = 'translateY(0)';
+            }
+            textEls.forEach((el, idx) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, idx * 60);
+            });
+            [badge, border, features].forEach((el, idx) => {
+                if (el) {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, idx * 80 + 100);
+                }
+            });
+        }, 360 * delayFactor);
     }
 
     /* --- STICKY HEADER SCROLL TRANSITION --- */
     const handleHeaderScroll = () => {
+        const customHeader = document.querySelector('custom-header');
         if (!customHeader) return;
         
         if (window.scrollY > 50) {
