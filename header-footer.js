@@ -1,0 +1,142 @@
+/**
+ * Green Earth Commodity FZ LLC
+ * Reusable Header and Footer Web Components (Redesigned Light Theme)
+ * 
+ * To reuse the header and footer on any page, include this script:
+ * <script src="header-footer.js" defer></script>
+ * And use the custom HTML tags:
+ * <custom-header></custom-header>
+ * <custom-footer></custom-footer>
+ */
+
+class CustomHeader extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="navbar-container">
+                <nav class="navbar">
+                    <a href="#hero" class="logo-container">
+                        <img src="image/logo.png" alt="Green Earth Logo" class="logo-img">
+                        <div class="logo-text">
+                            GREEN EARTH
+                            <span>Commodity FZ LLC</span>
+                        </div>
+                    </a>
+                    
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="#hero" class="nav-link">Home</a></li>
+                        <li><a href="#about-us" class="nav-link">About Us</a></li>
+                        <li><a href="#products" class="nav-link">Products</a></li>
+                        <li><a href="#sustainability" class="nav-link">Sustainability</a></li>
+                        <li><a href="#services" class="nav-link">Our Services</a></li>
+                        <li><a href="#why-choose-us" class="nav-link">Why Green Earth</a></li>
+                        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+                    </ul>
+                    
+                    <div class="nav-cta">
+                        <a href="#contact" class="btn btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; border-radius: 50px;">Get in Touch</a>
+                    </div>
+                    
+                    <div class="menu-toggle" id="mobile-menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </nav>
+            </div>
+        `;
+        
+        // Setup mobile menu event listeners (self-contained logic)
+        const mobileMenu = this.querySelector('#mobile-menu');
+        const navMenu = this.querySelector('#nav-menu');
+        const navLinks = this.querySelectorAll('.nav-link');
+        
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+    }
+}
+
+class CustomFooter extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <a href="#hero" class="footer-logo">
+                            <img src="image/logo.png" alt="Green Earth Logo" class="footer-logo-img">
+                            <div class="footer-logo-text">
+                                GREEN EARTH
+                                <div style="font-size: 0.6rem; font-weight: 600; color: #475569; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.25rem;">Commodity FZ LLC</div>
+                            </div>
+                        </a>
+                        <p class="footer-brand-desc">
+                            Connecting global suppliers and industrial buyers through transparent trading, efficient logistics, and custom-tailored supply chain solutions in the recycling and steel industry.
+                        </p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link-item"><a href="#hero">Home</a></li>
+                            <li class="footer-link-item"><a href="#about-us">About Us</a></li>
+                            <li class="footer-link-item"><a href="#products">Products</a></li>
+                            <li class="footer-link-item"><a href="#sustainability">Sustainability</a></li>
+                            <li class="footer-link-item"><a href="#services">Our Services</a></li>
+                            <li class="footer-link-item"><a href="#why-choose-us">Why Green Earth</a></li>
+                            <li class="footer-link-item"><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Products</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link-item"><a href="#products">Non-Prime Steel</a></li>
+                            <li class="footer-link-item"><a href="#products">Recycled Metals</a></li>
+                            <li class="footer-link-item"><a href="#products">Recycled Rubber</a></li>
+                            <li class="footer-link-item"><a href="#products">Recycled Plastics</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Registered Office</h4>
+                        <ul class="footer-contact-list">
+                            <li class="footer-contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>VUNE1239, Compass Building – Al Hulaila<br>Al Hulaila Industrial Zone – FZ<br>Ras Al Khaimah, United Arab Emirates</span>
+                            </li>
+                            <li class="footer-contact-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:Office@greenearthcommodity.com" style="color: #475569; text-decoration: none;">Office@greenearthcommodity.com</a>
+                            </li>
+                            <li class="footer-contact-item">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <a href="https://wa.me/971562050163" target="_blank" style="color: #475569; text-decoration: none;">+971 56 2050163</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Green Earth Commodity FZ LLC. All Rights Reserved.</p>
+                    <div class="footer-legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms & Conditions</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+customElements.define('custom-header', CustomHeader);
+customElements.define('custom-footer', CustomFooter);
