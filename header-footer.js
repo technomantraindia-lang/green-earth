@@ -16,10 +16,6 @@ class CustomHeader extends HTMLElement {
                 <nav class="navbar">
                     <a href="#hero" class="logo-container">
                         <img src="image/logo.png" alt="Green Earth Logo" class="logo-img">
-                        <div class="logo-text">
-                            GREEN EARTH
-                            <span>Commodity FZ LLC</span>
-                        </div>
                     </a>
                     
                     <ul class="nav-menu" id="nav-menu">

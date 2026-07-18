@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-enabled');
     const preloader = document.getElementById('site-preloader');
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hasSeenPreloader = sessionStorage.getItem('greenearth_preloader_seen') === 'true';
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (preloader) {
         initPreloader();
+    } else {
+        document.body.classList.add('page-loaded');
     }
 
     function initPreloader() {
@@ -87,145 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('preloader-active');
             preloader.style.display = 'none';
             preloader.remove(); // Cleanly remove from DOM to prevent blocking
-            animatePageEntry();
+            document.body.classList.add('page-loaded');
         }, fadeDuration);
     }
 
-    function animatePageEntry() {
-        if (isReducedMotion) {
-            // Instant display for reduced motion
-            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            if (header) { header.style.opacity = '1'; header.style.transform = 'none'; }
-            if (heading) { heading.style.opacity = '1'; heading.style.transform = 'none'; }
-            if (paragraph) { paragraph.style.opacity = '1'; paragraph.style.transform = 'none'; }
-            if (btn) { btn.style.opacity = '1'; btn.style.transform = 'none'; }
-            if (heroImage) { heroImage.style.opacity = '1'; heroImage.style.transform = 'none'; }
-            return;
-        }
-
-        // 1. Prepare initial style properties programmatically for smooth transitions
-        const duration = hasSeenPreloader ? '0.4s' : '0.7s';
-        const delayFactor = hasSeenPreloader ? 0.5 : 1;
-
-        if (header) {
-            header.style.opacity = '0';
-            header.style.transform = 'translateY(-15px)';
-            header.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-        
-        if (heading) {
-            heading.style.opacity = '0';
-            heading.style.transform = 'translateY(20px)';
-            heading.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-
-        if (tag) {
-            tag.style.opacity = '0';
-            tag.style.transform = 'translateY(15px)';
-            tag.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-
-        if (paragraph) {
-            paragraph.style.opacity = '0';
-            paragraph.style.transform = 'translateY(12px)';
-            paragraph.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-
-        if (btn) {
-            btn.style.opacity = '0';
-            btn.style.transform = 'translateY(12px)';
-            btn.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-
-        if (heroImage) {
-            heroImage.style.opacity = '0';
-            heroImage.style.transform = 'scale(1.03)';
-            heroImage.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        }
-
-        blobs.forEach(blob => {
-            blob.style.opacity = '0';
-            blob.style.transform = 'scale(0.92)';
-            blob.style.transition = `opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1)`;
-        });
-
-        // Other elements (paragraphs, badges) prepare
-        textEls.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(12px)';
-            el.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-        });
-        [badge, border, features].forEach(el => {
-            if (el) {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(12px)';
-                el.style.transition = `opacity ${duration} cubic-bezier(0.25, 1, 0.5, 1), transform ${duration} cubic-bezier(0.25, 1, 0.5, 1)`;
-            }
-        });
-
-        // 2. Sequential reveal timeline (vanilla JS timeouts)
-        // A. Header fades down, blobs fade in softly
-        setTimeout(() => {
-            if (header) {
-                header.style.opacity = '1';
-                header.style.transform = 'translateY(0)';
-            }
-            blobs.forEach(blob => {
-                blob.style.opacity = '0.4';
-                blob.style.transform = 'scale(1)';
-            });
-        }, 50 * delayFactor);
-
-        // B. Hero tag and Hero heading fade upward
-        setTimeout(() => {
-            if (tag) {
-                tag.style.opacity = '1';
-                tag.style.transform = 'translateY(0)';
-            }
-            if (heading) {
-                heading.style.opacity = '1';
-                heading.style.transform = 'translateY(0)';
-            }
-        }, 150 * delayFactor);
-
-        // C. Hero image gently scales from 1.03 to 1 and fades in
-        setTimeout(() => {
-            if (heroImage) {
-                heroImage.style.opacity = '1';
-                heroImage.style.transform = 'scale(1)';
-            }
-        }, 220 * delayFactor);
-
-        // D. Hero paragraph reveals with small delay
-        setTimeout(() => {
-            if (paragraph) {
-                paragraph.style.opacity = '1';
-                paragraph.style.transform = 'translateY(0)';
-            }
-        }, 280 * delayFactor);
-
-        // E. CTA buttons and other text elements fade in
-        setTimeout(() => {
-            if (btn) {
-                btn.style.opacity = '1';
-                btn.style.transform = 'translateY(0)';
-            }
-            textEls.forEach((el, idx) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, idx * 60);
-            });
-            [badge, border, features].forEach((el, idx) => {
-                if (el) {
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, idx * 80 + 100);
-                }
-            });
-        }, 360 * delayFactor);
-    }
+    // animatePageEntry removed - handled by CSS transitions based on body.page-loaded class
 
     /* --- STICKY HEADER SCROLL TRANSITION --- */
     const handleHeaderScroll = () => {
@@ -483,23 +352,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const DEG = Math.PI / 180;
         const locations = [
-            { name: 'United Kingdom', short: 'UK', lat: 55.0, lon: -2.5, type: 'supplier', dx: -26, dy: -12 },
-            { name: 'Germany', short: 'Germany', lat: 51.2, lon: 10.4, type: 'supplier', dx: -18, dy: -10 },
-            { name: 'Italy', short: 'Italy', lat: 42.8, lon: 12.5, type: 'supplier', dx: -16, dy: -12 },
+            { name: 'United Kingdom', short: 'UK', lat: 55.0, lon: -2.5, type: 'supplier', dx: -15, dy: -15 },
+            { name: 'Germany', short: 'Germany', lat: 51.2, lon: 10.4, type: 'supplier', dx: 12, dy: -10 },
+            { name: 'Italy', short: 'Italy', lat: 42.8, lon: 12.5, type: 'supplier', dx: 12, dy: 14 },
             { name: 'United States', short: 'USA', lat: 39.8, lon: -98.6, type: 'supplier', dx: -18, dy: -12 },
-            { name: 'UAE', short: 'UAE', lat: 24.3, lon: 54.4, type: 'hub', dx: -12, dy: -12 },
-            { name: 'India', short: 'India', lat: 22.4, lon: 78.9, type: 'customer', dx: -14, dy: -12 },
-            { name: 'Pakistan', short: 'Pakistan', lat: 30.4, lon: 69.3, type: 'customer', dx: -18, dy: -12 },
-            { name: 'Bangladesh', short: 'Bangladesh', lat: 23.7, lon: 90.4, type: 'customer', dx: 10, dy: -12 },
-            { name: 'China', short: 'China', lat: 35.8, lon: 104.2, type: 'customer', dx: 10, dy: -10 },
-            { name: 'Vietnam', short: 'Vietnam', lat: 16.3, lon: 107.8, type: 'customer', dx: 10, dy: -6 },
-            { name: 'Thailand', short: 'Thailand', lat: 15.8, lon: 101.0, type: 'customer', dx: 12, dy: 8 },
-            { name: 'Malaysia', short: 'Malaysia', lat: 4.2, lon: 102.0, type: 'customer', dx: 10, dy: 10 },
-            { name: 'Singapore', short: 'Singapore', lat: 1.3, lon: 103.8, type: 'customer', dx: 10, dy: 18 },
-            { name: 'Indonesia', short: 'Indonesia', lat: -2.4, lon: 118.0, type: 'customer', dx: 10, dy: 10 },
-            { name: 'Taiwan', short: 'Taiwan', lat: 23.7, lon: 121.0, type: 'customer', dx: 10, dy: -12 },
-            { name: 'South Korea', short: 'S. Korea', lat: 36.2, lon: 127.9, type: 'customer', dx: 10, dy: -12 },
-            { name: 'Sri Lanka', short: 'Sri Lanka', lat: 7.8, lon: 80.7, type: 'customer', dx: -12, dy: 16 }
+            { name: 'UAE', short: 'UAE', lat: 26.0, lon: 48.0, type: 'hub', dx: -36, dy: -10 },
+            { name: 'Pakistan', short: 'Pakistan', lat: 33.0, lon: 63.0, type: 'customer', dx: -32, dy: -16 },
+            { name: 'India', short: 'India', lat: 19.0, lon: 77.0, type: 'customer', dx: -18, dy: 18 },
+            { name: 'Bangladesh', short: 'Bangladesh', lat: 25.0, lon: 92.0, type: 'customer', dx: 12, dy: -14 },
+            { name: 'China', short: 'China', lat: 41.0, lon: 100.0, type: 'customer', dx: -18, dy: -18 },
+            { name: 'Vietnam', short: 'Vietnam', lat: 16.0, lon: 111.0, type: 'customer', dx: 14, dy: -4 },
+            { name: 'Thailand', short: 'Thailand', lat: 14.0, lon: 98.0, type: 'customer', dx: -36, dy: 12 },
+            { name: 'Malaysia', short: 'Malaysia', lat: 2.0, lon: 100.0, type: 'customer', dx: -36, dy: -4 },
+            { name: 'Singapore', short: 'Singapore', lat: -1.0, lon: 104.0, type: 'customer', dx: 12, dy: 16 },
+            { name: 'Indonesia', short: 'Indonesia', lat: -6.0, lon: 120.0, type: 'customer', dx: 12, dy: 12 },
+            { name: 'Taiwan', short: 'Taiwan', lat: 24.0, lon: 124.0, type: 'customer', dx: 14, dy: 4 },
+            { name: 'South Korea', short: 'S. Korea', lat: 40.0, lon: 132.0, type: 'customer', dx: 12, dy: -12 },
+            { name: 'Sri Lanka', short: 'Sri Lanka', lat: 4.0, lon: 78.0, type: 'customer', dx: -30, dy: 18 }
         ];
 
         const routePairs = [
@@ -548,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.width = width * dpr;
             canvas.height = height * dpr;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            radius = Math.min(width, height) * 0.33;
+            radius = Math.min(width, height) * 0.45;
         }
 
         function buildLandPoints(polygons, step) {
@@ -651,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function drawRoutes() {
-            routePairs.forEach(([fromName, toName]) => {
+            routePairs.forEach(([fromName, toName], index) => {
                 const from = locations.find((item) => item.name === fromName);
                 const to = locations.find((item) => item.name === toName);
                 if (!from || !to) return;
@@ -669,20 +538,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     denseRoute.push(...interpolateRoute(routePoints[i], routePoints[i + 1], 18));
                 }
 
-                drawPolyline(denseRoute, 'rgba(124, 224, 255, 0.45)', 1.1, 0.85);
+                const alphaPulse = 0.35 + Math.sin(Date.now() * 0.002 + index) * 0.15;
+                drawPolyline(denseRoute, `rgba(124, 224, 255, ${alphaPulse})`, 1.1, alphaPulse);
             });
         }
 
         function drawGlobe() {
             ctx.clearRect(0, 0, width, height);
 
-            const glow = ctx.createRadialGradient(width / 2, height / 2, radius * 0.3, width / 2, height / 2, radius * 1.6);
-            glow.addColorStop(0, 'rgba(18, 117, 145, 0.18)');
-            glow.addColorStop(1, 'rgba(18, 117, 145, 0)');
-            ctx.fillStyle = glow;
-            ctx.beginPath();
-            ctx.arc(width / 2, height / 2, radius * 1.75, 0, Math.PI * 2);
-            ctx.fill();
+
 
             ctx.save();
             ctx.beginPath();
@@ -760,7 +624,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 ctx.beginPath();
                 ctx.fillStyle = palette.glow;
-                ctx.arc(location.x, location.y, radiusDot + 5, 0, Math.PI * 2);
+                const pulse = 1.0 + Math.sin(Date.now() * 0.003 + location.lat) * 0.25;
+                ctx.arc(location.x, location.y, (radiusDot + 5) * pulse, 0, Math.PI * 2);
                 ctx.fill();
 
                 ctx.beginPath();
@@ -838,260 +703,145 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    /* --- GSAP WHY CHOOSE US ANIMATIONS --- */
-    if (typeof gsap !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
+    /* --- CUSTOM PREMIUM INTERSECTION OBSERVER SYSTEM --- */
+    const premiumRevealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .reveal-line-by-line');
+    
+    if (premiumRevealElements.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -8% 0px',
+            threshold: 0.02
+        };
 
-        gsap.to('.hero-bg-video', {
-            yPercent: 10,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#hero',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            }
-        });
-
-        gsap.fromTo('.products-header',
-            { opacity: 0, y: 40, filter: 'blur(8px)' },
-            {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#products',
-                    start: 'top 78%'
+        const premiumRevealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const delay = el.getAttribute('data-delay') || 0;
+                    el.style.setProperty('--delay', `${delay}ms`);
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                    
+                    // Trigger statistics count-up
+                    if (el.classList.contains('why-card') || el.classList.contains('about-content') || el.classList.contains('why-hero-panel')) {
+                        const countUpElements = el.querySelectorAll('.why-card-stat, .about-badge-large-num, .why-orbit-node strong');
+                        countUpElements.forEach(statEl => {
+                            if (!statEl.classList.contains('counted')) {
+                                statEl.classList.add('counted');
+                                animateCountUp(statEl);
+                            }
+                        });
+                    }
                 }
-            }
-        );
+            });
+        }, observerOptions);
 
-        gsap.fromTo('.product-card-mockup',
-            { opacity: 0, y: 70, rotateX: -10, transformOrigin: 'top center' },
-            {
-                opacity: 1,
-                y: 0,
-                rotateX: 0,
-                duration: 1,
-                stagger: 0.12,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: '.products-grid',
-                    start: 'top 80%'
-                }
-            }
-        );
-
-        gsap.fromTo('.services-header',
-            { opacity: 0, y: 36 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#services',
-                    start: 'top 80%'
-                }
-            }
-        );
-
-        gsap.fromTo('.network-content',
-            { opacity: 0, x: -40, filter: 'blur(8px)' },
-            {
-                opacity: 1,
-                x: 0,
-                filter: 'blur(0px)',
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#global-network',
-                    start: 'top 78%'
-                }
-            }
-        );
-
-        gsap.fromTo('.network-visual',
-            { opacity: 0, x: 40, scale: 0.97 },
-            {
-                opacity: 1,
-                x: 0,
-                scale: 1,
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#global-network',
-                    start: 'top 78%'
-                }
-            }
-        );
-
-        gsap.fromTo('.service-card-mockup:not(.hidden-service)',
-            { opacity: 0, y: 55, scale: 0.96 },
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.9,
-                stagger: 0.1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.services-grid',
-                    start: 'top 82%'
-                }
-            }
-        );
-
-        // Animated world map lines & background fade-in
-        gsap.fromTo('.why-background', 
-            { opacity: 0 },
-            { 
-                opacity: 1, 
-                duration: 1.5,
-                ease: 'sine.out',
-                scrollTrigger: {
-                    trigger: '#why-choose-us',
-                    start: 'top 80%',
-                }
-            }
-        );
-
-        gsap.fromTo('.why-hero-panel',
-            { opacity: 0, y: 50, scale: 0.98, filter: 'blur(8px)' },
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter: 'blur(0px)',
-                duration: 1.1,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: '.why-hero-panel',
-                    start: 'top 82%'
-                }
-            }
-        );
-
-        gsap.fromTo('.why-signal-card',
-            { opacity: 0, y: 45, scale: 0.97 },
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.9,
-                stagger: 0.12,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.why-signal-band',
-                    start: 'top 82%'
-                }
-            }
-        );
-
-        // Header slide upward with blur
-        gsap.fromTo('.why-section-header-gsap', 
-            { opacity: 0, y: 50, filter: 'blur(10px)' },
-            { 
-                opacity: 1, 
-                y: 0, 
-                filter: 'blur(0px)',
-                duration: 1.2,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: '#why-choose-us',
-                    start: 'top 80%',
-                }
-            }
-        );
-
-        // Expand header line decoration
-        gsap.fromTo('.why-section-line-gsap', 
-            { width: 0 },
-            { 
-                width: '120px', 
-                duration: 1.2,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '#why-choose-us',
-                    start: 'top 80%',
-                }
-            }
-        );
-
-        // Staggered cards entrance: left/right/bottom shifts, scale, opacity, blur
-        const whyCards = gsap.utils.toArray('.why-card');
-        whyCards.forEach((card, index) => {
-            let initialX = 0;
-            let initialY = 60;
-            
-            // Stagger left / right / bottom entrance depending on column positions
-            if (index % 3 === 0) {
-                initialX = -45;
-            } else if (index % 3 === 2) {
-                initialX = 45;
-            }
-            
-            gsap.fromTo(card,
-                { 
-                    opacity: 0, 
-                    x: initialX, 
-                    y: initialY, 
-                    scale: 0.92, 
-                    filter: 'blur(8px)' 
-                },
-                {
-                    opacity: 1,
-                    x: 0,
-                    y: 0,
-                    scale: 1,
-                    filter: 'blur(0px)',
-                    duration: 1.2,
-                    ease: 'power4.out',
-                    scrollTrigger: {
-                        trigger: '#why-choose-us',
-                        start: 'top 70%',
-                    },
-                    delay: index * 0.15
-                }
-            );
-        });
-
-        // Bottom CTA entrance
-        gsap.fromTo('.why-cta-container',
-            { opacity: 0, y: 40 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.why-cta-container',
-                    start: 'top 85%'
-                }
-            }
-        );
+        premiumRevealElements.forEach(el => premiumRevealObserver.observe(el));
     }
 
-    /* --- LIGHTWEIGHT POINTER DEPTH EFFECTS --- */
-    const interactiveCards = document.querySelectorAll('.product-card-mockup, .service-card-mockup, .network-detail-card, .why-signal-card, .why-orbit-node');
-    interactiveCards.forEach((card) => {
-        card.addEventListener('mousemove', (event) => {
-            if (window.innerWidth <= 991) return;
+    function animateCountUp(element) {
+        const firstChild = element.firstChild;
+        if (firstChild && firstChild.nodeType === Node.TEXT_NODE) {
+            const text = firstChild.textContent;
+            const numberMatch = text.match(/\d+/);
+            if (numberMatch) {
+                const targetValue = parseInt(numberMatch[0], 10);
+                const suffix = text.replace(numberMatch[0], '');
+                const duration = 1200;
+                const startTime = performance.now();
+                
+                function update(timestamp) {
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const easeProgress = progress * (2 - progress);
+                    const current = Math.floor(easeProgress * targetValue);
+                    firstChild.textContent = current + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        firstChild.textContent = text;
+                    }
+                }
+                requestAnimationFrame(update);
+                return;
+            }
+        }
+        
+        const text = element.textContent;
+        const numberMatch = text.match(/\d+/);
+        if (!numberMatch) return;
+        const targetValue = parseInt(numberMatch[0], 10);
+        const suffix = text.replace(numberMatch[0], '');
+        const duration = 1200;
+        const startTime = performance.now();
+        
+        function updateSimple(timestamp) {
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const easeProgress = progress * (2 - progress);
+            const current = Math.floor(easeProgress * targetValue);
+            element.textContent = current + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(updateSimple);
+            } else {
+                element.textContent = text;
+            }
+        }
+        requestAnimationFrame(updateSimple);
+    }
 
+    /* --- ABOUT IMAGE 3D TILT EFFECT --- */
+    const aboutImgBox = document.querySelector('.about-img-box');
+    if (aboutImgBox) {
+        aboutImgBox.addEventListener('mousemove', (e) => {
+            if (window.innerWidth <= 991 || isReducedMotion) return;
+            const rect = aboutImgBox.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const rotateY = ((x / rect.width) - 0.5) * 4; // max 2 degrees
+            const rotateX = (0.5 - (y / rect.height)) * 4; // max 2 degrees
+            aboutImgBox.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+            aboutImgBox.style.transition = 'transform 0.1s ease';
+        });
+        aboutImgBox.addEventListener('mouseleave', () => {
+            aboutImgBox.style.transform = '';
+            aboutImgBox.style.transition = 'transform 0.4s ease';
+        });
+    }
+
+    /* --- SUSTAINABILITY GLOBE SCROLL ROTATION --- */
+    const susGlobe = document.querySelector('.sus-globe-center');
+    const susSection = document.getElementById('sustainability');
+    if (susGlobe && susSection) {
+        window.addEventListener('scroll', () => {
+            if (isReducedMotion) return;
+            const rect = susSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const scrolledFraction = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                const rotation = (scrolledFraction - 0.5) * 6; // rotates between -3deg and +3deg
+                susGlobe.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            }
+        });
+    }
+
+    /* --- MOUSE GLOW & PERSPECTIVE TILT TRACKER FOR CARDS --- */
+    const glowCards = document.querySelectorAll('.why-card, .service-card-mockup, .network-detail-card');
+    glowCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            const rotateY = ((x / rect.width) - 0.5) * 8;
-            const rotateX = (0.5 - (y / rect.height)) * 8;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            if (window.innerWidth <= 991 || isReducedMotion) return;
+            const rotateY = ((x / rect.width) - 0.5) * 5;
+            const rotateX = (0.5 - (y / rect.height)) * 5;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            card.style.transition = 'transform 0.1s ease';
         });
 
         card.addEventListener('mouseleave', () => {
             card.style.transform = '';
+            card.style.transition = 'transform 0.4s ease';
         });
     });
-
 });

@@ -15,9 +15,7 @@
     <!-- Reusable Header/Footer Component JS -->
     <script src="header-footer.js" defer></script>
     
-    <!-- GSAP & ScrollTrigger Animation Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     
     <!-- Main Interactivity and Animation JS -->
     <script src="app.js" defer></script>
@@ -66,7 +64,7 @@
     <section id="about-us" class="section about-section">
         <div class="container">
             <div class="about-wrapper">
-                <div class="about-visual-block reveal">
+                <div class="about-visual-block reveal-left">
                     <!-- SVG Clip Path Definition for Responsive Wave Layout (Inset to avoid clipping) -->
                     <svg width="0" height="0" style="position: absolute;">
                         <defs>
@@ -98,13 +96,16 @@
                     </div>
                 </div>
                 
-                <div class="about-content reveal reveal-delay-1">
+                <div class="about-content reveal-right" data-delay="150">
                     <div class="about-tag-container">
                         <span class="about-tag">ABOUT US</span>
                         <div class="about-tag-line"></div>
                     </div>
                     
-                    <h2 class="about-heading">Built on Trust,<br>Sourced with Integrity</h2>
+                    <h2 class="about-heading reveal-line-by-line">
+                        <span class="line-wrapper"><span class="line-text">Built on Trust,</span></span><br>
+                        <span class="line-wrapper"><span class="line-text">Sourced with Integrity</span></span>
+                    </h2>
                     
                     <div class="about-divider"></div>
                     
@@ -149,7 +150,7 @@
     <!-- PRODUCTS SECTION -->
     <section id="products" class="section products-section">
         <div class="container">
-            <div class="section-header products-header reveal">
+            <div class="section-header products-header reveal-up">
                 <div class="products-kicker">PRODUCTS PORTFOLIO</div>
                 <div class="products-divider" aria-hidden="true">
                     <span></span>
@@ -162,7 +163,7 @@
             
             <div class="products-grid">
                 <!-- Card 1 -->
-                <div class="product-card-mockup reveal">
+                <div class="product-card-mockup reveal-left" data-delay="0">
                     <div class="product-card-img-box">
                         <img src="image/non_prime_steel.png" alt="Non-Prime Steel">
                     </div>
@@ -183,7 +184,7 @@
                 </div>
                 
                 <!-- Card 2 -->
-                <div class="product-card-mockup reveal reveal-delay-1">
+                <div class="product-card-mockup reveal-up" data-delay="120">
                     <div class="product-card-img-box">
                         <img src="image/recycled_metals.png" alt="Recycled Metals">
                     </div>
@@ -206,7 +207,7 @@
                 </div>
                 
                 <!-- Card 3 -->
-                <div class="product-card-mockup reveal reveal-delay-2">
+                <div class="product-card-mockup reveal-up" data-delay="240">
                     <div class="product-card-img-box">
                         <img src="image/recycled_rubber.png" alt="Recycled Rubber">
                     </div>
@@ -227,7 +228,7 @@
                 </div>
                 
                 <!-- Card 4 -->
-                <div class="product-card-mockup reveal reveal-delay-3">
+                <div class="product-card-mockup reveal-right" data-delay="360">
                     <div class="product-card-img-box">
                         <img src="image/recycled_plastics.png" alt="Recycled Plastics">
                     </div>
@@ -254,27 +255,30 @@
     <section id="sustainability" class="section sustainability-section">
         <div class="container">
             <div class="sustainability-wrapper">
-                <div class="sustainability-content reveal">
+                <div class="sustainability-content reveal-left">
                     <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
                         <span style="color: var(--secondary-color); font-size: 0.95rem;"><i class="fa-solid fa-leaf"></i></span>
                         <span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--primary-color); letter-spacing: 0.1em; text-transform: uppercase;">SUSTAINABILITY</span>
                         <span style="width: 30px; height: 1px; background-color: #b89c66;"></span>
                     </div>
                     
-                    <h2 class="sustainability-heading">At the Heart of<br>Everything We Do</h2>
+                    <h2 class="sustainability-heading reveal-line-by-line">
+                        <span class="line-wrapper"><span class="line-text">At the Heart of</span></span><br>
+                        <span class="line-wrapper"><span class="line-text">Everything We Do</span></span>
+                    </h2>
                     
                     <div class="sustainability-intro-block" style="margin-bottom: 2rem;">
-                        <p class="sustainability-lead">At Green Earth Commodity FZ LLC, sustainability is at the heart of everything we do. We believe that responsible recycling and efficient resource management are essential to building a cleaner, greener, and more sustainable future.</p>
+                        <p class="sustainability-lead reveal-up" data-delay="100">At Green Earth Commodity FZ LLC, sustainability is at the heart of everything we do. We believe that responsible recycling and efficient resource management are essential to building a cleaner, greener, and more sustainable future.</p>
                         
-                        <p class="sustainability-subtext">By facilitating the global trade of recycled metals, rubber, plastics, and non-prime steel products, we help extend the life cycle of valuable materials, reduce landfill waste, conserve natural resources, and minimize the environmental impact associated with the production of virgin raw materials.</p>
+                        <p class="sustainability-subtext reveal-up" data-delay="200">By facilitating the global trade of recycled metals, rubber, plastics, and non-prime steel products, we help extend the life cycle of valuable materials, reduce landfill waste, conserve natural resources, and minimize the environmental impact associated with the production of virgin raw materials.</p>
                         
-                        <p class="sustainability-subtext">Our commitment to sustainability goes beyond trading. We strive to work with responsible suppliers, promote ethical sourcing practices, optimize logistics to improve supply chain efficiency, and support industries that embrace the principles of the circular economy.</p>
+                        <p class="sustainability-subtext reveal-up" data-delay="300">Our commitment to sustainability goes beyond trading. We strive to work with responsible suppliers, promote ethical sourcing practices, optimize logistics to improve supply chain efficiency, and support industries that embrace the principles of the circular economy.</p>
                         
-                        <p class="sustainability-subtext">Through innovation, collaboration, and responsible business practices, Green Earth Commodity FZ LLC is dedicated to creating long-term environmental, economic, and social value for our customers, partners, and communities.</p>
+                        <p class="sustainability-subtext reveal-up" data-delay="400">Through innovation, collaboration, and responsible business practices, Green Earth Commodity FZ LLC is dedicated to creating long-term environmental, economic, and social value for our customers, partners, and communities.</p>
                     </div>
                 </div>
                 
-                <div class="sustainability-visual-box reveal reveal-delay-1">
+                <div class="sustainability-visual-box reveal-right" data-delay="150">
                     <div class="sus-interactive-box active-node-1">
                         <!-- Orbit Rotating Lines -->
                         <div class="sus-orbit-line-outer"></div>
@@ -358,7 +362,7 @@
         <div class="container">
             <div class="network-layout">
                 <div class="network-top-row">
-                    <div class="network-content reveal">
+                    <div class="network-content reveal-left">
                         <div class="network-tag-row">
                             <span class="network-tag">Global Network</span>
                             <span class="network-tag-line"></span>
@@ -368,7 +372,7 @@
                         <p class="network-intro">We connect dependable supplier markets with high-demand manufacturing and recycling destinations across Asia and the Far East, combining sourcing discipline, market intelligence, and experienced execution.</p>
                     </div>
 
-                    <div class="network-visual reveal reveal-delay-1">
+                    <div class="network-visual reveal-right" data-delay="150">
                         <div class="network-globe-shell">
                             <div class="trade-globe-stage" id="trade-globe-stage">
                                 <canvas id="trade-globe-canvas" class="trade-globe-canvas" aria-label="Interactive globe showing Green Earth supplier and customer countries"></canvas>
@@ -379,21 +383,21 @@
 
                 <div class="network-showcase">
                     <div class="network-detail-grid">
-                        <article class="network-detail-card reveal reveal-delay-1">
+                        <article class="network-detail-card reveal-up" data-delay="100">
                             <span class="network-card-num">01</span>
                             <div class="network-card-icon"><i class="fa-solid fa-globe"></i></div>
                             <h3>Global Sourcing Network</h3>
                             <p>We source high-quality recycled materials from trusted suppliers across the United Kingdom, Europe, and the United States, ensuring consistent quality, competitive pricing, and reliable supply through long-term strategic partnerships.</p>
                         </article>
 
-                        <article class="network-detail-card reveal reveal-delay-2">
+                        <article class="network-detail-card reveal-up" data-delay="220">
                             <span class="network-card-num">02</span>
                             <div class="network-card-icon"><i class="fa-solid fa-earth-asia"></i></div>
                             <h3>Global Sales &amp; Distribution</h3>
                             <p>Our products are supplied to customers throughout Asia and the Far East, including India, Pakistan, China, Vietnam, Thailand, Malaysia, Indonesia, Taiwan, South Korea, and other key manufacturing and recycling markets.</p>
                         </article>
 
-                        <article class="network-detail-card reveal reveal-delay-3">
+                        <article class="network-detail-card reveal-up" data-delay="340">
                             <span class="network-card-num">03</span>
                             <div class="network-card-icon"><i class="fa-solid fa-ship"></i></div>
                             <h3>Trade, Shipping &amp; Execution</h3>
@@ -408,7 +412,7 @@
     <!-- OUR SERVICES -->
     <section id="services" class="section services-section">
         <div class="container">
-            <div class="section-header services-header reveal">
+            <div class="section-header services-header reveal-up">
                 <span class="section-tag">Our Services</span>
                 <h2 class="section-title">End-to-End Trading &amp; Logistics Solutions</h2>
                 <p class="section-subtitle">Connecting trusted suppliers with manufacturers, recyclers, and industrial consumers across global markets with complete professionalism.</p>
@@ -416,7 +420,7 @@
             
             <div class="services-grid">
                 <!-- Service 1 -->
-                <div class="service-card-mockup reveal">
+                <div class="service-card-mockup reveal-up" data-delay="100">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">01</span>
                     <div class="service-card-icon-wrap">
@@ -430,7 +434,7 @@
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card-mockup reveal reveal-delay-1">
+                <div class="service-card-mockup reveal-up" data-delay="200">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">02</span>
                     <div class="service-card-icon-wrap">
@@ -444,7 +448,7 @@
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card-mockup reveal reveal-delay-2">
+                <div class="service-card-mockup reveal-up" data-delay="300">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">03</span>
                     <div class="service-card-icon-wrap">
@@ -458,7 +462,7 @@
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="service-card-mockup reveal reveal-delay-3">
+                <div class="service-card-mockup reveal-up" data-delay="400">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">04</span>
                     <div class="service-card-icon-wrap">
@@ -472,7 +476,7 @@
                 </div>
                 
                 <!-- Service 5 (Hidden Initially) -->
-                <div class="service-card-mockup hidden-card hidden-service" style="opacity: 0; transform: translateY(20px);">
+                <div class="service-card-mockup hidden-card hidden-service reveal-up" data-delay="100">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">05</span>
                     <div class="service-card-icon-wrap">
@@ -486,7 +490,7 @@
                 </div>
                 
                 <!-- Service 6 (Hidden Initially) -->
-                <div class="service-card-mockup hidden-card hidden-service" style="opacity: 0; transform: translateY(20px);">
+                <div class="service-card-mockup hidden-card hidden-service reveal-up" data-delay="200">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">06</span>
                     <div class="service-card-icon-wrap">
@@ -500,7 +504,7 @@
                 </div>
                 
                 <!-- Service 7 (Hidden Initially) -->
-                <div class="service-card-mockup hidden-card hidden-service" style="opacity: 0; transform: translateY(20px);">
+                <div class="service-card-mockup hidden-card hidden-service reveal-up" data-delay="300">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">07</span>
                     <div class="service-card-icon-wrap">
@@ -514,7 +518,7 @@
                 </div>
                 
                 <!-- Service 8 (Hidden Initially) -->
-                <div class="service-card-mockup hidden-card hidden-service" style="opacity: 0; transform: translateY(20px);">
+                <div class="service-card-mockup hidden-card hidden-service reveal-up" data-delay="400">
                     <div class="service-card-beam"></div>
                     <span class="service-card-num">08</span>
                     <div class="service-card-icon-wrap">
@@ -581,14 +585,14 @@
         </div>
 
         <div class="container" style="position: relative; z-index: 2;">
-            <div class="section-header why-section-header-gsap why-header-shell" style="opacity: 0; transform: translateY(40px);">
+            <div class="section-header why-header-shell reveal-up">
                 <span class="section-tag" style="color: #0E7A43;">Why Green Earth</span>
                 <h2 class="section-title" style="font-family: var(--font-serif); font-size: 3.5rem; line-height: 1.2; margin-top: 0.5rem; margin-bottom: 1.2rem;">Why Choose Us?</h2>
-                <div class="why-section-line-gsap" style="width: 0px; height: 3px; background: #0E7A43; margin: 0 auto 1.5rem auto; border-radius: 2px;"></div>
+                <div class="why-section-line-gsap" style="height: 3px; background: #0E7A43; margin: 0 auto 1.5rem auto; border-radius: 2px;"></div>
                 <p class="section-subtitle">Our commitment to excellence, customer satisfaction, and ethical transparency makes us a preferred global commodities trading partner.</p>
             </div>
 
-            <div class="why-hero-panel reveal">
+            <div class="why-hero-panel reveal-scale">
                 <div class="why-hero-copy">
                     <span class="why-hero-mini">Global capability. Sustainable thinking.</span>
                     <h3>Built for dependable supply, transparent partnerships, and premium execution.</h3>
@@ -622,7 +626,7 @@
                 </div>
             </div>
 
-            <div class="why-signal-band reveal">
+            <div class="why-signal-band reveal-up" data-delay="150">
                 <div class="why-signal-card">
                     <span class="why-signal-label">01</span>
                     <h3>Strategic sourcing with supplier discipline</h3>
@@ -642,7 +646,7 @@
             
             <div class="why-grid">
                 <!-- Card 1 (Decades of Expertise - Tall) -->
-                <div class="why-card why-card-tall" data-index="1">
+                <div class="why-card why-card-tall reveal-left" data-index="1" data-delay="50">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">01</span>
                     <div>
@@ -662,7 +666,7 @@
                 </div>
                 
                 <!-- Card 2 (Global Sourcing Network - Wide) -->
-                <div class="why-card why-card-wide" data-index="2">
+                <div class="why-card why-card-wide reveal-up" data-index="2" data-delay="150">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">02</span>
                     <div>
@@ -679,7 +683,7 @@
                 </div>
                 
                 <!-- Card 3 (Extensive Market Reach) -->
-                <div class="why-card" data-index="3">
+                <div class="why-card reveal-right" data-index="3" data-delay="250">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">03</span>
                     <div>
@@ -696,7 +700,7 @@
                 </div>
                 
                 <!-- Card 4 (Diverse Product Portfolio) -->
-                <div class="why-card" data-index="4">
+                <div class="why-card reveal-left" data-index="4" data-delay="100">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">04</span>
                     <div>
@@ -713,7 +717,7 @@
                 </div>
                 
                 <!-- Card 5 (Quality & Reliability - Wide) -->
-                <div class="why-card why-card-wide" data-index="5">
+                <div class="why-card why-card-wide reveal-up" data-index="5" data-delay="200">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">05</span>
                     <div>
@@ -736,7 +740,7 @@
                 </div>
                 
                 <!-- Card 6 (Competitive Pricing) -->
-                <div class="why-card" data-index="6">
+                <div class="why-card reveal-right" data-index="6" data-delay="300">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">06</span>
                     <div>
@@ -753,7 +757,7 @@
                 </div>
                 
                 <!-- Card 7 (Efficient Logistics) -->
-                <div class="why-card" data-index="7">
+                <div class="why-card reveal-left" data-index="7" data-delay="150">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">07</span>
                     <div>
@@ -770,7 +774,7 @@
                 </div>
                 
                 <!-- Card 8 (Integrity & Transparency) -->
-                <div class="why-card" data-index="8">
+                <div class="why-card reveal-up" data-index="8" data-delay="250">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">08</span>
                     <div>
@@ -787,7 +791,7 @@
                 </div>
                 
                 <!-- Card 9 (Commitment to Sustainability) -->
-                <div class="why-card" data-index="9">
+                <div class="why-card reveal-right" data-index="9" data-delay="350">
                     <div class="why-card-glow"></div>
                     <span class="why-card-number">09</span>
                     <div>
@@ -805,7 +809,7 @@
             </div>
             
             <!-- Premium bottom CTA -->
-            <div class="why-cta-container reveal" style="opacity: 0; transform: translateY(30px);">
+            <div class="why-cta-container reveal-up" data-delay="100">
                 <h3 class="why-cta-heading">Need a Reliable Global Trading Partner?</h3>
                 <a href="#products" class="why-cta-btn">
                     <span>Explore Our Products</span>
@@ -818,9 +822,15 @@
     <!-- CONTACT US SECTION -->
     <section id="contact" class="section contact-section">
         <div class="container">
+            <div class="contact-header-shell reveal-up" style="margin: 0 auto 4rem auto; text-align: center;">
+                <span class="section-tag">Contact Us</span>
+                <h2 class="section-title">Get in Touch with Our Global Trading Desk</h2>
+                <p class="section-subtitle">Whether you are looking to secure high-quality recycled commodities, verify specifications, or coordinate complex international shipping, our management team is here to assist.</p>
+            </div>
+            
             <div class="contact-wrapper">
                 <!-- Info panel -->
-                <div class="contact-info-panel reveal">
+                <div class="contact-info-panel reveal-left">
                     <div>
                         <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-dark);">Green Earth Commodity FZ-LLC</h3>
                         <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Our specialized trading desk and logistics managers are ready to support your supply requirements.</p>
@@ -855,7 +865,7 @@
                 </div>
                 
                 <!-- Form panel -->
-                <div class="contact-form-panel reveal">
+                <div class="contact-form-panel reveal-right" data-delay="150">
                     <h3 class="form-title">Send a Message</h3>
                     <p class="form-subtitle">Fill in the form details below and our management team will reach out to you within 24 hours.</p>
                     
