@@ -338,346 +338,302 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- GLOBAL NETWORK INTERACTIVE GLOBE --- */
-    const tradeGlobeCanvas = document.getElementById('trade-globe-canvas');
+    /* --- GLOBAL NETWORK INTERACTIVE EARTH --- */
     const tradeGlobeStage = document.getElementById('trade-globe-stage');
 
-    if (tradeGlobeCanvas && tradeGlobeStage) {
-        initTradeGlobe(tradeGlobeCanvas, tradeGlobeStage);
+    if (tradeGlobeStage) {
+        initTradeGlobe(tradeGlobeStage);
     }
 
-    function initTradeGlobe(canvas, stage) {
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
+    function initTradeGlobe(stage) {
+        const markerLayer = stage.querySelector('.global-network-earth-marker-layer');
+        const hasThree = typeof window.THREE !== 'undefined';
+        const canUseWebGL = (() => {
+            try {
+                const testCanvas = document.createElement('canvas');
+                return !!(window.WebGLRenderingContext && (testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')));
+            } catch (error) {
+                return false;
+            }
+        })();
 
-        const DEG = Math.PI / 180;
-        const locations = [
-            { name: 'United Kingdom', short: 'UK', lat: 55.0, lon: -2.5, type: 'supplier', dx: -15, dy: -15 },
-            { name: 'Germany', short: 'Germany', lat: 51.2, lon: 10.4, type: 'supplier', dx: 12, dy: -10 },
-            { name: 'Italy', short: 'Italy', lat: 42.8, lon: 12.5, type: 'supplier', dx: 12, dy: 14 },
-            { name: 'United States', short: 'USA', lat: 39.8, lon: -98.6, type: 'supplier', dx: -18, dy: -12 },
-            { name: 'UAE', short: 'UAE', lat: 26.0, lon: 48.0, type: 'hub', dx: -36, dy: -10 },
-            { name: 'Pakistan', short: 'Pakistan', lat: 33.0, lon: 63.0, type: 'customer', dx: -32, dy: -16 },
-            { name: 'India', short: 'India', lat: 19.0, lon: 77.0, type: 'customer', dx: -18, dy: 18 },
-            { name: 'Bangladesh', short: 'Bangladesh', lat: 25.0, lon: 92.0, type: 'customer', dx: 12, dy: -14 },
-            { name: 'China', short: 'China', lat: 41.0, lon: 100.0, type: 'customer', dx: -18, dy: -18 },
-            { name: 'Vietnam', short: 'Vietnam', lat: 16.0, lon: 111.0, type: 'customer', dx: 14, dy: -4 },
-            { name: 'Thailand', short: 'Thailand', lat: 14.0, lon: 98.0, type: 'customer', dx: -36, dy: 12 },
-            { name: 'Malaysia', short: 'Malaysia', lat: 2.0, lon: 100.0, type: 'customer', dx: -36, dy: -4 },
-            { name: 'Singapore', short: 'Singapore', lat: -1.0, lon: 104.0, type: 'customer', dx: 12, dy: 16 },
-            { name: 'Indonesia', short: 'Indonesia', lat: -6.0, lon: 120.0, type: 'customer', dx: 12, dy: 12 },
-            { name: 'Taiwan', short: 'Taiwan', lat: 24.0, lon: 124.0, type: 'customer', dx: 14, dy: 4 },
-            { name: 'South Korea', short: 'S. Korea', lat: 40.0, lon: 132.0, type: 'customer', dx: 12, dy: -12 },
-            { name: 'Sri Lanka', short: 'Sri Lanka', lat: 4.0, lon: 78.0, type: 'customer', dx: -30, dy: 18 }
+        if (!hasThree || !canUseWebGL || !markerLayer) {
+            stage.classList.add('webgl-unavailable');
+            return;
+        }
+
+        const THREE = window.THREE;
+        const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const textureBase = 'https://threejs.org/examples/textures/planets/';
+        const networkLocations = [
+            { name: 'India', lat: 20.5937, lon: 78.9629 },
+            { name: 'United Arab Emirates', lat: 23.4241, lon: 53.8478 },
+            { name: 'United Kingdom', lat: 55.3781, lon: -3.4360 },
+            { name: 'Europe', lat: 50.1109, lon: 8.6821 },
+            { name: 'United States', lat: 37.0902, lon: -95.7129 },
+            { name: 'Africa', lat: 1.6508, lon: 17.6791 },
+            { name: 'Southeast Asia', lat: 10.8231, lon: 106.6297 }
         ];
 
-        const routePairs = [
-            ['United Kingdom', 'UAE'],
-            ['Germany', 'UAE'],
-            ['Italy', 'UAE'],
-            ['United States', 'UAE'],
-            ['UAE', 'India'],
-            ['UAE', 'Pakistan'],
-            ['UAE', 'China'],
-            ['UAE', 'Vietnam'],
-            ['UAE', 'Thailand'],
-            ['UAE', 'Malaysia'],
-            ['UAE', 'Indonesia'],
-            ['UAE', 'Taiwan'],
-            ['UAE', 'South Korea']
-        ];
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+        camera.position.set(0, 0, 4.2);
 
-        const landPolygons = [
-            [[-168, 72], [-150, 68], [-132, 58], [-124, 50], [-118, 36], [-110, 28], [-100, 25], [-90, 22], [-82, 25], [-78, 30], [-82, 44], [-95, 55], [-120, 66], [-150, 72]],
-            [[-82, 12], [-74, 6], [-68, -2], [-62, -14], [-60, -24], [-66, -38], [-72, -49], [-62, -55], [-50, -50], [-46, -30], [-50, -8], [-60, 4], [-70, 10]],
-            [[-10, 36], [4, 44], [18, 50], [34, 56], [56, 60], [78, 58], [100, 54], [124, 50], [142, 46], [154, 56], [164, 62], [172, 54], [156, 42], [130, 24], [110, 12], [92, 20], [74, 30], [52, 34], [34, 38], [12, 42], [-4, 40]],
-            [[-18, 35], [6, 36], [22, 30], [34, 20], [42, 8], [42, -12], [32, -30], [18, -34], [4, -32], [-6, -18], [-12, 2], [-16, 20]],
-            [[68, 26], [78, 34], [88, 30], [92, 22], [86, 10], [78, 8], [72, 14]],
-            [[96, 22], [106, 24], [114, 20], [118, 10], [114, 2], [106, 0], [98, 8]],
-            [[112, -12], [122, -10], [132, -14], [142, -18], [148, -28], [138, -38], [124, -36], [114, -26]]
-        ];
+        const renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: true,
+            powerPreference: 'high-performance'
+        });
+        renderer.setClearColor(0x000000, 0);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+        stage.appendChild(renderer.domElement);
 
-        const landPoints = buildLandPoints(landPolygons, 4);
-        let width = 0;
-        let height = 0;
-        let dpr = Math.min(window.devicePixelRatio || 1, 2);
-        let radius = 0;
-        let rotationLon = 72 * DEG;
-        let rotationLat = -12 * DEG;
+        const globeGroup = new THREE.Group();
+        const markerGroup = new THREE.Group();
+        scene.add(globeGroup);
+        globeGroup.add(markerGroup);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.62);
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.45);
+        keyLight.position.set(-3.8, 2.2, 4.6);
+        const rimLight = new THREE.DirectionalLight(0x9fe8ff, 0.36);
+        rimLight.position.set(3.2, -1.3, -2.6);
+        scene.add(ambientLight, keyLight, rimLight);
+
+        const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+        const segments = isMobile() ? 48 : 64;
+        const earthGeometry = new THREE.SphereGeometry(1, segments, segments);
+        const cloudGeometry = new THREE.SphereGeometry(1.012, segments, segments);
+        const atmosphereGeometry = new THREE.SphereGeometry(1.06, segments, segments);
+        const maxAnisotropy = renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 1;
+
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.setCrossOrigin('anonymous');
+        const loadedTextures = [];
+        let earthMesh = null;
+        let cloudMesh = null;
+        let atmosphereMesh = null;
+        let animationFrame = null;
+        let resizeObserver = null;
+        let sectionObserver = null;
+        let isInView = true;
+        let isHidden = document.hidden;
+        let isPointerDown = false;
         let isDragging = false;
         let pointerId = null;
         let lastX = 0;
         let lastY = 0;
-        let autoVelocity = 0.0072;
-
-        function resizeCanvas() {
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
-            width = stage.clientWidth;
-            height = stage.clientHeight;
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            radius = Math.min(width, height) * 0.45;
-        }
-
-        function buildLandPoints(polygons, step) {
-            const points = [];
-            polygons.forEach((polygon) => {
-                const lons = polygon.map(([lon]) => lon);
-                const lats = polygon.map(([, lat]) => lat);
-                const minLon = Math.floor(Math.min(...lons));
-                const maxLon = Math.ceil(Math.max(...lons));
-                const minLat = Math.floor(Math.min(...lats));
-                const maxLat = Math.ceil(Math.max(...lats));
-
-                for (let lat = minLat; lat <= maxLat; lat += step) {
-                    for (let lon = minLon; lon <= maxLon; lon += step) {
-                        if (pointInPolygon([lon, lat], polygon)) {
-                            points.push({ lat, lon });
-                        }
-                    }
-                }
-            });
-            return points;
-        }
-
-        function pointInPolygon(point, polygon) {
-            let inside = false;
-            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-                const xi = polygon[i][0];
-                const yi = polygon[i][1];
-                const xj = polygon[j][0];
-                const yj = polygon[j][1];
-                const intersect = ((yi > point[1]) !== (yj > point[1])) &&
-                    (point[0] < ((xj - xi) * (point[1] - yi)) / ((yj - yi) || 0.00001) + xi);
-                if (intersect) inside = !inside;
-            }
-            return inside;
-        }
+        let pointerStartX = 0;
+        let pointerStartY = 0;
+        let lastMoveTime = performance.now();
+        let targetRotationX = -0.18;
+        let targetRotationY = -1.08;
+        let currentRotationX = targetRotationX;
+        let currentRotationY = targetRotationY;
+        let velocityX = 0;
+        let velocityY = 0;
+        let targetHoverX = 0;
+        let targetHoverY = 0;
+        let currentHoverX = 0;
+        let currentHoverY = 0;
+        let lastFrameTime = performance.now();
+        const verticalLimit = 1.05;
+        const dragSensitivity = isMobile() ? 0.0062 : 0.0075;
+        const verticalSensitivity = isMobile() ? 0.0045 : 0.0055;
+        const autoRotationSpeed = reducedMotionQuery.matches ? 0 : 0.085;
 
         function clamp(value, min, max) {
             return Math.max(min, Math.min(max, value));
         }
 
-        function projectPoint(latDeg, lonDeg) {
-            const lat = latDeg * DEG;
-            const lon = lonDeg * DEG;
-            const cosLat = Math.cos(lat);
-            const sinLat = Math.sin(lat);
-            const deltaLon = lon - rotationLon;
-            const cosDelta = Math.cos(deltaLon);
-            const sinDelta = Math.sin(deltaLon);
-            const cosCenter = Math.cos(rotationLat);
-            const sinCenter = Math.sin(rotationLat);
-
-            const x = radius * cosLat * sinDelta;
-            const y = radius * ((cosCenter * sinLat) - (sinCenter * cosLat * cosDelta));
-            const z = (sinCenter * sinLat) + (cosCenter * cosLat * cosDelta);
-
-            return {
-                x: width / 2 + x,
-                y: height / 2 - y,
-                z,
-                visible: z > 0
-            };
+        function loadTexture(path, colorSpace = true) {
+            return new Promise((resolve, reject) => {
+                textureLoader.load(
+                    path,
+                    (texture) => {
+                        texture.anisotropy = Math.min(maxAnisotropy, 8);
+                        texture.wrapS = THREE.RepeatWrapping;
+                        texture.wrapT = THREE.ClampToEdgeWrapping;
+                        if (colorSpace) texture.encoding = THREE.sRGBEncoding;
+                        loadedTextures.push(texture);
+                        resolve(texture);
+                    },
+                    undefined,
+                    reject
+                );
+            });
         }
 
-        function drawPolyline(points, color, lineWidth, alpha) {
-            ctx.beginPath();
-            let hasSegment = false;
+        function latLonToVector3(lat, lon, radius = 1.035) {
+            const phi = THREE.MathUtils.degToRad(90 - lat);
+            const theta = THREE.MathUtils.degToRad(lon + 180);
+            return new THREE.Vector3(
+                -radius * Math.sin(phi) * Math.cos(theta),
+                radius * Math.cos(phi),
+                radius * Math.sin(phi) * Math.sin(theta)
+            );
+        }
 
-            points.forEach((point, index) => {
-                const projected = projectPoint(point.lat, point.lon);
-                if (!projected.visible) {
-                    hasSegment = false;
+        const markerEntries = networkLocations.map((location) => {
+            const markerElement = document.createElement('span');
+            markerElement.className = 'global-network-earth-marker';
+            markerElement.innerHTML = `<span class="global-network-earth-marker-dot"></span><span class="global-network-earth-marker-label">${location.name}</span>`;
+            markerLayer.appendChild(markerElement);
+            return {
+                location,
+                element: markerElement,
+                basePosition: latLonToVector3(location.lat, location.lon)
+            };
+        });
+
+        function createMarkerObjects() {
+            const markerGeometry = new THREE.SphereGeometry(0.015, 16, 16);
+            const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xd7bf8b });
+
+            markerEntries.forEach((entry) => {
+                const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                marker.position.copy(entry.basePosition);
+                markerGroup.add(marker);
+            });
+        }
+
+        function resizeRenderer() {
+            const rect = stage.getBoundingClientRect();
+            const size = Math.max(260, Math.round(Math.min(rect.width, rect.height || rect.width)));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+            renderer.setSize(size, size, false);
+            camera.aspect = 1;
+            camera.updateProjectionMatrix();
+        }
+
+        function updateMarkers() {
+            const stageSize = renderer.domElement.clientWidth;
+            const rotation = new THREE.Euler(globeGroup.rotation.x, globeGroup.rotation.y, globeGroup.rotation.z, 'XYZ');
+
+            markerEntries.forEach((entry) => {
+                const worldPosition = entry.basePosition.clone().applyEuler(rotation);
+                if (worldPosition.z <= 0.12) {
+                    entry.element.classList.remove('visible');
                     return;
                 }
 
-                if (!hasSegment || index === 0) {
-                    ctx.moveTo(projected.x, projected.y);
-                    hasSegment = true;
-                } else {
-                    ctx.lineTo(projected.x, projected.y);
-                }
-            });
+                const projected = worldPosition.clone().project(camera);
+                const x = ((projected.x + 1) / 2) * stageSize;
+                const y = ((-projected.y + 1) / 2) * stageSize;
+                const edgeDistance = Math.hypot(x - stageSize / 2, y - stageSize / 2) / (stageSize / 2);
+                const opacity = clamp((worldPosition.z - 0.12) / 0.42, 0, 1) * clamp(1.08 - edgeDistance * 0.16, 0.55, 1);
 
-            ctx.strokeStyle = color;
-            ctx.lineWidth = lineWidth;
-            ctx.globalAlpha = alpha;
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-        }
-
-        function interpolateRoute(start, end, segments = 40) {
-            const points = [];
-            for (let i = 0; i <= segments; i += 1) {
-                const t = i / segments;
-                const lat = start.lat + ((end.lat - start.lat) * t);
-                const lon = start.lon + ((end.lon - start.lon) * t);
-                points.push({ lat, lon });
-            }
-            return points;
-        }
-
-        function drawRoutes() {
-            routePairs.forEach(([fromName, toName], index) => {
-                const from = locations.find((item) => item.name === fromName);
-                const to = locations.find((item) => item.name === toName);
-                if (!from || !to) return;
-
-                const midLat = (from.lat + to.lat) / 2 + 8;
-                const midLon = (from.lon + to.lon) / 2;
-                const routePoints = [
-                    { lat: from.lat, lon: from.lon },
-                    { lat: midLat, lon: midLon },
-                    { lat: to.lat, lon: to.lon }
-                ];
-
-                const denseRoute = [];
-                for (let i = 0; i < routePoints.length - 1; i += 1) {
-                    denseRoute.push(...interpolateRoute(routePoints[i], routePoints[i + 1], 18));
-                }
-
-                const alphaPulse = 0.35 + Math.sin(Date.now() * 0.002 + index) * 0.15;
-                drawPolyline(denseRoute, `rgba(124, 224, 255, ${alphaPulse})`, 1.1, alphaPulse);
+                entry.element.style.setProperty('--marker-x', `${x}px`);
+                entry.element.style.setProperty('--marker-y', `${y}px`);
+                entry.element.style.setProperty('--marker-opacity', opacity.toFixed(3));
+                entry.element.style.setProperty('--marker-scale', (0.82 + opacity * 0.18).toFixed(3));
+                entry.element.classList.add('visible');
             });
         }
 
-        function drawGlobe() {
-            ctx.clearRect(0, 0, width, height);
+        function renderFrame(timestamp) {
+            const delta = Math.min((timestamp - lastFrameTime) / 1000, 0.05);
+            lastFrameTime = timestamp;
 
-
-
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-            ctx.clip();
-
-            const sphereGradient = ctx.createRadialGradient(width / 2 - radius * 0.35, height / 2 - radius * 0.38, radius * 0.2, width / 2, height / 2, radius * 1.08);
-            sphereGradient.addColorStop(0, '#1d8dbe');
-            sphereGradient.addColorStop(0.45, '#0b4d83');
-            sphereGradient.addColorStop(0.72, '#07285d');
-            sphereGradient.addColorStop(1, '#041438');
-            ctx.fillStyle = sphereGradient;
-            ctx.fillRect(width / 2 - radius, height / 2 - radius, radius * 2, radius * 2);
-
-            for (let lat = -60; lat <= 60; lat += 20) {
-                const points = [];
-                for (let lon = -180; lon <= 180; lon += 6) {
-                    points.push({ lat, lon });
+            if (!isHidden && isInView) {
+                if (!isDragging && !reducedMotionQuery.matches) {
+                    targetRotationY += autoRotationSpeed * delta;
+                    targetRotationY += velocityY * delta;
+                    targetRotationX = clamp(targetRotationX + velocityX * delta, -verticalLimit, verticalLimit);
+                    velocityY *= Math.pow(0.9, delta * 60);
+                    velocityX *= Math.pow(0.88, delta * 60);
+                    if (Math.abs(velocityY) < 0.0008) velocityY = 0;
+                    if (Math.abs(velocityX) < 0.0008) velocityX = 0;
                 }
-                drawPolyline(points, 'rgba(255, 255, 255, 0.12)', 1, 1);
+
+                currentRotationX += (targetRotationX - currentRotationX) * Math.min(1, delta * 8);
+                currentRotationY += (targetRotationY - currentRotationY) * Math.min(1, delta * 8);
+                currentHoverX += (targetHoverX - currentHoverX) * Math.min(1, delta * 6);
+                currentHoverY += (targetHoverY - currentHoverY) * Math.min(1, delta * 6);
+
+                globeGroup.rotation.x = currentRotationX + currentHoverX;
+                globeGroup.rotation.y = currentRotationY + currentHoverY;
+
+                if (cloudMesh && !reducedMotionQuery.matches) {
+                    cloudMesh.rotation.y += delta * 0.035;
+                    cloudMesh.rotation.x = currentHoverX * 0.3;
+                }
+
+                updateMarkers();
+                renderer.render(scene, camera);
             }
 
-            for (let lon = -180; lon < 180; lon += 20) {
-                const points = [];
-                for (let lat = -90; lat <= 90; lat += 4) {
-                    points.push({ lat, lon });
-                }
-                drawPolyline(points, 'rgba(255, 255, 255, 0.1)', 1, 1);
-            }
-
-            const visibleLand = [];
-            landPoints.forEach((point) => {
-                const projected = projectPoint(point.lat, point.lon);
-                if (projected.visible) {
-                    visibleLand.push(projected);
-                }
-            });
-
-            visibleLand.sort((a, b) => a.z - b.z);
-            visibleLand.forEach((point) => {
-                const size = 1.6 + point.z * 1.7;
-                ctx.fillStyle = point.z > 0.65 ? 'rgba(72, 163, 114, 0.95)' : 'rgba(48, 110, 82, 0.9)';
-                ctx.beginPath();
-                ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            drawRoutes();
-
-            ctx.restore();
-
-            ctx.beginPath();
-            ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            const visibleLocations = [];
-            locations.forEach((location) => {
-                const projected = projectPoint(location.lat, location.lon);
-                if (projected.visible) {
-                    visibleLocations.push({ ...location, ...projected });
-                }
-            });
-
-            visibleLocations.sort((a, b) => a.z - b.z);
-            visibleLocations.forEach((location) => {
-                const palette = location.type === 'supplier'
-                    ? { fill: '#8fe26d', glow: 'rgba(143, 226, 109, 0.45)' }
-                    : location.type === 'hub'
-                        ? { fill: '#7ce0ff', glow: 'rgba(124, 224, 255, 0.45)' }
-                        : { fill: '#ffd15c', glow: 'rgba(255, 209, 92, 0.45)' };
-
-                const radiusDot = 3.2 + location.z * 2.1;
-
-                ctx.beginPath();
-                ctx.fillStyle = palette.glow;
-                const pulse = 1.0 + Math.sin(Date.now() * 0.003 + location.lat) * 0.25;
-                ctx.arc(location.x, location.y, (radiusDot + 5) * pulse, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.fillStyle = palette.fill;
-                ctx.arc(location.x, location.y, radiusDot, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.lineWidth = 1.5;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-                ctx.stroke();
-
-                const labelX = location.x + location.dx;
-                const labelY = location.y + location.dy;
-                ctx.font = '700 12px Outfit, sans-serif';
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = 'rgba(4, 15, 22, 0.72)';
-                ctx.strokeText(location.short, labelX, labelY);
-                ctx.fillStyle = '#f8fafc';
-                ctx.fillText(location.short, labelX, labelY);
-            });
+            animationFrame = window.requestAnimationFrame(renderFrame);
         }
 
-        function animate() {
-            if (!isDragging) {
-                rotationLon += autoVelocity;
+        function startLoop() {
+            if (animationFrame === null) {
+                lastFrameTime = performance.now();
+                animationFrame = window.requestAnimationFrame(renderFrame);
             }
-            drawGlobe();
-            window.requestAnimationFrame(animate);
         }
 
-        stage.addEventListener('pointerdown', (event) => {
-            isDragging = true;
+        function handlePointerDown(event) {
+            isPointerDown = true;
+            isDragging = false;
             pointerId = event.pointerId;
+            pointerStartX = event.clientX;
+            pointerStartY = event.clientY;
             lastX = event.clientX;
             lastY = event.clientY;
-            stage.classList.add('dragging');
+            lastMoveTime = performance.now();
+            velocityX = 0;
+            velocityY = 0;
             if (stage.setPointerCapture) {
                 stage.setPointerCapture(pointerId);
             }
-        });
+        }
 
-        stage.addEventListener('pointermove', (event) => {
-            if (!isDragging) return;
+        function handlePointerMove(event) {
+            const rect = stage.getBoundingClientRect();
+            targetHoverY = ((event.clientX - rect.left) / rect.width - 0.5) * 0.1;
+            targetHoverX = ((event.clientY - rect.top) / rect.height - 0.5) * 0.06;
+
+            if (!isPointerDown || event.pointerId !== pointerId) return;
+
             const dx = event.clientX - lastX;
             const dy = event.clientY - lastY;
+            const totalDx = event.clientX - pointerStartX;
+            const totalDy = event.clientY - pointerStartY;
+            const now = performance.now();
+            const elapsed = Math.max((now - lastMoveTime) / 1000, 0.016);
+
+            if (!isDragging) {
+                if (event.pointerType === 'touch' && Math.abs(totalDy) > Math.abs(totalDx) * 1.15 && Math.abs(totalDy) > 8) {
+                    stopDragging();
+                    return;
+                }
+                if (Math.hypot(totalDx, totalDy) < 3) return;
+                isDragging = true;
+                stage.classList.add('dragging');
+            }
+
+            event.preventDefault();
             lastX = event.clientX;
             lastY = event.clientY;
-            rotationLon -= dx * 0.0085;
-            rotationLat = clamp(rotationLat + dy * 0.0055, -0.9, 0.9);
-        });
+            lastMoveTime = now;
+            targetRotationY += dx * dragSensitivity;
+            targetRotationX = clamp(targetRotationX + dy * verticalSensitivity, -verticalLimit, verticalLimit);
+            velocityY = (dx * dragSensitivity) / elapsed;
+            velocityX = (dy * verticalSensitivity) / elapsed;
+        }
+
+        function handlePointerLeave() {
+            targetHoverX = 0;
+            targetHoverY = 0;
+            if (!isDragging) {
+                stage.classList.remove('dragging');
+            }
+        }
 
         function stopDragging() {
+            isPointerDown = false;
             if (pointerId !== null && stage.releasePointerCapture) {
                 try {
                     stage.releasePointerCapture(pointerId);
@@ -690,17 +646,137 @@ document.addEventListener('DOMContentLoaded', () => {
             stage.classList.remove('dragging');
         }
 
-        stage.addEventListener('pointerup', stopDragging);
-        stage.addEventListener('pointercancel', stopDragging);
-        stage.addEventListener('mouseleave', () => {
-            if (!isDragging) {
-                stage.classList.remove('dragging');
+        function handleKeydown(event) {
+            const keyStep = 0.12;
+            if (event.key === 'ArrowLeft') {
+                targetRotationY -= keyStep;
+            } else if (event.key === 'ArrowRight') {
+                targetRotationY += keyStep;
+            } else if (event.key === 'ArrowUp') {
+                targetRotationX = clamp(targetRotationX - keyStep, -verticalLimit, verticalLimit);
+            } else if (event.key === 'ArrowDown') {
+                targetRotationX = clamp(targetRotationX + keyStep, -verticalLimit, verticalLimit);
+            } else {
+                return;
             }
+            event.preventDefault();
+        }
+
+        function handleVisibilityChange() {
+            isHidden = document.hidden;
+            lastFrameTime = performance.now();
+        }
+
+        function disposeGlobe() {
+            if (animationFrame !== null) {
+                window.cancelAnimationFrame(animationFrame);
+            }
+            resizeObserver?.disconnect();
+            sectionObserver?.disconnect();
+            stage.removeEventListener('pointerdown', handlePointerDown);
+            stage.removeEventListener('pointermove', handlePointerMove);
+            stage.removeEventListener('pointerup', stopDragging);
+            stage.removeEventListener('pointercancel', stopDragging);
+            stage.removeEventListener('pointerleave', handlePointerLeave);
+            stage.removeEventListener('keydown', handleKeydown);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            earthGeometry.dispose();
+            cloudGeometry.dispose();
+            atmosphereGeometry.dispose();
+            loadedTextures.forEach((texture) => texture.dispose());
+            scene.traverse((object) => {
+                if (object.geometry && object.geometry !== earthGeometry && object.geometry !== cloudGeometry && object.geometry !== atmosphereGeometry) {
+                    object.geometry.dispose();
+                }
+                if (object.material) {
+                    if (Array.isArray(object.material)) {
+                        object.material.forEach((material) => material.dispose());
+                    } else {
+                        object.material.dispose();
+                    }
+                }
+            });
+            renderer.dispose();
+        }
+
+        Promise.all([
+            loadTexture(`${textureBase}earth_atmos_2048.jpg`),
+            loadTexture(`${textureBase}earth_normal_2048.jpg`, false),
+            loadTexture(`${textureBase}earth_specular_2048.jpg`, false),
+            loadTexture(`${textureBase}earth_clouds_1024.png`)
+        ]).then(([dayTexture, normalTexture, specularTexture, cloudTexture]) => {
+            earthMesh = new THREE.Mesh(
+                earthGeometry,
+                new THREE.MeshPhongMaterial({
+                    map: dayTexture,
+                    normalMap: normalTexture,
+                    normalScale: new THREE.Vector2(0.12, 0.12),
+                    specularMap: specularTexture,
+                    specular: new THREE.Color(0x244b64),
+                    shininess: 16
+                })
+            );
+
+            cloudMesh = new THREE.Mesh(
+                cloudGeometry,
+                new THREE.MeshPhongMaterial({
+                    map: cloudTexture,
+                    transparent: true,
+                    opacity: 0.38,
+                    depthWrite: false
+                })
+            );
+
+            atmosphereMesh = new THREE.Mesh(
+                atmosphereGeometry,
+                new THREE.MeshBasicMaterial({
+                    color: 0x8bdcff,
+                    transparent: true,
+                    opacity: 0.12,
+                    side: THREE.BackSide,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false
+                })
+            );
+
+            globeGroup.add(earthMesh, cloudMesh, atmosphereMesh);
+            createMarkerObjects();
+            stage.classList.add('loaded');
+            resizeRenderer();
+            renderer.render(scene, camera);
+            startLoop();
+        }).catch(() => {
+            stage.classList.add('webgl-unavailable');
         });
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        animate();
+        resizeObserver = new ResizeObserver(() => {
+            resizeRenderer();
+            lastFrameTime = performance.now();
+        });
+        resizeObserver.observe(stage);
+
+        sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                isInView = entry.isIntersecting;
+                lastFrameTime = performance.now();
+                markerLayer.style.opacity = isInView ? '1' : '0';
+            });
+        }, { threshold: 0.05 });
+        sectionObserver.observe(stage);
+
+        stage.addEventListener('pointerdown', handlePointerDown);
+        stage.addEventListener('pointermove', handlePointerMove, { passive: false });
+        stage.addEventListener('pointerup', stopDragging);
+        stage.addEventListener('pointercancel', stopDragging);
+        stage.addEventListener('pointerleave', handlePointerLeave);
+        stage.addEventListener('keydown', handleKeydown);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('beforeunload', disposeGlobe, { once: true });
+
+        if (reducedMotionQuery.matches) {
+            targetRotationY = -0.92;
+            currentRotationY = targetRotationY;
+        }
     }
 
     /* --- CUSTOM PREMIUM INTERSECTION OBSERVER SYSTEM --- */

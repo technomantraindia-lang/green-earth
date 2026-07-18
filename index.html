@@ -17,6 +17,9 @@
     
     
     
+    <!-- Three.js for Global Network Interactive Earth -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+
     <!-- Main Interactivity and Animation JS -->
     <script src="app.js" defer></script>
 </head>
@@ -284,21 +287,32 @@
                         <div class="sus-orbit-line-outer"></div>
                         <div class="sus-orbit-line-inner"></div>
                         
-                        <!-- Spinning blue globe in the center -->
-                        <div class="sus-globe-center">
-                            <!-- Seamless rotating globe continents pattern -->
+                        <!-- Dimensional rotating globe in the center -->
+                        <div class="sus-globe-center sus-globe-real">
+                            <div class="sus-globe-atmosphere"></div>
+                            <div class="sus-globe-shadow"></div>
+                            <img src="image/real-earth-globe-source.png" alt="Realistic Earth globe" class="sus-globe-photo">
                             <div class="sus-globe-continents-wrapper">
                                 <svg class="sus-globe-sphere" viewBox="0 0 400 100" preserveAspectRatio="none">
-                                    <!-- Loop 1 -->
-                                    <path d="M 20 40 Q 35 15 60 25 T 90 20 T 110 50 T 80 80 T 40 70 Z" fill="#ffffff" opacity="0.75"/>
-                                    <path d="M 130 30 Q 150 10 170 35 T 190 70 T 140 80 Z" fill="#ffffff" opacity="0.75"/>
-                                    <circle cx="100" cy="75" r="8" fill="#ffffff" opacity="0.75"/>
-                                    
-                                    <!-- Loop 2 (identical to Loop 1, offset by +200) -->
-                                    <path d="M 220 40 Q 235 15 260 25 T 290 20 T 310 50 T 280 80 T 240 70 Z" fill="#ffffff" opacity="0.75"/>
-                                    <path d="M 330 30 Q 350 10 370 35 T 390 70 T 340 80 Z" fill="#ffffff" opacity="0.75"/>
-                                    <circle cx="300" cy="75" r="8" fill="#ffffff" opacity="0.75"/>
+                                    <defs>
+                                        <linearGradient id="susLandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#d5f5b2"/>
+                                            <stop offset="46%" stop-color="#62c86b"/>
+                                            <stop offset="100%" stop-color="#0f7a4b"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <g fill="url(#susLandGradient)">
+                                        <path d="M8 38 C20 20 39 17 55 26 C68 33 74 24 88 26 C103 28 111 42 105 54 C99 66 82 63 74 73 C62 87 35 81 25 68 C16 56 0 54 8 38 Z"/>
+                                        <path d="M95 13 C109 7 130 10 138 23 C146 36 135 48 145 61 C157 77 135 91 116 84 C104 80 105 65 94 58 C79 48 75 22 95 13 Z"/>
+                                        <path d="M159 24 C178 10 199 18 204 35 C209 52 193 61 198 75 C202 88 184 91 171 80 C160 71 148 76 141 65 C131 50 141 37 159 24 Z"/>
+                                        <path d="M42 82 C52 75 63 80 69 88 C60 95 47 96 36 89 C37 86 39 84 42 82 Z"/>
+                                        <path d="M208 38 C220 20 239 17 255 26 C268 33 274 24 288 26 C303 28 311 42 305 54 C299 66 282 63 274 73 C262 87 235 81 225 68 C216 56 200 54 208 38 Z"/>
+                                        <path d="M295 13 C309 7 330 10 338 23 C346 36 335 48 345 61 C357 77 335 91 316 84 C304 80 305 65 294 58 C279 48 275 22 295 13 Z"/>
+                                        <path d="M359 24 C378 10 399 18 404 35 C409 52 393 61 398 75 C402 88 384 91 371 80 C360 71 348 76 341 65 C331 50 341 37 359 24 Z"/>
+                                        <path d="M242 82 C252 75 263 80 269 88 C260 95 247 96 236 89 C237 86 239 84 242 82 Z"/>
+                                    </g>
                                 </svg>
+                                <div class="sus-globe-clouds"></div>
                             </div>
                             
                             <!-- Static overlay latitude/longitude grid overlay lines -->
@@ -311,6 +325,7 @@
                                 <ellipse cx="50" cy="50" rx="30" ry="45" stroke="rgba(255,255,255,0.28)" stroke-width="0.8" fill="none"/>
                                 <line x1="50" y1="5" x2="50" y2="95" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
                             </svg>
+                            <div class="sus-globe-specular"></div>
                             
                             <!-- Centered Static Label overlay on the spinning blue globe -->
                             <div class="sus-globe-label">
@@ -322,9 +337,14 @@
                         
                         <!-- Floating Tooltip details card that overlaps the globe -->
                         <div class="sus-orbit-tooltip">
+                            <span class="sus-tooltip-kicker">Impact Pillar</span>
                             <h4 class="sus-tooltip-title">Promoting the Circular Economy</h4>
                             <p class="sus-tooltip-desc">Promoting the global circular economy through responsible recycling.</p>
                         </div>
+
+                        <span class="sus-orbit-particle sus-particle-1"></span>
+                        <span class="sus-orbit-particle sus-particle-2"></span>
+                        <span class="sus-orbit-particle sus-particle-3"></span>
                         
                         <!-- Numbered nodes spaced pentagonally on the outer orbit line -->
                         <!-- Node 1 -->
@@ -358,7 +378,8 @@
     </section>
 
     <!-- GLOBAL NETWORK SECTION -->
-    <section id="global-network" class="section network-section">
+    <!-- Global Network Interactive Earth: Start -->
+    <section id="global-network" class="section network-section global-network-earth-section">
         <div class="container">
             <div class="network-layout">
                 <div class="network-top-row">
@@ -374,8 +395,15 @@
 
                     <div class="network-visual reveal-right" data-delay="150">
                         <div class="network-globe-shell">
-                            <div class="trade-globe-stage" id="trade-globe-stage">
-                                <canvas id="trade-globe-canvas" class="trade-globe-canvas" aria-label="Interactive globe showing Green Earth supplier and customer countries"></canvas>
+                            <div class="trade-globe-stage global-network-earth-stage" id="trade-globe-stage" role="img" aria-label="Interactive 3D Earth showing Green Earth global network locations" tabindex="0">
+                                <div class="global-network-earth-loader" aria-hidden="true">
+                                    <span></span>
+                                    <p>Loading global network</p>
+                                </div>
+                                <div class="global-network-earth-marker-layer" aria-hidden="true"></div>
+                                <div class="global-network-earth-fallback" role="status">
+                                    Interactive Earth is unavailable on this device.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -408,6 +436,7 @@
             </div>
         </div>
     </section>
+    <!-- Global Network Interactive Earth: End -->
 
     <!-- OUR SERVICES -->
     <section id="services" class="section services-section">
