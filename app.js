@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initPreloader();
     } else {
         document.body.classList.add('page-loaded');
+        initRevealObservers();
     }
 
     function initPreloader() {
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             preloader.style.display = 'none';
             preloader.remove(); // Cleanly remove from DOM to prevent blocking
             document.body.classList.add('page-loaded');
+            initRevealObservers();
         }, fadeDuration);
     }
 
@@ -165,33 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* --- INTERSECTION OBSERVER FOR SCROLL REVEAL --- */
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Stop observing once animated in
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            root: null, // Viewport
-            threshold: 0.1, // Trigger when 10% visible
-            rootMargin: '0px 0px -50px 0px' // Trigger slightly before entering screen
-        });
-        
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-    } else {
-        // Fallback for older browsers
-        revealElements.forEach(element => {
-            element.classList.add('active');
-        });
-    }
+    /* Observers will be initialized after layout finishes */
 
 
     /* --- CONTACT FORM HANDLING --- */
@@ -780,39 +756,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --- CUSTOM PREMIUM INTERSECTION OBSERVER SYSTEM --- */
-    const premiumRevealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .reveal-line-by-line');
-    
-    if (premiumRevealElements.length > 0) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -8% 0px',
-            threshold: 0.02
-        };
+    function initRevealObservers() {
+        // Standard Reveal Elements (Flat translate animations)
+        const revealElements = document.querySelectorAll('.reveal');
+        if (revealElements.length > 0) {
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                revealElements.forEach(element => {
+                    revealObserver.observe(element);
+                });
+            } else {
+                revealElements.forEach(element => {
+                    element.classList.add('active');
+                });
+            }
+        }
 
-        const premiumRevealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const delay = el.getAttribute('data-delay') || 0;
-                    el.style.setProperty('--delay', `${delay}ms`);
-                    el.classList.add('visible');
-                    observer.unobserve(el);
-                    
-                    // Trigger statistics count-up
-                    if (el.classList.contains('why-card') || el.classList.contains('about-content') || el.classList.contains('why-hero-panel')) {
-                        const countUpElements = el.querySelectorAll('.why-card-stat, .about-badge-large-num, .why-orbit-node strong');
-                        countUpElements.forEach(statEl => {
-                            if (!statEl.classList.contains('counted')) {
-                                statEl.classList.add('counted');
-                                animateCountUp(statEl);
-                            }
-                        });
+        // Premium Reveal Elements (3D Entry animations, delays, blurs)
+        const premiumRevealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .reveal-line-by-line, .reveal-up-3d');
+        if (premiumRevealElements.length > 0) {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -8% 0px',
+                threshold: 0.02
+            };
+
+            const premiumRevealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const delay = el.getAttribute('data-delay') || 0;
+                        el.style.setProperty('--delay', `${delay}ms`);
+                        el.classList.add('visible');
+                        observer.unobserve(el);
+                        
+                        // Trigger statistics count-up
+                        if (el.classList.contains('why-card') || el.classList.contains('about-content') || el.classList.contains('why-hero-panel')) {
+                            const countUpElements = el.querySelectorAll('.why-card-stat, .about-badge-large-num, .why-orbit-node strong');
+                            countUpElements.forEach(statEl => {
+                                if (!statEl.classList.contains('counted')) {
+                                    statEl.classList.add('counted');
+                                    animateCountUp(statEl);
+                                }
+                            });
+                        }
                     }
-                }
-            });
-        }, observerOptions);
+                });
+            }, observerOptions);
 
-        premiumRevealElements.forEach(el => premiumRevealObserver.observe(el));
+            premiumRevealElements.forEach(el => premiumRevealObserver.observe(el));
+        }
     }
 
     function animateCountUp(element) {
@@ -899,7 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --- MOUSE GLOW & PERSPECTIVE TILT TRACKER FOR CARDS --- */
-    const glowCards = document.querySelectorAll('.why-card, .service-card-mockup, .network-detail-card');
+    const glowCards = document.querySelectorAll('.service-card-mockup, .network-detail-card, .product-card-mockup, .info-detail-card, .info-action-card, .contact-form-panel');
     glowCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -918,6 +923,36 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('mouseleave', () => {
             card.style.transform = '';
             card.style.transition = 'transform 0.4s ease';
+        });
+    });
+
+    /* --- WHY CHOOSE US BENTO TILT CARDS --- */
+    const tiltCards = document.querySelectorAll('.why-tilt-card');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Set mouse position properties for tracking radial gradient glow
+            card.style.setProperty('--mx', `${x}px`);
+            card.style.setProperty('--my', `${y}px`);
+
+            if (window.innerWidth <= 991 || isReducedMotion) return;
+
+            // Calculate rotation angles (max 8 degrees tilt)
+            const rotateY = ((x / rect.width) - 0.5) * 16; 
+            const rotateX = (0.5 - (y / rect.height)) * 16;
+
+            card.style.setProperty('--rx', `${rotateX}deg`);
+            card.style.setProperty('--ry', `${rotateY}deg`);
+            card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+            card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease';
         });
     });
 });
