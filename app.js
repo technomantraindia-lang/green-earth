@@ -296,44 +296,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- SUSTAINABILITY ORBIT HOVER HANDLER --- */
+    /* --- SUSTAINABILITY ORBIT & COMMITMENT CARDS HOVER HANDLER --- */
     const orbitNodes = document.querySelectorAll('.sus-orbit-node');
+    const commitmentItems = document.querySelectorAll('.sus-commitment-item');
     const parentBox = document.querySelector('.sus-interactive-box');
     const detailsCard = document.querySelector('.sus-orbit-tooltip');
     const detailsTitle = document.querySelector('.sus-tooltip-title');
     const detailsDesc = document.querySelector('.sus-tooltip-desc');
     
-    if (orbitNodes.length > 0 && detailsCard) {
+    function activateSustainabilityIndex(index) {
+        orbitNodes.forEach(n => {
+            if (n.getAttribute('data-index') === String(index)) {
+                n.classList.add('active');
+                const title = n.getAttribute('data-title');
+                const desc = n.getAttribute('data-desc');
+                if (detailsCard) {
+                    detailsCard.style.opacity = '0';
+                    setTimeout(() => {
+                        if (detailsTitle) detailsTitle.textContent = title;
+                        if (detailsDesc) detailsDesc.textContent = desc;
+                        detailsCard.style.opacity = '1';
+                    }, 150);
+                }
+            } else {
+                n.classList.remove('active');
+            }
+        });
+
+        commitmentItems.forEach(item => {
+            if (item.getAttribute('data-index') === String(index)) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        if (parentBox) {
+            parentBox.className = `sus-interactive-box active-node-${index}`;
+        }
+    }
+
+    if (orbitNodes.length > 0) {
         orbitNodes.forEach(node => {
             node.addEventListener('mouseenter', () => {
-                // If it is already active, don't do anything
-                if (node.classList.contains('active')) return;
-                
-                // Clear active from all nodes and set it on current hovered node
-                orbitNodes.forEach(n => n.classList.remove('active'));
-                node.classList.add('active');
-                
-                // Extract details and index
                 const index = node.getAttribute('data-index');
-                const title = node.getAttribute('data-title');
-                const desc = node.getAttribute('data-desc');
-                
-                // Update parent container class to adjust tooltip top/left coordinates
-                if (parentBox) {
-                    parentBox.className = `sus-interactive-box active-node-${index}`;
-                }
-                
-                // Fade out card contents smoothly
-                detailsCard.style.opacity = '0';
-                
-                setTimeout(() => {
-                    // Update text details
-                    if (detailsTitle) detailsTitle.textContent = title;
-                    if (detailsDesc) detailsDesc.textContent = desc;
-                    
-                    // Fade back in
-                    detailsCard.style.opacity = '1';
-                }, 150);
+                activateSustainabilityIndex(index);
+            });
+        });
+    }
+
+    if (commitmentItems.length > 0) {
+        commitmentItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const index = item.getAttribute('data-index');
+                activateSustainabilityIndex(index);
             });
         });
     }
@@ -366,13 +382,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         const textureBase = 'https://threejs.org/examples/textures/planets/';
         const networkLocations = [
-            { name: 'India', lat: 20.5937, lon: 78.9629 },
-            { name: 'United Arab Emirates', lat: 23.4241, lon: 53.8478 },
-            { name: 'United Kingdom', lat: 55.3781, lon: -3.4360 },
-            { name: 'Europe', lat: 50.1109, lon: 8.6821 },
-            { name: 'United States', lat: 37.0902, lon: -95.7129 },
-            { name: 'Africa', lat: 1.6508, lon: 17.6791 },
-            { name: 'Southeast Asia', lat: 10.8231, lon: 106.6297 }
+            { name: 'India', lat: 20.5937, lon: 78.9629, labelPos: 'bottom-left' },
+            { name: 'Pakistan', lat: 30.3753, lon: 69.3451, labelPos: 'top-left' },
+            { name: 'China', lat: 35.8617, lon: 104.1954, labelPos: 'top-right' },
+            { name: 'Vietnam', lat: 14.0583, lon: 108.2772, labelPos: 'bottom-right' },
+            { name: 'Thailand', lat: 15.8700, lon: 100.9925, labelPos: 'top-left' },
+            { name: 'Malaysia', lat: 4.2105, lon: 101.9758, labelPos: 'bottom-left' },
+            { name: 'Indonesia', lat: -0.7893, lon: 113.9213, labelPos: 'bottom-right' },
+            { name: 'Taiwan', lat: 23.6978, lon: 120.9605, labelPos: 'top-right' },
+            { name: 'South Korea', lat: 35.9078, lon: 127.7669, labelPos: 'top-right' }
         ];
 
         const scene = new THREE.Scene();
@@ -427,8 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let pointerStartX = 0;
         let pointerStartY = 0;
         let lastMoveTime = performance.now();
-        let targetRotationX = -0.18;
-        let targetRotationY = -1.08;
+        let targetRotationX = -0.32;
+        let targetRotationY = -1.82;
         let currentRotationX = targetRotationX;
         let currentRotationY = targetRotationY;
         let velocityX = 0;
@@ -477,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const markerEntries = networkLocations.map((location) => {
             const markerElement = document.createElement('span');
-            markerElement.className = 'global-network-earth-marker';
+            markerElement.className = `global-network-earth-marker pos-${location.labelPos || 'right'}`;
             markerElement.innerHTML = `<span class="global-network-earth-marker-dot"></span><span class="global-network-earth-marker-label">${location.name}</span>`;
             markerLayer.appendChild(markerElement);
             return {
@@ -488,8 +506,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         function createMarkerObjects() {
-            const markerGeometry = new THREE.SphereGeometry(0.015, 16, 16);
-            const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xd7bf8b });
+            const markerGeometry = new THREE.SphereGeometry(0.018, 16, 16);
+            const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x10b981 });
 
             markerEntries.forEach((entry) => {
                 const marker = new THREE.Mesh(markerGeometry, markerMaterial);
@@ -780,7 +798,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --- CUSTOM PREMIUM INTERSECTION OBSERVER SYSTEM --- */
-    const premiumRevealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .reveal-line-by-line');
+    const premiumRevealElements = document.querySelectorAll('.reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .reveal-line-by-line');
     
     if (premiumRevealElements.length > 0) {
         const observerOptions = {
