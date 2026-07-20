@@ -16,6 +16,10 @@ class CustomHeader extends HTMLElement {
                 <nav class="navbar">
                     <a href="#hero" class="logo-container">
                         <img src="image/logo.png" alt="Green Earth Logo" class="logo-img">
+                        <div class="logo-text">
+                            GREEN EARTH
+                            <span>Commodity FZ LLC</span>
+                        </div>
                     </a>
                     
                     <ul class="nav-menu" id="nav-menu">
@@ -96,10 +100,12 @@ class CustomFooter extends HTMLElement {
                     <div class="footer-column">
                         <h4 class="footer-column-title">Products</h4>
                         <ul class="footer-links">
-                            <li class="footer-link-item"><a href="#products">Non-Prime Steel</a></li>
                             <li class="footer-link-item"><a href="#products">Recycled Metals</a></li>
+                            <li class="footer-link-item"><a href="#products">Non-Prime Steel</a></li>
                             <li class="footer-link-item"><a href="#products">Recycled Rubber</a></li>
                             <li class="footer-link-item"><a href="#products">Recycled Plastics</a></li>
+                            <li class="footer-link-item"><a href="#products">Recycled Paper</a></li>
+                            <li class="footer-link-item"><a href="#products">Recycled Wood</a></li>
                         </ul>
                     </div>
                     

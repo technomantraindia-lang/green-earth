@@ -358,6 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         const textureBase = 'https://threejs.org/examples/textures/planets/';
         const networkLocations = [
+            { name: 'USA', lat: 37.0902, lon: -95.7129, labelPos: 'top-left' },
+            { name: 'Europe', lat: 50.8503, lon: 4.3517, labelPos: 'top-left' },
             { name: 'India', lat: 20.5937, lon: 78.9629, labelPos: 'bottom-left' },
             { name: 'Pakistan', lat: 30.3753, lon: 69.3451, labelPos: 'top-left' },
             { name: 'China', lat: 35.8617, lon: 104.1954, labelPos: 'top-right' },
