@@ -14,11 +14,12 @@ class CustomHeader extends HTMLElement {
         this.innerHTML = `
             <div class="navbar-container">
                 <nav class="navbar">
-                    <a href="index.html#hero" class="logo-container">
-                        <img src="image/logo.png" alt="Green Earth Logo" class="logo-img">
+                    <a href="index.html" class="logo-container">
+                        <img src="image/NEWST%20LOGO.png" alt="Green Earth Commodity Logo" class="logo-img">
                         <div class="logo-text">
                             GREEN EARTH
                             <span>Commodity FZ LLC</span>
+                            <span class="logo-tagline">Global Sourcing & Sustainable Trading</span>
                         </div>
                     </a>
                     
@@ -71,7 +72,7 @@ class CustomFooter extends HTMLElement {
                 <div class="footer-top">
                     <div class="footer-brand">
                         <a href="index.html#hero" class="footer-logo">
-                            <img src="image/logo.png" alt="Green Earth Logo" class="footer-logo-img">
+                            <img src="image/NEWST%20LOGO.png" alt="Green Earth Logo" class="footer-logo-img">
                             <div class="footer-logo-text">
                                 GREEN EARTH
                                 <div style="font-size: 0.6rem; font-weight: 600; color: #475569; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.25rem;">Commodity FZ LLC</div>

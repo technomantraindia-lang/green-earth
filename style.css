@@ -518,22 +518,26 @@ custom-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
+    height: 110px;
+    margin: 0;
+    padding: 0;
     transition: var(--transition-normal);
 }
 
 .header-active .navbar {
-    height: 80px;
+    height: 90px;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     text-decoration: none;
+    margin: 0;
+    padding: 0;
 }
 
 .logo-img {
-    height: 88px;
+    height: 96px;
     width: auto;
     margin: 0;
     padding: 0;
@@ -541,27 +545,37 @@ custom-header {
 }
 
 .header-active .logo-img {
-    height: 72px;
+    height: 80px;
 }
 
 .logo-text {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.55rem;
     font-weight: 800;
     color: var(--text-dark);
-    margin-left: 0.8rem;
+    margin-left: 0.85rem;
     line-height: 1;
     display: flex;
     flex-direction: column;
 }
 
 .logo-text span {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--text-secondary);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-top: 0.25rem;
+}
+
+.logo-tagline {
+    font-size: 0.52rem !important;
+    font-weight: 750 !important;
+    color: var(--primary-color) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-top: 0.35rem !important;
+    line-height: 1.2 !important;
 }
 
 .nav-menu {
@@ -629,12 +643,12 @@ custom-header {
 /* --- HERO SECTION --- */
 .hero-section {
     position: relative;
-    min-height: calc(100vh - 100px);
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 110px);
+    height: calc(100vh - 110px);
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    margin-top: 100px; /* Offset to sit properly below fixed navbar */
+    margin-top: 110px; /* Offset to sit properly below fixed navbar */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -5633,7 +5647,8 @@ html, body {
 .about-banner-section {
     position: relative;
     width: 100%;
-    margin-top: 100px; /* Offset for sticky header */
+    height: 320px; /* Constrained height */
+    margin-top: 110px; /* Offset for sticky header */
     padding: 0;
     overflow: hidden;
     background-color: var(--bg-light);
@@ -5641,9 +5656,17 @@ html, body {
 
 .about-banner-img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Resize without stretching */
+    object-position: center;
     display: block;
     transition: transform 1.2s var(--transition-premium);
+}
+
+@media (max-width: 768px) {
+    .about-banner-section {
+        height: 200px;
+    }
 }
 
 .about-banner-section:hover .about-banner-img {
@@ -6637,4 +6660,6 @@ html, body {
         justify-content: center;
     }
 }
+
+
 
