@@ -143,25 +143,35 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const href = targetLink.getAttribute('href');
         
-        // Check if link is an anchor link pointing to the current page
-        if (href && href.startsWith('#')) {
-            e.preventDefault();
+        // Check if link is an anchor link pointing to the current page (or index.html prefix on index.html)
+        if (href && (href.startsWith('#') || href.includes('#'))) {
+            const hashIndex = href.indexOf('#');
+            const pathBeforeHash = href.substring(0, hashIndex);
+            const targetId = href.substring(hashIndex + 1);
             
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
+            // Check if target is on the same page
+            const currentPath = window.location.pathname;
+            const isSamePage = pathBeforeHash === '' || 
+                               currentPath.endsWith(pathBeforeHash) || 
+                               (pathBeforeHash === 'index.html' && (currentPath.endsWith('/') || currentPath.endsWith('index.html')));
             
-            if (targetElement) {
-                // Get header height for scrolling offset
-                const header = document.querySelector('.navbar');
-                const headerHeight = header ? header.offsetHeight : 80;
+            if (isSamePage) {
+                const targetElement = document.getElementById(targetId);
                 
-                const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-                const offsetPosition = elementPosition - headerHeight;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                if (targetElement) {
+                    e.preventDefault();
+                    // Get header height for scrolling offset
+                    const header = document.querySelector('.navbar');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerHeight;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         }
     });

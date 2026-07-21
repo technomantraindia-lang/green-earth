@@ -14,7 +14,7 @@ class CustomHeader extends HTMLElement {
         this.innerHTML = `
             <div class="navbar-container">
                 <nav class="navbar">
-                    <a href="#hero" class="logo-container">
+                    <a href="index.html#hero" class="logo-container">
                         <img src="image/logo.png" alt="Green Earth Logo" class="logo-img">
                         <div class="logo-text">
                             GREEN EARTH
@@ -23,17 +23,17 @@ class CustomHeader extends HTMLElement {
                     </a>
                     
                     <ul class="nav-menu" id="nav-menu">
-                        <li><a href="#hero" class="nav-link">Home</a></li>
-                        <li><a href="#about-us" class="nav-link">About Us</a></li>
-                        <li><a href="#products" class="nav-link">Products</a></li>
-                        <li><a href="#sustainability" class="nav-link">Sustainability</a></li>
-                        <li><a href="#services" class="nav-link">Our Services</a></li>
-                        <li><a href="#why-choose-us" class="nav-link">Why Green Earth</a></li>
-                        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+                        <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About Us</a></li>
+                        <li><a href="index.html#products" class="nav-link">Products</a></li>
+                        <li><a href="index.html#sustainability" class="nav-link">Sustainability</a></li>
+                        <li><a href="index.html#services" class="nav-link">Our Services</a></li>
+                        <li><a href="index.html#why-choose-us" class="nav-link">Why Green Earth</a></li>
+                        <li><a href="index.html#contact" class="nav-link">Contact Us</a></li>
                     </ul>
                     
                     <div class="nav-cta">
-                        <a href="#contact" class="btn btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; border-radius: 50px;">Get in Touch</a>
+                        <a href="index.html#contact" class="btn btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; border-radius: 50px;">Get in Touch</a>
                     </div>
                     
                     <div class="menu-toggle" id="mobile-menu">
@@ -72,7 +72,7 @@ class CustomFooter extends HTMLElement {
             <div class="container">
                 <div class="footer-top">
                     <div class="footer-brand">
-                        <a href="#hero" class="footer-logo">
+                        <a href="index.html#hero" class="footer-logo">
                             <img src="image/logo.png" alt="Green Earth Logo" class="footer-logo-img">
                             <div class="footer-logo-text">
                                 GREEN EARTH
@@ -87,25 +87,25 @@ class CustomFooter extends HTMLElement {
                     <div class="footer-column">
                         <h4 class="footer-column-title">Quick Links</h4>
                         <ul class="footer-links">
-                            <li class="footer-link-item"><a href="#hero">Home</a></li>
-                            <li class="footer-link-item"><a href="#about-us">About Us</a></li>
-                            <li class="footer-link-item"><a href="#products">Products</a></li>
-                            <li class="footer-link-item"><a href="#sustainability">Sustainability</a></li>
-                            <li class="footer-link-item"><a href="#services">Our Services</a></li>
-                            <li class="footer-link-item"><a href="#why-choose-us">Why Green Earth</a></li>
-                            <li class="footer-link-item"><a href="#contact">Contact Us</a></li>
+                            <li class="footer-link-item"><a href="index.html#hero">Home</a></li>
+                            <li class="footer-link-item"><a href="about.html">About Us</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Products</a></li>
+                            <li class="footer-link-item"><a href="index.html#sustainability">Sustainability</a></li>
+                            <li class="footer-link-item"><a href="index.html#services">Our Services</a></li>
+                            <li class="footer-link-item"><a href="index.html#why-choose-us">Why Green Earth</a></li>
+                            <li class="footer-link-item"><a href="index.html#contact">Contact Us</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
                         <h4 class="footer-column-title">Products</h4>
                         <ul class="footer-links">
-                            <li class="footer-link-item"><a href="#products">Recycled Metals</a></li>
-                            <li class="footer-link-item"><a href="#products">Non-Prime Steel</a></li>
-                            <li class="footer-link-item"><a href="#products">Recycled Rubber</a></li>
-                            <li class="footer-link-item"><a href="#products">Recycled Plastics</a></li>
-                            <li class="footer-link-item"><a href="#products">Recycled Paper</a></li>
-                            <li class="footer-link-item"><a href="#products">Recycled Wood</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Recycled Metals</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Non-Prime Steel</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Recycled Rubber</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Recycled Plastics</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Recycled Paper</a></li>
+                            <li class="footer-link-item"><a href="index.html#products">Recycled Wood</a></li>
                         </ul>
                     </div>
                     
