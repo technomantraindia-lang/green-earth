@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
     const preloader = document.getElementById('site-preloader');
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const hasSeenPreloader = sessionStorage.getItem('greenearth_preloader_seen') === 'true';
+    let hasSeenPreloader = false;
+    try {
+        hasSeenPreloader = sessionStorage.getItem('greenearth_preloader_seen') === 'true';
+    } catch (e) {
+        // Fallback for sandboxed or private browsing environments
+        hasSeenPreloader = false;
+    }
 
     // Elements to animate on page reveal
     const header = document.querySelector('custom-header');
@@ -65,7 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const remaining = Math.max(0, minDuration - elapsed);
 
             setTimeout(() => {
-                sessionStorage.setItem('greenearth_preloader_seen', 'true');
+                try {
+                    sessionStorage.setItem('greenearth_preloader_seen', 'true');
+                } catch (e) {
+                    // Safe fallback
+                }
                 closePreloader(600); // 600ms fade out transition matching CSS
             }, remaining);
         }

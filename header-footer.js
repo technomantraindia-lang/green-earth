@@ -28,7 +28,7 @@ class CustomHeader extends HTMLElement {
                     <ul class="nav-menu" id="nav-menu">
                         <li><a href="index.html#hero" class="nav-link">Home</a></li>
                         <li><a href="about.html" class="nav-link">About Us</a></li>
-                        <li><a href="index.html#services" class="nav-link">Services</a></li>
+                        <li><a href="service.html" class="nav-link">Services</a></li>
                         <li><a href="index.html#products" class="nav-link">Products</a></li>
                         <li><a href="contact.html" class="nav-link">Contact</a></li>
                     </ul>
@@ -90,7 +90,7 @@ class CustomFooter extends HTMLElement {
                         <ul class="footer-links">
                             <li class="footer-link-item"><a href="index.html#hero">Home</a></li>
                             <li class="footer-link-item"><a href="about.html">About Us</a></li>
-                            <li class="footer-link-item"><a href="index.html#services">Services</a></li>
+                            <li class="footer-link-item"><a href="service.html">Services</a></li>
                             <li class="footer-link-item"><a href="index.html#products">Products</a></li>
                             <li class="footer-link-item"><a href="contact.html">Contact</a></li>
                         </ul>

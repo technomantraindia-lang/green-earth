@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Our Services - Green Earth Commodity FZ LLC provides comprehensive commodity trading, global sourcing, logistics, and supply chain solutions.">
+    <title>Our Services | Green Earth Commodity FZ LLC</title>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="style.css?v=1.0.2">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Reusable Header/Footer Component JS -->
+    <script src="header-footer.js" defer></script>
+
+    <!-- Main Interactivity and Animation JS -->
+    <script src="app.js" defer></script>
+
+    <!-- Preloader Safety Fail-Safe Script -->
+    <script>
+        // Guaranteed removal of preloader to prevent blank screen hangs
+        (function() {
+            function removePreloader() {
+                const preloader = document.getElementById('site-preloader');
+                if (preloader) {
+                    preloader.classList.add('fade-out');
+                    setTimeout(function() {
+                        document.body.classList.remove('preloader-active');
+                        document.body.classList.add('page-loaded');
+                        preloader.remove();
+                        // Trigger scroll reveal animations in case window load event was bypassed
+                        if (typeof initRevealObservers === 'function') {
+                            initRevealObservers();
+                        }
+                    }, 600);
+                }
+            }
+            // Trigger on page load or after a safety timeout of 2 seconds
+            window.addEventListener('load', removePreloader);
+            setTimeout(removePreloader, 2000);
+        })();
+    </script>
+</head>
+
+<body class="preloader-active">
+
+    <!-- Premium Preloader -->
+    <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
+        <div class="preloader-inner" role="status" aria-label="Website loading">
+            <div class="loader-visual-wrapper">
+                <div class="loader-pulse-glow"></div>
+                <div class="loader-ring loader-ring-outer"></div>
+                <div class="loader-ring loader-ring-inner"></div>
+                <div class="loader-leaf-container">
+                    <i class="fa-solid fa-leaf loader-leaf-icon"></i>
+                </div>
+            </div>
+
+            <div class="loader-text-wrapper">
+                <div class="preloader-company">Green Earth Commodity FZ LLC</div>
+                <p class="preloader-tagline">Sustainable Global Commodity Trading</p>
+                <div class="loader-dots">
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ambient background glows -->
+    <div class="bg-blob blob-primary"></div>
+    <div class="bg-blob blob-secondary"></div>
+
+    <!-- Reusable Navbar Header -->
+    <custom-header></custom-header>
+
+    <!-- HERO/BANNER SECTION -->
+    <section class="about-banner-section">
+        <!-- Main banner image displayed in full width -->
+        <img src="image/new%20about%20banner.png" alt="Green Earth Commodity Our Services Banner" class="about-banner-img">
+        <div class="about-banner-overlay"></div>
+        <div class="services-banner-content">
+            <h1 class="services-banner-title reveal-up">Our Services</h1>
+            <p class="services-banner-subtitle reveal-up" data-delay="100">Connecting global markets with sustainable, reliable, and professional supply chain solutions</p>
+        </div>
+    </section>
+
+    <!-- SERVICES INTRO SECTION (SPLIT LAYOUT) -->
+    <section class="services-intro-section">
+        <div class="container">
+            <div class="services-intro-grid">
+                <div class="services-intro-visual reveal-left">
+                    <img src="image/about_visual.png" alt="Global Supply Chain and Trading Excellence">
+                </div>
+                <div class="services-intro-text reveal-right" data-delay="150">
+                    <span class="services-intro-kicker">End-to-End Solutions</span>
+                    <h2 class="services-intro-title">Empowering Global Trade with <span>Professionalism</span></h2>
+                    <p class="services-intro-desc">
+                        Green Earth Commodity FZ LLC provides comprehensive commodity trading and supply chain solutions, connecting trusted suppliers with manufacturers, recyclers, and industrial consumers across global markets.
+                    </p>
+                    <p class="services-intro-highlight">
+                        Our expertise extends beyond simple trading, ensuring that every transaction is managed with the highest standards of professionalism, efficiency, and reliability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE SERVICES SECTION -->
+    <section class="section services-grid-section" style="background-color: var(--bg-cream); padding: 6rem 0;">
+        <div class="container">
+            <div class="section-header reveal-up" style="text-align: center; margin-bottom: 5rem;">
+                <span class="section-tag" style="background-color: rgba(22, 163, 74, 0.08); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Capabilities</span>
+                <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 1.5rem;">Core Business Services</h2>
+                <div class="products-divider" aria-hidden="true" style="justify-content: center; margin: 0 auto 1.5rem auto; display: flex; align-items: center; gap: 1rem;">
+                    <span style="width: 50px; height: 1px; background-color: var(--border-color);"></span>
+                    <i class="fa-solid fa-leaf" style="color: var(--primary-color);"></i>
+                    <span style="width: 50px; height: 1px; background-color: var(--border-color);"></span>
+                </div>
+                <p style="font-family: var(--font-body); color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1.05rem;">From global procurement and shipping to quality verification and custom logistics solutions.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1: Global Sourcing -->
+                <div class="service-card-mockup reveal-up" data-delay="100">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">01</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-earth-americas"></i>
+                    </div>
+                    <div class="service-card-chip">Market Sourcing</div>
+                    <h3 class="service-card-title">Global Sourcing</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">We source high-quality recycled commodities and non-prime steel products from trusted suppliers across the United Kingdom, Europe, and the United States, ensuring consistent quality, competitive pricing, and reliable supply.</p>
+                    <div class="service-card-footer"><span>Trusted Sourcing Network</span></div>
+                </div>
+
+                <!-- Service 2: International Commodity Trading -->
+                <div class="service-card-mockup reveal-up" data-delay="200">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">02</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div class="service-card-chip">Global Commerce</div>
+                    <h3 class="service-card-title">International Trading</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">We specialize in the global trading of recycled Metals, Rubber, Plastics, and Non-Prime Steel products, delivering tailored solutions to meet the specific requirements of our customers.</p>
+                    <div class="service-card-footer"><span>Tailored Trading Solutions</span></div>
+                </div>
+
+                <!-- Service 3: Procurement Solutions -->
+                <div class="service-card-mockup reveal-up" data-delay="300">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">03</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    </div>
+                    <div class="service-card-chip">Commercial Sourcing</div>
+                    <h3 class="service-card-title">Procurement Solutions</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">Our experienced team identifies reliable supply sources, negotiates competitive pricing, and secures the right products to meet our customers' commercial and technical requirements.</p>
+                    <div class="service-card-footer"><span>Smart Sourcing Solutions</span></div>
+                </div>
+
+                <!-- Service 4: Supply Chain Management -->
+                <div class="service-card-mockup reveal-up" data-delay="400">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">04</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-boxes-packing"></i>
+                    </div>
+                    <div class="service-card-chip">End-to-End Control</div>
+                    <h3 class="service-card-title">Supply Chain Management</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">From procurement to final delivery, we coordinate every stage of the supply chain to ensure smooth, efficient, and cost-effective operations.</p>
+                    <div class="service-card-footer"><span>Efficient Operations</span></div>
+                </div>
+
+                <!-- Service 5: Logistics & Shipping Coordination -->
+                <div class="service-card-mockup reveal-up" data-delay="100">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">05</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-ship"></i>
+                    </div>
+                    <div class="service-card-chip">Global Forwarding</div>
+                    <h3 class="service-card-title">Logistics & Shipping</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">We work closely with shipping lines, freight forwarders, and logistics partners to ensure timely shipments, efficient transportation, and seamless international deliveries.</p>
+                    <div class="service-card-footer"><span>Seamless Shipping</span></div>
+                </div>
+
+                <!-- Service 6: Quality Assurance -->
+                <div class="service-card-mockup reveal-up" data-delay="200">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">06</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="service-card-chip">Verification Standards</div>
+                    <h3 class="service-card-title">Quality Assurance</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">Quality is our priority. We work with trusted suppliers and implement appropriate quality verification processes to ensure products meet agreed specifications and customer expectations.</p>
+                    <div class="service-card-footer"><span>Consistent Quality Check</span></div>
+                </div>
+
+                <!-- Service 7: Documentation & Export Support -->
+                <div class="service-card-mockup reveal-up" data-delay="300">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">07</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="service-card-chip">Regulatory Compliance</div>
+                    <h3 class="service-card-title">Documentation & Export</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">Our team manages all essential export documentation, customs requirements, and shipping documents to facilitate smooth international trade and regulatory compliance.</p>
+                    <div class="service-card-footer"><span>Hassle-free Exporting</span></div>
+                </div>
+
+                <!-- Service 8: Customer-Focused Solutions -->
+                <div class="service-card-mockup reveal-up" data-delay="400">
+                    <div class="service-card-beam"></div>
+                    <span class="service-card-num">08</span>
+                    <div class="service-card-icon-wrap">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <div class="service-card-chip">Custom Agreements</div>
+                    <h3 class="service-card-title">Customer Solutions</h3>
+                    <div class="service-card-line"></div>
+                    <p class="service-card-desc">Every customer has unique requirements. We provide flexible, reliable, and customized trading solutions designed to build long-term partnerships and create sustainable value.</p>
+                    <div class="service-card-footer"><span>Designed Around You</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIES WE SERVE SECTION -->
+    <section id="industries" class="section industries-section" style="background-color: var(--bg-light); padding: 6rem 0;">
+        <div class="container">
+            <div class="section-header reveal-up" style="text-align: center; margin-bottom: 5rem;">
+                <div class="industries-kicker" style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--primary-color); letter-spacing: 0.1em; text-transform: uppercase;">GLOBAL REACH</div>
+                <h2 class="industries-main-title" style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 1.5rem;">Industries We Serve</h2>
+                <div class="products-divider" aria-hidden="true" style="justify-content: center; margin: 0 auto 1.5rem auto; display: flex; align-items: center; gap: 1rem;">
+                    <span style="width: 50px; height: 1px; background-color: var(--border-color);"></span>
+                    <i class="fa-solid fa-leaf" style="color: var(--primary-color);"></i>
+                    <span style="width: 50px; height: 1px; background-color: var(--border-color);"></span>
+                </div>
+                <p class="industries-subtitle" style="font-family: var(--font-body); color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1.05rem;">Our products and services support a diverse range of industries worldwide, including:</p>
+            </div>
+
+            <div class="industries-grid">
+                <!-- Card 1 -->
+                <div class="industry-card reveal-up" data-delay="0">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-industry"></i></div>
+                    <h3 class="industry-name">Steel Mills & Rolling Mills</h3>
+                </div>
+                <!-- Card 2 -->
+                <div class="industry-card reveal-up" data-delay="50">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-recycle"></i></div>
+                    <h3 class="industry-name">Metal Recyclers & Scrap Processors</h3>
+                </div>
+                <!-- Card 3 -->
+                <div class="industry-card reveal-up" data-delay="100">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-fire-burner"></i></div>
+                    <h3 class="industry-name">Foundries & Metal Manufacturers</h3>
+                </div>
+                <!-- Card 4 -->
+                <div class="industry-card reveal-up" data-delay="150">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-circle-notch"></i></div>
+                    <h3 class="industry-name">Rubber Recycling & Tyre Recycling</h3>
+                </div>
+                <!-- Card 5 -->
+                <div class="industry-card reveal-up" data-delay="200">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-cubes"></i></div>
+                    <h3 class="industry-name">Rubber Product Manufacturers</h3>
+                </div>
+                <!-- Card 6 -->
+                <div class="industry-card reveal-up" data-delay="250">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-arrows-spin"></i></div>
+                    <h3 class="industry-name">Plastic Recyclers & Processors</h3>
+                </div>
+                <!-- Card 7 -->
+                <div class="industry-card reveal-up" data-delay="300">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-box-open"></i></div>
+                    <h3 class="industry-name">Plastic Packaging & Manufacturing</h3>
+                </div>
+                <!-- Card 8 -->
+                <div class="industry-card reveal-up" data-delay="350">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-car"></i></div>
+                    <h3 class="industry-name">Automotive & Components</h3>
+                </div>
+                <!-- Card 9 -->
+                <div class="industry-card reveal-up" data-delay="400">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-trowel-bricks"></i></div>
+                    <h3 class="industry-name">Construction & Infrastructure</h3>
+                </div>
+                <!-- Card 10 -->
+                <div class="industry-card reveal-up" data-delay="450">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-gears"></i></div>
+                    <h3 class="industry-name">Engineering & Industrial Mfg.</h3>
+                </div>
+                <!-- Card 11 -->
+                <div class="industry-card reveal-up" data-delay="500">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-store"></i></div>
+                    <h3 class="industry-name">Trading Houses & Distributors</h3>
+                </div>
+                <!-- Card 12 -->
+                <div class="industry-card reveal-up" data-delay="550">
+                    <div class="industry-icon-wrapper"><i class="fa-solid fa-globe"></i></div>
+                    <h3 class="industry-name">Importers, Exporters & Consumers</h3>
+                </div>
+            </div>
+
+            <!-- Concluding Card -->
+            <div class="industries-conclusion reveal-up">
+                <div class="conclusion-card">
+                    <div class="conclusion-badge"><i class="fa-solid fa-award"></i></div>
+                    <p class="conclusion-text">At Green Earth Commodity FZ LLC, we are committed to delivering dependable products, efficient logistics, and exceptional customer service. Our goal is to build long-term partnerships by providing reliable supply chain solutions, maintaining the highest standards of professionalism, and creating sustainable value for our customers across global markets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEDICATED CTA SECTION -->
+    <section class="about-cta-section section">
+        <div class="container">
+            <div class="cta-card reveal-scale">
+                <div class="cta-glow-overlay"></div>
+                <div class="cta-content-wrapper">
+                    <span class="cta-kicker">WORK WITH US</span>
+                    <h2 class="cta-heading-title">Need a Reliable Global Trading Partner?</h2>
+                    <p class="cta-subtitle-text">Partner with Green Earth Commodity FZ LLC for dependable sourcing, ethical trading practices, and sustainable circular economy solutions across international markets.</p>
+                    <div class="cta-actions-row">
+                        <a href="index.html#products" class="btn-cta-primary">
+                            <span>Explore Our Products</span>
+                            <i class="fa-solid fa-arrow-right" style="margin-left: 0.8rem;"></i>
+                        </a>
+                        <a href="contact.html" class="btn-cta-secondary">
+                            <span>Get in Touch</span>
+                            <i class="fa-solid fa-envelope" style="margin-left: 0.8rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reusable Footer -->
+    <custom-footer></custom-footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="back-to-top-btn" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+</body>
+
+</html>
