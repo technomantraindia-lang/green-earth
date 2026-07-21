@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contact Green Earth Commodity FZ-LLC. Reach out to our trading desk in Ras Al Khaimah, UAE, for sourcing inquiries and partnerships.">
+    <title>Contact Us | Green Earth Commodity FZ LLC</title>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Reusable Header/Footer Component JS -->
+    <script src="header-footer.js" defer></script>
+
+    <!-- Main Interactivity and Animation JS -->
+    <script src="app.js" defer></script>
+</head>
+
+<body class="preloader-active">
+
+    <!-- Premium Preloader -->
+    <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
+        <div class="preloader-inner" role="status" aria-label="Website loading">
+            <div class="loader-visual-wrapper">
+                <div class="loader-pulse-glow"></div>
+                <div class="loader-ring loader-ring-outer"></div>
+                <div class="loader-ring loader-ring-inner"></div>
+                <div class="loader-leaf-container">
+                    <i class="fa-solid fa-leaf loader-leaf-icon"></i>
+                </div>
+            </div>
+
+            <div class="loader-text-wrapper">
+                <div class="preloader-company">Green Earth Commodity FZ LLC</div>
+                <p class="preloader-tagline">Sustainable Global Commodity Trading</p>
+                <div class="loader-dots">
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ambient background glows -->
+    <div class="bg-blob blob-primary"></div>
+    <div class="bg-blob blob-secondary"></div>
+
+    <!-- Reusable Navbar Header -->
+    <custom-header></custom-header>
+
+    <!-- CONTACT HERO/BANNER SECTION -->
+    <section class="about-banner-section">
+        <!-- Main banner image displayed in full width -->
+        <img src="image/contact us .png" alt="Green Earth Commodity Contact Us Banner" class="about-banner-img">
+        <div class="about-banner-overlay"></div>
+    </section>
+
+    <!-- CONTACT US CONTENT SECTION -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <!-- Info panel -->
+                <div class="contact-info-panel reveal-left">
+                    <div>
+                        <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-dark);">
+                            Green Earth Commodity FZ-LLC</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem;">
+                            Our specialized trading desk and logistics managers are ready to support your supply requirements. Get in touch with us today.
+                        </p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <div class="contact-item-title">Registered Office</div>
+                                    <div class="contact-item-value">
+                                        VUNE1239, Compass Building – Al Hulaila<br>
+                                        Al Hulaila Industrial Zone – FZ<br>
+                                        Ras Al Khaimah, United Arab Emirates
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <div class="contact-item-title">Email Address</div>
+                                    <a href="mailto:Office@greenearthcommodity.com"
+                                        class="contact-item-value">Office@greenearthcommodity.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/971562050163" target="_blank" class="whatsapp-card">
+                        <div class="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="whatsapp-info">
+                            <div class="whatsapp-title">Chat on WhatsApp</div>
+                            <div class="whatsapp-desc">Direct business line: +971 56 2050163</div>
+                        </div>
+                        <div class="whatsapp-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+                </div>
+
+                <!-- Form panel -->
+                <div class="contact-form-panel reveal-right" data-delay="150">
+                    <h3 class="form-title">Send a Message</h3>
+                    <p class="form-subtitle">Fill in the form details below and our management team will reach out to
+                        you within 24 hours.</p>
+
+                    <div id="form-alert" class="form-notification"></div>
+
+                    <form id="contact-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input"
+                                    placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input"
+                                    placeholder="Sourcing Query" required>
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label for="message" class="form-label">Message Details</label>
+                                <textarea id="message" name="message" class="form-input"
+                                    placeholder="Tell us about your commodity supply requirements..."
+                                    required></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit-btn">
+                            <span>Submit Inquiry</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reusable Footer -->
+    <custom-footer></custom-footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="back-to-top-btn" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+</body>
+
+</html>
