@@ -16,10 +16,12 @@ class CustomHeader extends HTMLElement {
                 <nav class="navbar">
                     <a href="index.html" class="logo-container">
                         <img src="image/NEWST%20LOGO.png" alt="Green Earth Commodity Logo" class="logo-img">
-                        <div class="logo-text">
-                            GREEN EARTH
-                            <span>Commodity FZ LLC</span>
-                            <span class="logo-tagline">Global Sourcing & Sustainable Trading</span>
+                        <div class="logo-brand-stack">
+                            <div class="logo-text">
+                                GREEN EARTH
+                                <span>Commodity FZ LLC</span>
+                            </div>
+                            <span class="logo-tagline">Global Sourcing &amp; Sustainable Trading</span>
                         </div>
                     </a>
                     
