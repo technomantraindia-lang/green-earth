@@ -4846,31 +4846,36 @@ custom-footer {
 /* Fallback: default values for reveal system when JS is enabled */
 .js-enabled .reveal-up {
     opacity: 0;
-    transform: translateY(35px);
+    transform: perspective(1200px) translateY(80px) rotateX(12deg) scale(0.96);
+    filter: blur(4px);
 }
 .js-enabled .reveal-down {
     opacity: 0;
-    transform: translateY(-35px);
+    transform: perspective(1200px) translateY(-80px) rotateX(-12deg) scale(0.96);
+    filter: blur(4px);
 }
 .js-enabled .reveal-left {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: perspective(1200px) translateX(-90px) rotateY(-12deg) scale(0.96);
+    filter: blur(4px);
 }
 .js-enabled .reveal-right {
     opacity: 0;
-    transform: translateX(50px);
+    transform: perspective(1200px) translateX(90px) rotateY(12deg) scale(0.96);
+    filter: blur(4px);
 }
 .js-enabled .reveal-scale {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.9);
+    filter: blur(4px);
 }
 .js-enabled .reveal-blur {
     opacity: 0;
-    filter: blur(10px);
+    filter: blur(12px);
 }
 .js-enabled .reveal-up-3d {
     opacity: 0;
-    transform: perspective(1200px) rotateX(12deg) translateY(50px);
+    transform: perspective(1200px) rotateX(15deg) translateY(60px);
 }
 
 /* Reveal transition trigger */
@@ -4882,10 +4887,11 @@ custom-footer {
 .js-enabled .reveal-blur.visible,
 .js-enabled .reveal-up-3d.visible {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    transform: perspective(1200px) translate(0, 0) scale(1) rotateX(0deg) rotateY(0deg);
     filter: blur(0px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 1s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0ms);
+    will-change: transform, opacity, filter;
 }
 
 /* Page Load Timeline (triggered by .page-loaded class on body) */
@@ -5905,23 +5911,11 @@ section, header, footer, main, .container, .why-section, .contact-section {
 /* Pillars Layout V2 */
 .about-pillars-layout {
     display: grid;
-    grid-template-columns: 1fr 240px 1fr;
-    align-items: center;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 3rem;
     margin-top: 4rem;
     position: relative;
-}
-
-.pillars-col-left {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-}
-
-.pillars-col-right {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
 }
 
 .pillar-card-v2 {
@@ -5931,12 +5925,12 @@ section, header, footer, main, .container, .why-section, .contact-section {
     background-position: center;
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 24px;
-    padding: 2.5rem 2rem;
+    padding: 3rem 2.2rem;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
     position: relative;
     transition: transform 0.5s var(--transition-premium), border-color 0.5s var(--transition-premium), box-shadow 0.5s var(--transition-premium);
     overflow: hidden;
-    min-height: 280px;
+    min-height: 330px;
     display: flex;
     align-items: center;
 }
@@ -5947,13 +5941,13 @@ section, header, footer, main, .container, .why-section, .contact-section {
 }
 
 .pillar-left {
-    padding-left: 170px !important;
-    padding-right: 2.5rem !important;
+    padding-left: 180px !important;
+    padding-right: 2.8rem !important;
 }
 
 .pillar-right {
-    padding-right: 170px !important;
-    padding-left: 2.5rem !important;
+    padding-right: 180px !important;
+    padding-left: 2.8rem !important;
 }
 
 .pillar-text-box {
@@ -6228,8 +6222,8 @@ section, header, footer, main, .container, .why-section, .contact-section {
         gap: 2rem;
     }
     .pillar-right {
-        padding-left: 170px !important;
-        padding-right: 2.5rem !important;
+        padding-left: 180px !important;
+        padding-right: 2.8rem !important;
     }
     .pillar-right .pillar-icon-v2 {
         left: 102.5px;
@@ -6425,31 +6419,59 @@ section, header, footer, main, .container, .why-section, .contact-section {
 
 /* --- PREMIUM 3D HOVER EFFECTS & CARD ROTATE --- */
 /* Apply to pillar-card (About details), industry-card (Industries we serve), and why-card (Why choose us) */
-.pillar-card-v2, .industry-card, .why-card {
+.pillar-card-v2, .industry-card, .why-card, .product-card-mockup, .about-showcase-card, .conclusion-card {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
                 box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transform-style: preserve-3d !important;
     perspective: 1000px !important;
+    position: relative;
+    overflow: hidden;
 }
 
-/* 3D Rotate and Tilt on Hover */
+/* 3D Rotate and Tilt on Hover Fallbacks (for when JS is disabled) */
 .pillar-card-v2:hover {
-    transform: translateY(-10px) rotateX(4deg) rotateY(-4deg) scale(1.02) !important;
-    box-shadow: 0 25px 50px rgba(21, 128, 61, 0.12) !important;
+    transform: translateY(-10px) rotateX(4deg) rotateY(-4deg) scale(1.02);
+    box-shadow: 0 25px 50px rgba(21, 128, 61, 0.12);
     border-color: var(--border-hover) !important;
 }
 
 .industry-card:hover {
-    transform: translateY(-8px) rotateX(5deg) rotateY(-5deg) scale(1.03) !important;
-    box-shadow: 0 20px 45px rgba(21, 128, 61, 0.1) !important;
+    transform: translateY(-8px) rotateX(5deg) rotateY(-5deg) scale(1.03);
+    box-shadow: 0 20px 45px rgba(21, 128, 61, 0.1);
     border-color: var(--border-hover) !important;
 }
 
 .why-card:hover {
-    transform: translateY(-10px) rotateX(4deg) rotateY(-4deg) scale(1.02) !important;
-    box-shadow: 0 25px 50px rgba(21, 128, 61, 0.1) !important;
+    transform: translateY(-10px) rotateX(4deg) rotateY(-4deg) scale(1.02);
+    box-shadow: 0 25px 50px rgba(21, 128, 61, 0.1);
     border-color: var(--border-hover) !important;
+}
+
+/* Shine Overlay for Card reflection */
+.card-shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle 250px at var(--shine-x, 50%) var(--shine-y, 50%),
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(22, 163, 74, 0.08) 35%,
+        transparent 75%
+    );
+    z-index: 99;
+    mix-blend-mode: overlay;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillar-card-v2:hover .card-shine, 
+.industry-card:hover .card-shine, 
+.why-card:hover .card-shine,
+.product-card-mockup:hover .card-shine,
+.about-showcase-card:hover .card-shine,
+.conclusion-card:hover .card-shine {
+    opacity: 1;
 }
 
 /* Pop Children forward in 3D Space (TranslateZ) */

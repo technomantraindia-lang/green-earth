@@ -907,56 +907,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- MOUSE GLOW & PERSPECTIVE TILT TRACKER FOR CARDS --- */
-    const glowCards = document.querySelectorAll('.service-card-mockup, .network-detail-card, .product-card-mockup, .info-detail-card, .info-action-card, .contact-form-panel');
-    glowCards.forEach(card => {
+    /* --- PREMIUM 3D TILT & HOLOGRAPHIC SHINE EFFECT --- */
+    const premiumCards = document.querySelectorAll(
+        '.pillar-card-v2, .why-card, .industry-card, .product-card-mockup, ' +
+        '.about-showcase-card, .conclusion-card, .service-card-mockup, ' +
+        '.network-detail-card, .info-detail-card, .info-action-card, .contact-form-panel'
+    );
+
+    premiumCards.forEach(card => {
+        // Inject shine overlay programmatically if not already present
+        if (!card.querySelector('.card-shine')) {
+            const shine = document.createElement('div');
+            shine.className = 'card-shine';
+            card.appendChild(shine);
+        }
+
+        // Ensure parent style preserves 3D
+        card.style.transformStyle = 'preserve-3d';
+
         card.addEventListener('mousemove', (e) => {
+            if (window.innerWidth <= 991 || isReducedMotion) return;
+
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
+
+            // Percentage positioning for shine overlay
+            const percentX = (x / rect.width) * 100;
+            const percentY = (y / rect.height) * 100;
+
+            card.style.setProperty('--shine-x', `${percentX}%`);
+            card.style.setProperty('--shine-y', `${percentY}%`);
+
+            // Also keep standard mouse x/y for other animations
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
-
-            if (window.innerWidth <= 991 || isReducedMotion) return;
-            const rotateY = ((x / rect.width) - 0.5) * 5;
-            const rotateX = (0.5 - (y / rect.height)) * 5;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-            card.style.transition = 'transform 0.1s ease';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.transition = 'transform 0.4s ease';
-        });
-    });
-
-    /* --- WHY CHOOSE US BENTO TILT CARDS --- */
-    const tiltCards = document.querySelectorAll('.why-tilt-card');
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Set mouse position properties for tracking radial gradient glow
             card.style.setProperty('--mx', `${x}px`);
             card.style.setProperty('--my', `${y}px`);
 
-            if (window.innerWidth <= 991 || isReducedMotion) return;
+            // Calculate tilt angles (max 10-12 degrees)
+            const tiltY = ((x / rect.width) - 0.5) * 20; // -10deg to +10deg
+            const tiltX = (0.5 - (y / rect.height)) * 20; // -10deg to +10deg
 
-            // Calculate rotation angles (max 8 degrees tilt)
-            const rotateY = ((x / rect.width) - 0.5) * 16; 
-            const rotateX = (0.5 - (y / rect.height)) * 16;
-
-            card.style.setProperty('--rx', `${rotateX}deg`);
-            card.style.setProperty('--ry', `${rotateY}deg`);
-            card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+            // Dynamic rotation, scale and lift
+            card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-10px) scale(1.03)`;
+            card.style.transition = 'transform 0.08s linear, box-shadow 0.2s ease';
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.setProperty('--rx', '0deg');
-            card.style.setProperty('--ry', '0deg');
-            card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+            // Reset to defaults smoothly
+            card.style.transform = '';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            
+            // Reset properties
+            card.style.setProperty('--shine-x', '50%');
+            card.style.setProperty('--shine-y', '50%');
         });
     });
 });
