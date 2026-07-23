@@ -83,6 +83,14 @@ class CustomFooter extends HTMLElement {
                         <p class="footer-brand-desc">
                             Connecting global suppliers and industrial buyers through transparent trading, efficient logistics, and custom-tailored supply chain solutions in the recycling and steel industry.
                         </p>
+                        <div class="footer-social-links" aria-label="Contact Green Earth">
+                            <a href="mailto:Office@greenearthcommodity.com" aria-label="Email Green Earth">
+                                <i class="fa-solid fa-envelope"></i>
+                            </a>
+                            <a href="https://wa.me/971562050163" target="_blank" rel="noopener noreferrer" aria-label="Chat with Green Earth on WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="footer-column">
@@ -109,7 +117,7 @@ class CustomFooter extends HTMLElement {
                     </div>
                     
                     <div class="footer-column">
-                        <h4 class="footer-column-title">Registered Office</h4>
+                        <h4 class="footer-column-title">Contact Us</h4>
                         <ul class="footer-contact-list">
                             <li class="footer-contact-item">
                                 <i class="fa-solid fa-location-dot"></i>
