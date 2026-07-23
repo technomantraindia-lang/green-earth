@@ -7520,22 +7520,22 @@ html, body {
         padding-inline: 1rem;
     }
 
-    .home-page .sustainability-wrapper {
+    :is(.home-page, .about-page) .sustainability-wrapper {
         gap: 2rem;
     }
 
-    .home-page .sustainability-visual-box {
+    :is(.home-page, .about-page) .sustainability-visual-box {
         order: 0;
         overflow: visible;
     }
 
-    .home-page .sus-interactive-box {
+    :is(.home-page, .about-page) .sus-interactive-box {
         width: 100%;
         height: 510px;
         margin: 0 auto;
     }
 
-    .home-page .sus-globe-commitment-banner {
+    :is(.home-page, .about-page) .sus-globe-commitment-banner {
         top: 0;
         width: min(100%, 320px);
         padding: 0.6rem 1rem;
@@ -7543,12 +7543,12 @@ html, body {
         white-space: normal;
     }
 
-    .home-page .sus-banner-title {
+    :is(.home-page, .about-page) .sus-banner-title {
         font-size: 0.92rem;
         line-height: 1.25;
     }
 
-    .home-page .sus-orbit-line-outer {
+    :is(.home-page, .about-page) .sus-orbit-line-outer {
         width: 290px;
         height: 290px;
         top: 82px;
@@ -7557,7 +7557,7 @@ html, body {
         animation: none;
     }
 
-    .home-page .sus-orbit-line-inner {
+    :is(.home-page, .about-page) .sus-orbit-line-inner {
         width: 205px;
         height: 205px;
         top: 124px;
@@ -7566,13 +7566,13 @@ html, body {
         animation: none;
     }
 
-    .home-page .sus-globe-center {
+    :is(.home-page, .about-page) .sus-globe-center {
         width: 142px;
         height: 142px;
         top: 227px;
     }
 
-    .home-page .sus-interactive-box::before {
+    :is(.home-page, .about-page) .sus-interactive-box::before {
         width: 300px;
         height: 300px;
         top: 77px;
@@ -7580,44 +7580,44 @@ html, body {
         transform: translateX(-50%);
     }
 
-    .home-page .sus-interactive-box::after,
-    .home-page .sus-orbit-particle {
+    :is(.home-page, .about-page) .sus-interactive-box::after,
+    :is(.home-page, .about-page) .sus-orbit-particle {
         display: none;
     }
 
-    .home-page .sus-orbit-node {
+    :is(.home-page, .about-page) .sus-orbit-node {
         width: 42px;
         height: 42px;
         animation: none;
     }
 
-    .home-page .sus-node-1 {
+    :is(.home-page, .about-page) .sus-node-1 {
         left: 50%;
         top: 78px;
     }
 
-    .home-page .sus-node-2 {
+    :is(.home-page, .about-page) .sus-node-2 {
         left: calc(50% + 135px);
         top: 170px;
     }
 
-    .home-page .sus-node-3 {
+    :is(.home-page, .about-page) .sus-node-3 {
         left: calc(50% + 84px);
         top: 350px;
     }
 
-    .home-page .sus-node-4 {
+    :is(.home-page, .about-page) .sus-node-4 {
         left: calc(50% - 84px);
         top: 350px;
     }
 
-    .home-page .sus-node-5 {
+    :is(.home-page, .about-page) .sus-node-5 {
         left: calc(50% - 135px);
         top: 170px;
     }
 
-    .home-page .sus-interactive-box[class*="active-node-"] .sus-orbit-tooltip,
-    .home-page .sus-orbit-tooltip {
+    :is(.home-page, .about-page) .sus-interactive-box[class*="active-node-"] .sus-orbit-tooltip,
+    :is(.home-page, .about-page) .sus-orbit-tooltip {
         top: auto !important;
         left: 50% !important;
         bottom: 0;
@@ -7627,16 +7627,16 @@ html, body {
         border-radius: 16px;
     }
 
-    .home-page .sus-tooltip-kicker {
+    :is(.home-page, .about-page) .sus-tooltip-kicker {
         margin-bottom: 0.25rem;
     }
 
-    .home-page .sus-tooltip-title {
+    :is(.home-page, .about-page) .sus-tooltip-title {
         margin-bottom: 0.25rem;
         font-size: 0.9rem;
     }
 
-    .home-page .sus-tooltip-desc {
+    :is(.home-page, .about-page) .sus-tooltip-desc {
         font-size: 0.78rem;
         line-height: 1.4;
     }
@@ -7666,44 +7666,463 @@ html, body {
 }
 
 @media (max-width: 360px) {
-    .home-page .sus-orbit-line-outer {
+    :is(.home-page, .about-page) .sus-orbit-line-outer {
         width: 260px;
         height: 260px;
         top: 92px;
     }
 
-    .home-page .sus-orbit-line-inner {
+    :is(.home-page, .about-page) .sus-orbit-line-inner {
         width: 184px;
         height: 184px;
         top: 130px;
     }
 
-    .home-page .sus-globe-center {
+    :is(.home-page, .about-page) .sus-globe-center {
         width: 128px;
         height: 128px;
         top: 222px;
     }
 
-    .home-page .sus-node-1 {
+    :is(.home-page, .about-page) .sus-node-1 {
         top: 88px;
     }
 
-    .home-page .sus-node-2 {
+    :is(.home-page, .about-page) .sus-node-2 {
         left: calc(50% + 120px);
     }
 
-    .home-page .sus-node-3 {
+    :is(.home-page, .about-page) .sus-node-3 {
         left: calc(50% + 74px);
         top: 334px;
     }
 
-    .home-page .sus-node-4 {
+    :is(.home-page, .about-page) .sus-node-4 {
         left: calc(50% - 74px);
         top: 334px;
     }
 
-    .home-page .sus-node-5 {
+    :is(.home-page, .about-page) .sus-node-5 {
         left: calc(50% - 120px);
+    }
+}
+
+/* --- ABOUT & SERVICES PAGES: RESPONSIVE FINISHING LAYER --- */
+:is(.about-page, .services-page) {
+    overflow-x: clip;
+}
+
+:is(.about-page, .services-page) img,
+:is(.about-page, .services-page) video,
+:is(.about-page, .services-page) svg {
+    max-width: 100%;
+}
+
+:is(.about-page, .services-page) .container {
+    width: min(100%, 1460px);
+    padding-inline: clamp(1rem, 3.2vw, 3rem);
+}
+
+:is(.about-page, .services-page) .section {
+    padding-block: clamp(4.5rem, 8vw, 8rem);
+}
+
+:is(.about-page, .services-page) :is(
+    .about-main-title,
+    .industries-main-title,
+    .sustainability-heading,
+    .services-intro-title,
+    .service-card-title,
+    .cta-heading-title,
+    .why-cta-heading
+) {
+    overflow-wrap: anywhere;
+}
+
+:is(.about-page, .services-page) :is(
+    .who-we-are-layout,
+    .who-we-are-grid,
+    .sustainability-wrapper,
+    .why-grid,
+    .services-intro-grid,
+    .services-grid,
+    .industries-grid,
+    .about-pillars-layout
+) > * {
+    min-width: 0;
+}
+
+:is(.about-page, .services-page) .about-banner-section {
+    height: clamp(420px, 48vw, 650px);
+}
+
+.about-page .about-banner-img {
+    object-position: 25% center;
+}
+
+.services-page .about-banner-img {
+    object-position: center;
+}
+
+@media (max-width: 1280px) {
+    .about-page .who-we-are-layout {
+        grid-template-columns: minmax(0, 1.55fr) minmax(350px, 0.85fr);
+    }
+
+    .about-page .who-card {
+        grid-template-columns: 66px minmax(0, 1fr);
+        gap: 0.9rem;
+        padding: 1.6rem 1rem;
+    }
+
+    .about-page .who-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 1.5rem;
+    }
+
+    .services-page .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    :is(.about-page, .services-page) .industries-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1100px) {
+    .about-page .who-we-are-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-page .who-visual {
+        min-height: clamp(300px, 45vw, 460px);
+    }
+
+    .about-page .who-visual img {
+        position: absolute;
+    }
+
+    .about-page .why-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-page .why-grid > * {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+
+    .services-page .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    :is(.about-page, .services-page) .about-banner-section {
+        height: clamp(360px, 52vw, 520px);
+        margin-top: 96px;
+    }
+
+    .services-page .services-intro-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.75rem;
+    }
+
+    .services-page .services-intro-visual {
+        width: min(100%, 680px);
+        margin-inline: auto;
+    }
+
+    .services-page .services-intro-visual img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
+
+    :is(.about-page, .services-page) .industries-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    :is(.about-page, .services-page) .conclusion-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :is(.about-page, .services-page) .section,
+    .services-page .services-intro-section {
+        padding-block: clamp(4rem, 12vw, 5.5rem) !important;
+    }
+
+    :is(.about-page, .services-page) .about-banner-section {
+        height: clamp(300px, 58vw, 420px);
+        margin-top: 80px;
+    }
+
+    :is(.about-page, .services-page) .about-banner-img {
+        transform: none !important;
+    }
+
+    .about-page .about-details-section > .container {
+        padding-inline: 0;
+    }
+
+    .about-page .about-details-section .section-header {
+        padding-inline: 1.25rem;
+    }
+
+    .about-page .who-we-are-layout {
+        margin-top: 1.5rem;
+        border-inline: 0;
+    }
+
+    .about-page .who-we-are-grid {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0.5rem 1rem;
+    }
+
+    .about-page .who-card {
+        grid-template-columns: 54px minmax(0, 1fr);
+        padding: 1.35rem 0.25rem;
+        gap: 0.8rem;
+        border-right: 0 !important;
+        border-top: 1px dashed rgba(44, 104, 28, 0.2);
+    }
+
+    .about-page .who-card:first-child {
+        border-top: 0;
+    }
+
+    .about-page .who-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .about-page .who-card p {
+        font-size: 0.88rem;
+        line-height: 1.65;
+    }
+
+    .about-page .who-visual {
+        min-height: clamp(240px, 68vw, 360px);
+    }
+
+    .about-page .who-visual-caption {
+        left: 1.25rem;
+        right: 1.25rem;
+        bottom: 1.25rem;
+    }
+
+    .about-page .why-grid,
+    .services-page .services-grid,
+    :is(.about-page, .services-page) .industries-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-page .why-card,
+    .services-page .service-card-mockup {
+        width: min(100%, 600px);
+        margin-inline: auto;
+    }
+
+    .about-page .why-card {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+
+    .about-page .why-card-checklist {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .services-page .services-grid-section .section-header,
+    .services-page .industries-section .section-header {
+        margin-bottom: 3rem !important;
+    }
+
+    .services-page .service-card-mockup {
+        padding: clamp(1.4rem, 6vw, 2rem);
+        min-height: 0;
+    }
+
+    .services-page .service-card-title {
+        font-size: 1.25rem;
+    }
+
+    .services-page .service-card-desc {
+        font-size: 0.9rem;
+    }
+
+    :is(.about-page, .services-page) .industry-card {
+        width: min(100%, 560px);
+        min-height: 86px;
+        margin-inline: auto;
+        padding: 1.25rem;
+    }
+
+    :is(.about-page, .services-page) .industries-conclusion {
+        margin-top: 3rem;
+    }
+
+    :is(.about-page, .services-page) .conclusion-card {
+        padding: 1.5rem;
+        gap: 1.25rem;
+    }
+
+    :is(.about-page, .services-page) .conclusion-text {
+        font-size: 0.92rem;
+        text-align: left;
+    }
+
+    .services-page .cta-card {
+        padding: clamp(2rem, 8vw, 3rem) clamp(1.25rem, 5vw, 2rem);
+        border-radius: 24px;
+    }
+
+    .services-page .cta-heading-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+
+    .services-page .cta-actions-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .services-page :is(.btn-cta-primary, .btn-cta-secondary) {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        padding-inline: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :is(.about-page, .services-page) .about-banner-section {
+        height: clamp(240px, 66vw, 320px);
+    }
+
+    .about-page .about-banner-img {
+        object-position: 30% center;
+    }
+
+    .services-page .about-banner-img {
+        object-position: 48% center;
+    }
+
+    :is(.about-page, .services-page) :is(.about-main-title, .industries-main-title) {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+    }
+
+    .services-page .services-intro-title {
+        font-size: clamp(1.9rem, 8.5vw, 2.35rem);
+    }
+
+    .services-page .services-intro-desc,
+    .services-page .services-intro-highlight {
+        font-size: 0.92rem;
+    }
+
+    .about-page .who-card {
+        grid-template-columns: 44px minmax(0, 1fr);
+    }
+
+    .about-page .who-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    :is(.about-page, .services-page) .industry-card {
+        min-height: 76px;
+        gap: 0.9rem;
+        padding: 1rem;
+    }
+
+    :is(.about-page, .services-page) .industry-icon-wrapper {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+    }
+
+    :is(.about-page, .services-page) .industry-name {
+        font-size: 0.88rem;
+    }
+
+    :is(.about-page, .services-page) .conclusion-card {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    :is(.about-page, .services-page) .conclusion-badge {
+        width: 52px;
+        height: 52px;
+        flex: 0 0 52px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .about-page .who-we-are-grid {
+        padding-inline: 0.75rem;
+    }
+
+    .about-page .who-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-page .who-icon {
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* --- INNER PAGE BANNERS: PRESERVE COMPLETE SOURCE ARTWORK --- */
+:is(.about-page, .services-page, .contact-page) .about-banner-section {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-top: 126px;
+    overflow: hidden;
+    background: #f4f6ef;
+}
+
+:is(.about-page, .services-page) .about-banner-section {
+    aspect-ratio: 2.75 / 1;
+}
+
+.contact-page .about-banner-section {
+    aspect-ratio: 2.172 / 1;
+    margin-top: 126px;
+}
+
+:is(.about-page, .services-page, .contact-page) .about-banner-img,
+.js-enabled :is(.about-page, .services-page, .contact-page) .about-banner-img,
+.page-loaded :is(.about-page, .services-page, .contact-page) .about-banner-img,
+:is(.about-page, .services-page, .contact-page) .about-banner-section:hover .about-banner-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
+    transform: none !important;
+    transition: none !important;
+}
+
+@media (max-width: 768px) {
+    :is(.about-page, .services-page, .contact-page) .about-banner-section {
+        height: auto;
+        min-height: 0;
+        margin-top: 126px;
+    }
+
+    :is(.about-page, .services-page) .about-banner-section {
+        aspect-ratio: 2.75 / 1;
+    }
+
+    .contact-page .about-banner-section {
+        aspect-ratio: 2.172 / 1;
     }
 }
 
