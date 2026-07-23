@@ -135,6 +135,12 @@ class CustomFooter extends HTMLElement {
                     </div>
                 </div>
             </div>
+
+            <!-- Floating WhatsApp Button -->
+            <a href="https://wa.me/971562050163" target="_blank" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span class="whatsapp-tooltip">Chat with Us!</span>
+            </a>
         `;
     }
 }

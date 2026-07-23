@@ -258,39 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.innerHTML = originalHtml;
     }
 
-    /* --- OUR SERVICES TOGGLE --- */
-    const toggleServicesBtn = document.getElementById('toggle-services-btn');
-    if (toggleServicesBtn) {
-        toggleServicesBtn.addEventListener('click', () => {
-            const hiddenCards = document.querySelectorAll('.service-card-mockup.hidden-card');
-            const isExpanded = toggleServicesBtn.getAttribute('data-expanded') === 'true';
-            
-            if (isExpanded) {
-                // Collapse
-                hiddenCards.forEach(card => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.classList.add('hidden-service');
-                    }, 400);
-                });
-                toggleServicesBtn.innerHTML = '<span>See More Services</span><i class="fa-solid fa-chevron-down" style="margin-left: 0.5rem;"></i>';
-                toggleServicesBtn.setAttribute('data-expanded', 'false');
-            } else {
-                // Expand
-                hiddenCards.forEach((card, index) => {
-                    card.classList.remove('hidden-service');
-                    // Stagger animation
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 100 + 50);
-                });
-                toggleServicesBtn.innerHTML = '<span>See Less Services</span><i class="fa-solid fa-chevron-up" style="margin-left: 0.5rem;"></i>';
-                toggleServicesBtn.setAttribute('data-expanded', 'true');
-            }
-        });
-    }
+
 
     /* --- SUSTAINABILITY ORBIT & COMMITMENT CARDS HOVER HANDLER --- */
     const orbitNodes = document.querySelectorAll('.sus-orbit-node');
@@ -974,4 +942,197 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--shine-y', '50%');
         });
     });
+
+    /* --- CANVAS LEAF PARTICLE SYSTEM (SERVICES PAGE) --- */
+    const leafCanvas = document.getElementById('services-particles-canvas');
+    if (leafCanvas && !isReducedMotion) {
+        const ctx = leafCanvas.getContext('2d');
+        let width = leafCanvas.width = window.innerWidth;
+        let height = leafCanvas.height = window.innerHeight;
+        
+        const leaves = [];
+        const circles = [];
+        const maxLeaves = 25;
+        const maxCircles = 15;
+        
+        const mouse = { x: -1000, y: -1000, radius: 140 };
+        
+        window.addEventListener('resize', () => {
+            width = leafCanvas.width = window.innerWidth;
+            height = leafCanvas.height = window.innerHeight;
+        });
+        
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        
+        window.addEventListener('mouseleave', () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+        
+        // Leaf shape template function
+        function drawLeafShape(ctx, size) {
+            ctx.beginPath();
+            ctx.moveTo(0, -size / 2);
+            ctx.quadraticCurveTo(size / 2.5, -size / 4, size / 3.5, 0);
+            ctx.quadraticCurveTo(size / 5, size / 3, 0, size / 2);
+            ctx.quadraticCurveTo(-size / 5, size / 3, -size / 3.5, 0);
+            ctx.quadraticCurveTo(-size / 2.5, -size / 4, 0, -size / 2);
+            ctx.closePath();
+        }
+        
+        class LeafParticle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * height; // initial distribution
+            }
+            
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.size = Math.random() * 12 + 10;
+                this.speedY = Math.random() * 0.7 + 0.4;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() * 0.015 - 0.0075);
+                this.opacity = Math.random() * 0.35 + 0.15;
+                this.color = [
+                    'rgba(21, 128, 61, ' + this.opacity + ')',     // Forest Green
+                    'rgba(34, 197, 94, ' + this.opacity + ')',     // Emerald
+                    'rgba(132, 204, 22, ' + this.opacity + ')',    // Lime
+                    'rgba(215, 191, 139, ' + (this.opacity * 0.75) + ')' // Soft Gold
+                ][Math.floor(Math.random() * 4)];
+                this.wobbleSpeed = Math.random() * 0.02 + 0.005;
+                this.wobbleRange = Math.random() * 1.5 + 0.5;
+                this.wobbleAngle = Math.random() * Math.PI * 2;
+            }
+            
+            update() {
+                this.y += this.speedY;
+                this.wobbleAngle += this.wobbleSpeed;
+                this.x += this.speedX + Math.sin(this.wobbleAngle) * this.wobbleRange;
+                this.rotation += this.rotationSpeed;
+                
+                // Mouse interaction (repelling force)
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+                    this.x += Math.cos(angle) * force * 4;
+                    this.y += Math.sin(angle) * force * 4;
+                }
+                
+                if (this.y > height + 20 || this.x < -20 || this.x > width + 20) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle = this.color;
+                drawLeafShape(ctx, this.size);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        
+        class GlowCircle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * height;
+            }
+            
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 20;
+                this.radius = Math.random() * 30 + 15;
+                this.speedY = -(Math.random() * 0.4 + 0.2);
+                this.speedX = Math.random() * 0.2 - 0.1;
+                this.opacity = Math.random() * 0.08 + 0.02;
+                this.wobble = 0;
+                this.wobbleSpeed = Math.random() * 0.01 + 0.005;
+            }
+            
+            update() {
+                this.y += this.speedY;
+                this.wobble += this.wobbleSpeed;
+                this.x += this.speedX + Math.sin(this.wobble) * 0.2;
+                
+                // Gentle push from mouse
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+                    this.x += Math.cos(angle) * force * 2;
+                    this.y += Math.sin(angle) * force * 2;
+                }
+                
+                if (this.y < -this.radius || this.x < -this.radius || this.x > width + this.radius) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                grad.addColorStop(0, `rgba(34, 197, 94, ${this.opacity})`);
+                grad.addColorStop(1, 'rgba(34, 197, 94, 0)');
+                ctx.fillStyle = grad;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        
+        for (let i = 0; i < maxLeaves; i++) {
+            leaves.push(new LeafParticle());
+        }
+        for (let i = 0; i < maxCircles; i++) {
+            circles.push(new GlowCircle());
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < circles.length; i++) {
+                circles[i].update();
+                circles[i].draw();
+            }
+            for (let i = 0; i < leaves.length; i++) {
+                leaves[i].update();
+                leaves[i].draw();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    }
+
+    /* --- HERO BANNERS SCROLL PARALLAX EFFECT --- */
+    const bannerImgs = document.querySelectorAll('.about-banner-img');
+    if (bannerImgs.length > 0 && !isReducedMotion) {
+        bannerImgs.forEach(img => {
+            img.style.transformOrigin = 'center center';
+            img.style.transform = 'scale(1.12)';
+        });
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop < 750) {
+                bannerImgs.forEach(img => {
+                    img.style.transform = `translate3d(0, ${scrollTop * 0.22}px, 0) scale(1.12)`;
+                });
+            }
+        }, { passive: true });
+    }
 });
