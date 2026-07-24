@@ -121,7 +121,7 @@ class CustomFooter extends HTMLElement {
                         <ul class="footer-contact-list">
                             <li class="footer-contact-item">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <span>VUNE1239, Compass Building – Al Hulaila<br>Al Hulaila Industrial Zone – FZ<br>Ras Al Khaimah, United Arab Emirates</span>
+                                <span>VUNE1239, Compass Building<br>Al Hulaila Industrial Zone – FZ<br>Ras Al Khaimah, United Arab Emirates</span>
                             </li>
                             <li class="footer-contact-item">
                                 <i class="fa-solid fa-envelope"></i>

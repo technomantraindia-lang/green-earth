@@ -347,7 +347,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const textureBase = 'https://threejs.org/examples/textures/planets/';
         const networkLocations = [
             { name: 'USA', lat: 37.0902, lon: -95.7129, labelPos: 'top-left' },
-            { name: 'Europe', lat: 50.8503, lon: 4.3517, labelPos: 'top-left' },
+            { name: 'UK', lat: 55.3781, lon: -3.4360, labelPos: 'top-left' },
+            { name: 'Belgium', lat: 50.5039, lon: 4.4699, labelPos: 'top-right' },
+            { name: 'Bangladesh', lat: 23.6850, lon: 90.3563, labelPos: 'top-right' },
             { name: 'India', lat: 20.5937, lon: 78.9629, labelPos: 'bottom-left' },
             { name: 'Pakistan', lat: 30.3753, lon: 69.3451, labelPos: 'top-left' },
             { name: 'China', lat: 35.8617, lon: 104.1954, labelPos: 'top-right' },
@@ -1135,4 +1137,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
     }
+
+    /* --- CURSOR-TRACKING 3D TILT EFFECT FOR CARDS --- */
+    function apply3DTiltEffect(selector, intensity = 10) {
+        if (isReducedMotion) return;
+        const cards = document.querySelectorAll(selector);
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const rotateX = ((y / rect.height) - 0.5) * -intensity;
+                const rotateY = ((x / rect.width) - 0.5) * intensity;
+                
+                let translateStyle = '';
+                if (selector.includes('product-card-mockup')) {
+                    translateStyle = 'translateY(-10px) scale(1.02)';
+                } else if (selector.includes('network-detail-card')) {
+                    translateStyle = 'translateY(-8px) scale(1.02)';
+                } else if (selector.includes('why-card')) {
+                    translateStyle = 'translateY(-16px) scale(1.02)';
+                } else if (selector.includes('service-card-mockup')) {
+                    translateStyle = 'translateY(-10px) scale(1.02)';
+                }
+                
+                card.style.transform = `perspective(1000px) ${translateStyle} rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                card.style.transition = 'transform 0.05s linear, box-shadow 0.1s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+            });
+        });
+    }
+
+    // Initialize cursor-tracking 3D tilt effects
+    apply3DTiltEffect('.product-card-mockup', 12);
+    apply3DTiltEffect('.network-detail-card', 12);
+    apply3DTiltEffect('.why-card', 12);
+    apply3DTiltEffect('.service-card-mockup', 12);
 });
