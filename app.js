@@ -1158,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (selector.includes('why-card')) {
                     translateStyle = 'translateY(-16px) scale(1.02)';
                 } else if (selector.includes('service-card-mockup')) {
-                    translateStyle = 'translateY(-10px) scale(1.02)';
+                    translateStyle = 'translateY(-16px) scale(1.02)';
                 }
                 
                 card.style.transform = `perspective(1000px) ${translateStyle} rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;

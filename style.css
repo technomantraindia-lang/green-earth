@@ -5255,12 +5255,28 @@ custom-footer {
 .service-card-mockup {
     position: relative;
     overflow: hidden;
+    --service-rotate-x: 0deg;
+    --service-rotate-y: 0deg;
+    --service-lift: 0px;
+    transform: perspective(1100px) translateY(var(--service-lift)) rotateX(var(--service-rotate-x)) rotateY(var(--service-rotate-y));
+    transform-style: preserve-3d;
+    will-change: transform;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 .service-card-mockup:hover {
-    transform: translateY(-12px) !important;
+    --service-lift: -12px;
     border-color: rgba(21, 128, 61, 0.24) !important;
     box-shadow: 0 24px 50px rgba(13, 30, 22, 0.1) !important;
+}
+.services-page .service-card-mockup > :not(.card-shine):not(.service-card-beam) {
+    transform: translateZ(22px);
+    transform-style: preserve-3d;
+}
+.services-page .service-card-mockup .service-card-icon-wrap {
+    transform: translateZ(38px);
+}
+.services-page .service-card-mockup:hover .service-card-icon-wrap {
+    transform: translateZ(38px) rotateY(360deg);
 }
 .service-card-mockup .service-card-icon-wrap i {
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -5301,6 +5317,15 @@ custom-footer {
 }
 .service-card-mockup:hover::after {
     left: 150%;
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+    .services-page .service-card-mockup {
+        --service-rotate-x: 0deg !important;
+        --service-rotate-y: 0deg !important;
+        will-change: auto;
+    }
+
 }
 
 .services-btn-outline {
@@ -6620,6 +6645,7 @@ html, body {
 .industry-card:hover .card-shine, 
 .why-card:hover .card-shine,
 .product-card-mockup:hover .card-shine,
+.services-page .service-card-mockup:hover .card-shine,
 .about-showcase-card:hover .card-shine,
 .conclusion-card:hover .card-shine {
     opacity: 1;
