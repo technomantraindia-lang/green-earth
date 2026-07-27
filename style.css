@@ -5780,14 +5780,19 @@ html, body {
 .about-details-section .about-pillars-layout,
 .about-details-section .about-watermark { display: none !important; }
 
-.about-details-section > .container { max-width: none; padding-left: 0; padding-right: 0; }
+.about-page .about-details-section > .container {
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
 .about-details-section .section-header { text-align: left; width: 100%; max-width: none; margin: 0; padding-left: 4.5rem; padding-right: 4.5rem; }
 .about-main-title span { color: #1f6c18; }
 .about-details-section .products-divider { justify-content: flex-start; margin-left: 0; max-width: 500px; }
 
 .who-we-are-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.8fr) minmax(420px, 1fr);
+    grid-template-columns: 1fr 1fr;
     width: 100%;
     max-width: none;
     margin: 1rem 0 0;
@@ -5804,10 +5809,10 @@ html, body {
 .who-card:nth-child(n+3) { border-top: 1px dashed rgba(44, 104, 28, .25); }
 .who-card::before { display: none; }
 .who-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #2c7a1e; background: linear-gradient(135deg, rgba(241,247,233,.94), rgba(223,234,212,.94)); box-shadow: 0 8px 24px rgba(42, 105, 27, .08); font-size: 1.9rem; position: relative; z-index: 1; }
-.who-card p { text-align: justify; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
+.who-card p { text-align: left; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
 .who-card strong { color: #237019; }
 .who-visual { min-height: 100%; position: relative; overflow: hidden; background: #e9f0e2; }
-.who-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
+.who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
 .who-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(8, 35, 20, .7) 100%); }
 .who-visual-caption { position: absolute; left: 2rem; right: 2rem; bottom: 2rem; z-index: 2; color: #fff; display: flex; flex-direction: column; gap: .6rem; }
 .who-visual-caption span { width: max-content; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(10px); font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
@@ -5817,7 +5822,7 @@ html, body {
 @media (max-width: 1100px) {
     .who-we-are-layout { grid-template-columns: 1fr; }
     .who-visual { min-height: 360px; }
-    .who-visual img { object-position: center 54%; }
+    .who-visual img, .who-visual video { object-position: center 54%; }
 }
 
 @media (max-width: 720px) {
@@ -6880,9 +6885,11 @@ html, body {
     overflow: hidden;
     box-shadow: var(--shadow-medium);
     border: 1px solid var(--border-color);
+    aspect-ratio: 1.2 / 1;
 }
 
-.services-intro-visual img {
+.services-intro-visual img,
+.services-intro-visual video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -6890,7 +6897,8 @@ html, body {
     transition: transform 0.6s ease;
 }
 
-.services-intro-visual:hover img {
+.services-intro-visual:hover img,
+.services-intro-visual:hover video {
     transform: scale(1.03);
 }
 
@@ -7820,7 +7828,7 @@ html, body {
 
 @media (max-width: 1280px) {
     .about-page .who-we-are-layout {
-        grid-template-columns: minmax(0, 1.55fr) minmax(350px, 0.85fr);
+        grid-template-columns: 1fr 1fr;
     }
 
     .about-page .who-card {
@@ -7853,7 +7861,8 @@ html, body {
         min-height: clamp(300px, 45vw, 460px);
     }
 
-    .about-page .who-visual img {
+    .about-page .who-visual img,
+    .about-page .who-visual video {
         position: absolute;
     }
 
@@ -7885,9 +7894,11 @@ html, body {
     .services-page .services-intro-visual {
         width: min(100%, 680px);
         margin-inline: auto;
+        aspect-ratio: auto;
     }
 
-    .services-page .services-intro-visual img {
+    .services-page .services-intro-visual img,
+    .services-page .services-intro-visual video {
         width: 100%;
         height: auto;
         aspect-ratio: 16 / 10;
@@ -8178,6 +8189,157 @@ html, body {
     .contact-page .about-banner-section {
         aspect-ratio: 2.172 / 1;
     }
+}
+
+/* --- PRODUCT CARD ACTION BUTTONS --- */
+.btn-card-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    background-color: var(--primary-color, #16a34a);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
+    margin-top: 1.5rem;
+    width: max-content;
+}
+
+.btn-card-more:hover {
+    background-color: var(--text-dark, #0d1e16);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 30, 22, 0.2);
+}
+
+.btn-card-more i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-card-more:hover i {
+    transform: translateX(3px);
+}
+
+/* --- PRODUCT BANNER SLIDESHOW --- */
+.product-banner-slideshow {
+    position: relative;
+    height: clamp(550px, 52vw, 720px) !important;
+    overflow: hidden;
+    width: 100%;
+}
+
+.product-banner-slideshow .about-banner-overlay {
+    z-index: 2;
+    background: linear-gradient(90deg, rgba(8, 35, 20, 0.8) 0%, rgba(8, 35, 20, 0.45) 50%, rgba(8, 35, 20, 0.15) 100%);
+}
+
+.banner-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.banner-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+.banner-slideshow-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding-left: clamp(2rem, 8vw, 6rem);
+    padding-right: clamp(2rem, 8vw, 6rem);
+    z-index: 3;
+    color: #ffffff;
+    max-width: 1460px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.banner-text-left {
+    max-width: 850px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpSlideshow 1s forwards ease-out 0.5s;
+    text-align: left;
+}
+
+.banner-kicker {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #b9e87c;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.banner-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    color: #b9e87c;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+}
+
+.banner-subtitle {
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.6;
+    color: #f1f5f9;
+}
+
+@keyframes fadeInUpSlideshow {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-banner-slideshow {
+        height: 400px !important;
+    }
+    .banner-text-left {
+        max-width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .banner-slideshow-content {
+        justify-content: center;
+        padding-inline: 1.5rem;
+    }
+}
+
+/* --- PRODUCT PAGE STATIC BANNER --- */
+.product-banner-img {
+    object-fit: cover !important;
+    object-position: center !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 

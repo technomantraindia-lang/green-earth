@@ -29,7 +29,7 @@ class CustomHeader extends HTMLElement {
                         <li><a href="index.html#hero" class="nav-link">Home</a></li>
                         <li><a href="about.html" class="nav-link">About Us</a></li>
                         <li><a href="service.html" class="nav-link">Services</a></li>
-                        <li><a href="index.html#products" class="nav-link">Products</a></li>
+                        <li><a href="product.html" class="nav-link">Products</a></li>
                         <li><a href="contact.html" class="nav-link">Contact</a></li>
                     </ul>
                     
@@ -99,7 +99,7 @@ class CustomFooter extends HTMLElement {
                             <li class="footer-link-item"><a href="index.html#hero">Home</a></li>
                             <li class="footer-link-item"><a href="about.html">About Us</a></li>
                             <li class="footer-link-item"><a href="service.html">Services</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Products</a></li>
+                            <li class="footer-link-item"><a href="product.html">Products</a></li>
                             <li class="footer-link-item"><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
@@ -107,12 +107,12 @@ class CustomFooter extends HTMLElement {
                     <div class="footer-column">
                         <h4 class="footer-column-title">Products</h4>
                         <ul class="footer-links">
-                            <li class="footer-link-item"><a href="index.html#products">Non Ferrous & Ferrous Metals</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Secondary Steel Coils & Sheets</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Used Tyre Rubber Scrap</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Plastic Scrap</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Waste Paper</a></li>
-                            <li class="footer-link-item"><a href="index.html#products">Wood Raw Materials</a></li>
+                            <li class="footer-link-item"><a href="metals.html">Non Ferrous & Ferrous Metals</a></li>
+                            <li class="footer-link-item"><a href="product.html">Secondary Steel Coils & Sheets</a></li>
+                            <li class="footer-link-item"><a href="product.html">Used Tyre Rubber Scrap</a></li>
+                            <li class="footer-link-item"><a href="product.html">Plastic Scrap</a></li>
+                            <li class="footer-link-item"><a href="product.html">Waste Paper</a></li>
+                            <li class="footer-link-item"><a href="product.html">Wood Raw Materials</a></li>
                         </ul>
                     </div>
                     

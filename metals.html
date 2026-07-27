@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Non-Ferrous & Ferrous Metals Scrap Trading - HMS, Shredded Scrap, Aluminium, Stainless Steel, and more. Sustainable global sourcing by Green Earth Commodity FZ LLC.">
+    <title>Non Ferrous & Ferrous Metals | Green Earth Commodity FZ LLC</title>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="style.css?v=1.0.7">
+
+    <!-- Site Icon -->
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Reusable Header/Footer Component JS -->
+    <script src="header-footer.js?v=1.0.1" defer></script>
+
+    <!-- Main Interactivity and Animation JS -->
+    <script src="app.js" defer></script>
+
+    <style>
+        .product-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 5rem;
+        }
+        .product-gallery {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+        .product-gallery video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .product-info-kicker {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .product-info-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .product-info-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        .product-specs-section {
+            background-color: var(--bg-cream);
+            padding: 5rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .spec-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(22, 163, 74, 0.08);
+            transition: transform 0.3s ease;
+        }
+        .spec-card:hover {
+            transform: translateY(-5px);
+        }
+        .spec-card-icon {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        .spec-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .spec-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .spec-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 992px) {
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page preloader-active">
+
+    <!-- Premium Preloader -->
+    <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
+        <div class="preloader-inner" role="status" aria-label="Website loading">
+            <div class="loader-visual-wrapper">
+                <div class="loader-pulse-glow"></div>
+                <div class="loader-ring loader-ring-outer"></div>
+                <div class="loader-ring loader-ring-inner"></div>
+                <div class="loader-leaf-container">
+                    <i class="fa-solid fa-leaf loader-leaf-icon"></i>
+                </div>
+            </div>
+
+            <div class="loader-text-wrapper">
+                <div class="preloader-company">Green Earth Commodity FZ LLC</div>
+                <p class="preloader-tagline">Sustainable Global Commodity Trading</p>
+                <div class="loader-dots">
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ambient background glows -->
+    <div class="bg-blob blob-primary"></div>
+    <div class="bg-blob blob-secondary"></div>
+
+    <!-- Reusable Navbar Header -->
+    <custom-header></custom-header>
+
+    <!-- PRODUCT HERO/BANNER SECTION -->
+    <section class="about-banner-section product-banner-slideshow">
+        <div class="banner-slides">
+            <div class="banner-slide active" style="background-image: url('image/prodcut/scrap-metal-heap-at-industrial-recycling-facility-2026-01-05-23-32-03-utc.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/prodcut/close-up-silver-metal-shavings-from-manufacturing-2026-01-09-06-19-47-utc.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/prodcut/pile-of-recycled-computer-connector-parts-2026-03-25-07-39-37-utc.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/prodcut/corrugated-cardboard-packaging-material-2026-01-07-06-12-24-utc.jpg');"></div>
+        </div>
+        <div class="about-banner-overlay"></div>
+        <div class="banner-slideshow-content">
+            <div class="banner-text-left">
+                <span class="banner-kicker">PRODUCTS PORTFOLIO</span>
+                <h1 class="banner-title">Ferrous &amp; Non Ferrous Metals</h1>
+                <p class="banner-subtitle">High-quality recycled industrial metals, scrap, and secondary steel commodities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAILS SECTION -->
+    <section class="product-detail-section">
+        <div class="product-detail-container">
+            <div class="product-detail-grid">
+                
+                <!-- Left Panel: Video Gallery -->
+                <div class="product-gallery reveal-left">
+                    <video autoplay muted loop playsinline>
+                        <source src="image/ferrous adn noon ferrous.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <!-- Right Panel: Description -->
+                <div class="product-info reveal-right">
+                    <span class="product-info-kicker">COMMODITY CATEGORY 01</span>
+                    <h1 class="product-info-title">Non Ferrous &amp; Ferrous Metals</h1>
+                    <div class="products-divider" aria-hidden="true" style="margin-bottom: 2rem;">
+                        <span style="width: 50px; height: 1px; background-color: var(--border-color); display: inline-block;"></span>
+                        <i class="fa-solid fa-leaf" style="color: var(--primary-color); margin: 0 0.5rem;"></i>
+                        <span style="width: 50px; height: 1px; background-color: var(--border-color); display: inline-block;"></span>
+                    </div>
+                    
+                    <p class="product-info-desc">
+                        At Green Earth Commodity FZ LLC, we are key players in the international trading of Ferrous and Non-Ferrous metal scrap. We act as a vital link between major metal recyclers/collectors in source markets and industrial consumers, including steel mills, foundries, and smelting operations worldwide.
+                    </p>
+                    <p class="product-info-desc">
+                        Our sourcing is focused on premium grades, ensuring that our clients receive metal scrap that meets strict international specifications (such as ISRI standards). We manage the complete supply chain, guaranteeing that grade verification, weight assessment, and customs logistics are executed with absolute transparency and efficiency.
+                    </p>
+                    
+                    <div style="margin-top: 2.5rem;">
+                        <a href="contact.html?interest=metals" class="btn btn-primary">
+                            <span>Request Specifications &amp; Pricing</span>
+                            <i class="fa-solid fa-paper-plane" style="margin-left: 0.5rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIFICATIONS SECTION -->
+    <section class="product-specs-section">
+        <div class="container">
+            <div class="section-header reveal-up" style="text-align: center; margin-bottom: 4rem;">
+                <span class="section-tag" style="background-color: rgba(22, 163, 74, 0.08); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Grades &amp; Specifications</span>
+                <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 1rem;">Our Product Portfolio Includes</h2>
+            </div>
+            
+            <div class="specs-grid">
+                
+                <!-- Ferrous Metals -->
+                <div class="spec-card reveal-left">
+                    <div class="spec-card-icon">
+                        <i class="fa-solid fa-anchor"></i>
+                    </div>
+                    <h3 class="spec-card-title">Ferrous Metal Scrap</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">High-melting scrap grades for steel manufacturing and iron foundries:</p>
+                    <ul class="spec-list">
+                        <li><strong>HMS 1 &amp; 2 (Heavy Melting Steel)</strong>: Sourced in standard 80:20 ratios, compliant with ISRI 200-206 specifications.</li>
+                        <li><strong>Shredded Scrap</strong>: Compliant with ISRI 211 grade, high density and clean metallic composition.</li>
+                        <li><strong>Plate &amp; Structural Scrap</strong>: Clean cut pieces, minimal impurities, ideal for foundry induction furnaces.</li>
+                        <li><strong>Bonus Grade Scrap</strong>: Premium heavy iron/steel plates, rails, and structural steel scrap.</li>
+                    </ul>
+                </div>
+                
+                <!-- Non-Ferrous Metals -->
+                <div class="spec-card reveal-right">
+                    <div class="spec-card-icon">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h3 class="spec-card-title">Non-Ferrous Metal Scrap</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">Recyclable non-ferrous metal grades for secondary smelters and metal refiners:</p>
+                    <ul class="spec-list">
+                        <li><strong>Aluminium Scrap</strong>: Tense (mixed castings), Tabor (sheet aluminium), Extrusions (6063), and clean alloy wheels.</li>
+                        <li><strong>Stainless Steel Scrap</strong>: Mainly Grade 304 (18-8 solids) and Grade 316 solids/turnings, sorted and verified.</li>
+                        <li><strong>Copper Scrap</strong>: Berry/Candy (No.1 copper wire), Birch/Cliff (No.2 copper), and copper cathodes.</li>
+                        <li><strong>Brass Scrap</strong>: Honey grade yellow brass scrap, ocean brass, and rod brass turnings.</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- DEDICATED CTA SECTION -->
+    <section class="about-cta-section section">
+        <div class="container">
+            <div class="cta-card reveal-scale">
+                <div class="cta-glow-overlay"></div>
+                <div class="cta-content-wrapper">
+                    <span class="cta-kicker">GET A QUOTE</span>
+                    <h2 class="cta-heading-title">Ready to Settle Your Metal Supply Chain?</h2>
+                    <p class="cta-subtitle-text">Connect with our trading department to discuss specifications, contract volumes, shipping options, and current pricing estimates.</p>
+                    <div class="cta-actions-row">
+                        <a href="contact.html?interest=metals" class="btn-cta-primary">
+                            <span>Contact Trading Desk</span>
+                            <i class="fa-solid fa-arrow-right" style="margin-left: 0.8rem;"></i>
+                        </a>
+                        <a href="https://wa.me/971562050163" target="_blank" rel="noopener noreferrer" class="btn-cta-secondary">
+                            <span>Chat via WhatsApp</span>
+                            <i class="fa-brands fa-whatsapp" style="margin-left: 0.8rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reusable Footer -->
+    <custom-footer></custom-footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="back-to-top-btn" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Slideshow Runner Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.banner-slide');
+            let currentSlide = 0;
+            const slideInterval = 4000; // Change slide every 4 seconds
+
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, slideInterval);
+            }
+        });
+    </script>
+</body>
+
+</html>
