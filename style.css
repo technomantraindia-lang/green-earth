@@ -674,9 +674,9 @@ custom-header {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center top;
     display: block;
-    transform: scale(1.02);
+    transform: scale(1.0);
     z-index: 1;
     animation: heroDrift 18s ease-in-out infinite alternate;
 }
@@ -720,8 +720,8 @@ custom-header {
 }
 
 @keyframes heroDrift {
-    0% { transform: scale(1.02) translate3d(0, 0, 0); }
-    100% { transform: scale(1.08) translate3d(0, -10px, 0); }
+    0% { transform: scale(1.0) translate3d(0, 0, 0); }
+    100% { transform: scale(1.03) translate3d(0, -5px, 0); }
 }
 
 /* --- ABOUT US SECTION (Mockup Match Redesign) --- */
@@ -4987,12 +4987,12 @@ custom-footer {
 
 .js-enabled .hero-bg-video {
     opacity: 0;
-    transform: scale(1.04);
+    transform: scale(1.02);
     transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .page-loaded .hero-bg-video {
     opacity: 1;
-    transform: scale(1.02); /* Maintain scale(1.02) to match default design specifications */
+    transform: scale(1.0); /* Zoomed out to scale(1.0) */
 }
 
 .js-enabled .hero-overlay {
@@ -5811,8 +5811,9 @@ html, body {
 .who-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #2c7a1e; background: linear-gradient(135deg, rgba(241,247,233,.94), rgba(223,234,212,.94)); box-shadow: 0 8px 24px rgba(42, 105, 27, .08); font-size: 1.9rem; position: relative; z-index: 1; }
 .who-card p { text-align: left; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
 .who-card strong { color: #237019; }
-.who-visual { min-height: 100%; position: relative; overflow: hidden; background: #e9f0e2; }
+.who-visual { min-height: 100%; position: relative; overflow: hidden; background: #000000; }
 .who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
+.who-visual video { object-fit: contain; }
 .who-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(8, 35, 20, .7) 100%); }
 .who-visual-caption { position: absolute; left: 2rem; right: 2rem; bottom: 2rem; z-index: 2; color: #fff; display: flex; flex-direction: column; gap: .6rem; }
 .who-visual-caption span { width: max-content; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(10px); font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
@@ -6866,7 +6867,7 @@ html, body {
 
 /* Services Intro Section (Split Layout) */
 .services-intro-section {
-    padding: 7rem 0 5rem 0;
+    padding: 8rem 0 7rem 0;
     background-color: var(--bg-light);
     position: relative;
     overflow: hidden;
@@ -6885,7 +6886,10 @@ html, body {
     overflow: hidden;
     box-shadow: var(--shadow-medium);
     border: 1px solid var(--border-color);
-    aspect-ratio: 1.2 / 1;
+    aspect-ratio: 9 / 16;
+    max-height: 880px;
+    width: 100%;
+    margin-inline: auto;
 }
 
 .services-intro-visual img,
@@ -6915,16 +6919,16 @@ html, body {
     color: var(--primary-color);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .services-intro-title {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 4vw, 2.75rem);
+    font-size: clamp(2.5rem, 4vw, 2.85rem);
     font-weight: 800;
     color: var(--text-dark);
     line-height: 1.25;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .services-intro-title span {
@@ -6933,10 +6937,10 @@ html, body {
 
 .services-intro-desc {
     font-family: var(--font-body);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
-    line-height: 1.75;
-    margin-bottom: 1.5rem;
+    line-height: 1.85;
+    margin-bottom: 2.2rem;
 }
 
 .services-intro-highlight {
@@ -7204,7 +7208,7 @@ html, body {
 
     .home-page .hero-bg-video {
         animation: none;
-        transform: scale(1.01);
+        transform: scale(1.0);
     }
 
     .home-page .hero-section::after {
@@ -7892,16 +7896,16 @@ html, body {
     }
 
     .services-page .services-intro-visual {
-        width: min(100%, 680px);
+        width: min(100%, 380px);
         margin-inline: auto;
-        aspect-ratio: auto;
+        aspect-ratio: 9 / 16;
     }
 
     .services-page .services-intro-visual img,
     .services-page .services-intro-visual video {
         width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 10;
+        height: 100%;
+        aspect-ratio: auto;
         object-fit: cover;
     }
 
