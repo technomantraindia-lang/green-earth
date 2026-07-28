@@ -21,7 +21,7 @@ class CustomHeader extends HTMLElement {
                                 GREEN EARTH
                                 <span>Commodity FZ LLC</span>
                             </div>
-                            <span class="logo-tagline">Global Sourcing &amp; Sustainable Trading</span>
+                            <span class="logo-tagline">Sustainable Global Commodity Trading Partner</span>
                         </div>
                     </a>
                     

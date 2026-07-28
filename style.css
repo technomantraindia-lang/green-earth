@@ -5809,7 +5809,7 @@ html, body {
 .who-card:nth-child(n+3) { border-top: 1px dashed rgba(44, 104, 28, .25); }
 .who-card::before { display: none; }
 .who-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #2c7a1e; background: linear-gradient(135deg, rgba(241,247,233,.94), rgba(223,234,212,.94)); box-shadow: 0 8px 24px rgba(42, 105, 27, .08); font-size: 1.9rem; position: relative; z-index: 1; }
-.who-card p { text-align: left; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
+.who-card p { text-align: justify; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
 .who-card strong { color: #237019; }
 .who-visual { min-height: 100%; position: relative; overflow: hidden; background: #000000; }
 .who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
@@ -6460,7 +6460,7 @@ html, body {
 
 .industries-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: 4rem;
 }
