@@ -81,7 +81,7 @@ class CustomFooter extends HTMLElement {
                             </div>
                         </a>
                         <p class="footer-brand-desc">
-                            Connecting global suppliers and industrial buyers through transparent trading, efficient logistics, and custom-tailored supply chain solutions in the recycling and steel industry.
+                            Connecting Global Suppliers and Industrial Buyers through transparent Trading, Efficient Logistics, and Custom-tailored Supply Chain Solutions in the Recycling Industry.
                         </p>
                         <div class="footer-social-links" aria-label="Contact Green Earth">
                             <a href="mailto:Office@greenearthcommodity.com" aria-label="Email Green Earth">

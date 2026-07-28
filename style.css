@@ -518,14 +518,14 @@ custom-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 126px;
+    height: 142px;
     margin: 0;
     padding: 0;
     transition: var(--transition-normal);
 }
 
 .header-active .navbar {
-    height: 104px;
+    height: 118px;
 }
 
 .logo-container {
@@ -547,7 +547,7 @@ custom-header {
 .logo-brand-stack .logo-tagline { display: block; margin-top: 0.55rem !important; white-space: nowrap; }
 
 .logo-img {
-    height: 124px;
+    height: 140px;
     width: auto;
     margin: 0;
     padding: 0;
@@ -555,14 +555,14 @@ custom-header {
 }
 
 .header-active .logo-img {
-    height: 102px;
+    height: 115px;
 }
 
 .logo-text {
     font-family: var(--font-heading);
-    font-size: 1.55rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    color: var(--text-dark);
+    color: var(--primary-color);
     margin-left: 0.85rem;
     line-height: 1;
     display: flex;
@@ -579,7 +579,7 @@ custom-header {
 }
 
 .logo-tagline {
-    font-size: 0.65rem !important;
+    font-size: 0.7rem !important;
     font-weight: 750 !important;
     color: var(--primary-color) !important;
     letter-spacing: 0.05em !important;
@@ -3346,10 +3346,6 @@ custom-header {
     color: var(--text-secondary);
     line-height: 1.65;
     margin: 0;
-    text-align: justify;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
 }
 
 /* Spacing and custom bento properties */
@@ -5813,11 +5809,10 @@ html, body {
 .who-card:nth-child(n+3) { border-top: 1px dashed rgba(44, 104, 28, .25); }
 .who-card::before { display: none; }
 .who-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #2c7a1e; background: linear-gradient(135deg, rgba(241,247,233,.94), rgba(223,234,212,.94)); box-shadow: 0 8px 24px rgba(42, 105, 27, .08); font-size: 1.9rem; position: relative; z-index: 1; }
-.who-card p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
+.who-card p { text-align: left; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
 .who-card strong { color: #237019; }
 .who-visual { min-height: 100%; position: relative; overflow: hidden; background: #000000; }
 .who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
-.who-visual video { object-fit: contain; }
 .who-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(8, 35, 20, .7) 100%); }
 .who-visual-caption { position: absolute; left: 2rem; right: 2rem; bottom: 2rem; z-index: 2; color: #fff; display: flex; flex-direction: column; gap: .6rem; }
 .who-visual-caption span { width: max-content; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(10px); font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
@@ -5839,10 +5834,10 @@ html, body {
     .who-icon { width: 54px; height: 54px; font-size: 1.35rem; }
     .who-card p { font-size: .92rem; }
     .who-visual { min-height: 260px; }
-    .logo-img { height: 104px; }
-    .header-active .logo-img { height: 88px; }
+    .logo-img { height: 118px; }
+    .header-active .logo-img { height: 98px; }
     .logo-brand-stack { margin-left: .35rem; }
-    .logo-brand-stack .logo-tagline { font-size: .52rem !important; }
+    .logo-brand-stack .logo-tagline { font-size: .56rem !important; }
 }
 
 .about-details-section {
@@ -8344,15 +8339,15 @@ html, body {
 
 /* --- PRODUCT PAGE STATIC BANNER --- */
 .product-banner-section {
-    height: auto !important;
-    aspect-ratio: auto !important;
+    height: clamp(480px, 55vw, 750px) !important;
+    position: relative !important;
 }
 .product-banner-img {
-    position: relative !important;
-    inset: auto !important;
-    object-fit: contain !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
     transform: none !important;
     transition: none !important;
 }
