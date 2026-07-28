@@ -108,11 +108,11 @@ class CustomFooter extends HTMLElement {
                         <h4 class="footer-column-title">Products</h4>
                         <ul class="footer-links">
                             <li class="footer-link-item"><a href="metals.html">Non Ferrous & Ferrous Metals</a></li>
-                            <li class="footer-link-item"><a href="product.html">Secondary Steel Coils & Sheets</a></li>
-                            <li class="footer-link-item"><a href="product.html">Used Tyre Rubber Scrap</a></li>
-                            <li class="footer-link-item"><a href="product.html">Plastic Scrap</a></li>
-                            <li class="footer-link-item"><a href="product.html">Waste Paper</a></li>
-                            <li class="footer-link-item"><a href="product.html">Wood Raw Materials</a></li>
+                            <li class="footer-link-item"><a href="steel.html">Secondary Steel Coils & Sheets</a></li>
+                            <li class="footer-link-item"><a href="rubber.html">Used Tyre Rubber Scrap</a></li>
+                            <li class="footer-link-item"><a href="plastic.html">Plastic Scrap</a></li>
+                            <li class="footer-link-item"><a href="paper.html">Waste Paper</a></li>
+                            <li class="footer-link-item"><a href="wood.html">Wood Raw Materials</a></li>
                         </ul>
                     </div>
                     
