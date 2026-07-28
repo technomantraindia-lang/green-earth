@@ -34,19 +34,78 @@
             grid-template-columns: 1.2fr 1fr;
             gap: 4rem;
             align-items: start;
-            margin-bottom: 5rem;
+            margin-bottom: 6rem;
         }
-        .product-gallery {
+        .product-detail-grid:last-child {
+            margin-bottom: 0;
+        }
+        .product-slideshow {
             position: relative;
+            width: 100%;
+            height: 480px;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow-medium);
-            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium), 0 15px 35px rgba(22, 163, 74, 0.08);
+            border: 6px solid var(--bg-white);
+            outline: 1px solid rgba(22, 163, 74, 0.18);
         }
-        .product-gallery video {
+        .product-slideshow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .product-slideshow .slide {
+            position: absolute;
+            inset: 0;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .product-slideshow .slide.active {
+            opacity: 1;
+        }
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(22, 163, 74, 0.18);
+            color: var(--text-dark);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: auto;
+        }
+        .product-slideshow:hover .slide-nav {
+            opacity: 1;
+        }
+        .slide-nav:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        }
+        .btn-prev {
+            left: 20px;
+        }
+        .btn-next {
+            right: 20px;
         }
         .product-info-kicker {
             font-family: var(--font-heading);
@@ -73,51 +132,15 @@
             margin-bottom: 1.5rem;
             text-align: justify;
         }
-        .product-specs-section {
-            background-color: var(--bg-cream);
-            padding: 5rem 1.5rem;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .spec-card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(22, 163, 74, 0.08);
-            transition: transform 0.3s ease;
-        }
-        .spec-card:hover {
-            transform: translateY(-5px);
-        }
-        .spec-card-icon {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-        .spec-card-title {
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
         .spec-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 1.5rem 0 0 0;
         }
         .spec-list li {
             position: relative;
             padding-left: 1.75rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
             font-size: 0.98rem;
             color: var(--text-secondary);
             line-height: 1.5;
@@ -136,10 +159,38 @@
             .product-detail-grid {
                 grid-template-columns: 1fr;
                 gap: 3rem;
+                margin-bottom: 4rem;
             }
-            .specs-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .product-slideshow {
+                height: 380px;
+            }
+            .slide-nav {
+                opacity: 0.85;
+                width: 40px;
+                height: 40px;
+                font-size: 0.85rem;
+            }
+            .btn-prev {
+                left: 12px;
+            }
+            .btn-next {
+                right: 12px;
+            }
+        }
+        @media (max-width: 576px) {
+            .product-slideshow {
+                height: 260px;
+            }
+            .slide-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 0.75rem;
+            }
+            .btn-prev {
+                left: 8px;
+            }
+            .btn-next {
+                right: 8px;
             }
         }
     </style>
@@ -181,10 +232,17 @@
     <!-- PRODUCT HERO/BANNER SECTION -->
     <section class="about-banner-section product-banner-slideshow">
         <div class="banner-slides">
-            <div class="banner-slide active" style="background-image: url('image/prodcut/scrap-metal-heap-at-industrial-recycling-facility-2026-01-05-23-32-03-utc.jpg');"></div>
-            <div class="banner-slide" style="background-image: url('image/prodcut/close-up-silver-metal-shavings-from-manufacturing-2026-01-09-06-19-47-utc.jpg');"></div>
-            <div class="banner-slide" style="background-image: url('image/prodcut/pile-of-recycled-computer-connector-parts-2026-03-25-07-39-37-utc.jpg');"></div>
-            <div class="banner-slide" style="background-image: url('image/prodcut/corrugated-cardboard-packaging-material-2026-01-07-06-12-24-utc.jpg');"></div>
+            <div class="banner-slide active" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 1.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/NF1.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 2.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/NF 2.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 3.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/NF3.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 4.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/NF4.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 5.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/NF5.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('image/new video/new videos and phtos/TM/FEROUS 6.jpg');"></div>
         </div>
         <div class="about-banner-overlay"></div>
         <div class="banner-slideshow-content">
@@ -199,20 +257,34 @@
     <!-- PRODUCT DETAILS SECTION -->
     <section class="product-detail-section">
         <div class="product-detail-container">
+            
+            <!-- Section Header: Ferrous Metals -->
+            <div class="section-header reveal-up" style="text-align: center; margin-bottom: 4rem;">
+                <span class="section-tag" style="background-color: rgba(22, 163, 74, 0.08); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Product Category 01</span>
+                <h2 style="font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 0.5rem;">Ferrous Metals Scrap</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1.05rem; line-height: 1.5;">Heavy melting steel grades and industrial shredded scrap sourced globally.</p>
+            </div>
+            
+            <!-- Row 1: Ferrous Metals -->
             <div class="product-detail-grid">
-                
-                <!-- Left Panel: Video Gallery -->
-                <div class="product-gallery reveal-left">
-                    <video autoplay muted loop playsinline>
-                        <source src="image/ferrous adn noon ferrous.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <!-- Left Panel: Slideshow -->
+                <div class="product-slideshow reveal-left" id="ferrous-slideshow">
+                    <div class="slide active" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 1.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 2.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 3.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 4.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/FERROUS 5.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/FEROUS 6.jpg');"></div>
+                    
+                    <!-- Navigation Buttons -->
+                    <button class="slide-nav btn-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slide-nav btn-next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 
                 <!-- Right Panel: Description -->
                 <div class="product-info reveal-right">
-                    <span class="product-info-kicker">COMMODITY CATEGORY 01</span>
-                    <h1 class="product-info-title">Non Ferrous &amp; Ferrous Metals</h1>
+                    <span class="product-info-kicker">COMMODITY CATEGORY 01A</span>
+                    <h1 class="product-info-title">Ferrous Metal Scrap</h1>
                     <div class="products-divider" aria-hidden="true" style="margin-bottom: 2rem;">
                         <span style="width: 50px; height: 1px; background-color: var(--border-color); display: inline-block;"></span>
                         <i class="fa-solid fa-leaf" style="color: var(--primary-color); margin: 0 0.5rem;"></i>
@@ -220,11 +292,15 @@
                     </div>
                     
                     <p class="product-info-desc">
-                        At Green Earth Commodity FZ LLC, we are key players in the international trading of Ferrous and Non-Ferrous metal scrap. We act as a vital link between major metal recyclers/collectors in source markets and industrial consumers, including steel mills, foundries, and smelting operations worldwide.
+                        High-melting scrap grades for steel manufacturing and iron foundries:
                     </p>
-                    <p class="product-info-desc">
-                        Our sourcing is focused on premium grades, ensuring that our clients receive metal scrap that meets strict international specifications (such as ISRI standards). We manage the complete supply chain, guaranteeing that grade verification, weight assessment, and customs logistics are executed with absolute transparency and efficiency.
-                    </p>
+                    
+                    <ul class="spec-list">
+                        <li><strong>HMS 1 &amp; 2 (Heavy Melting Steel)</strong>: Sourced in standard 80:20 ratios, compliant with ISRI 200-206 specifications.</li>
+                        <li><strong>Shredded Scrap</strong>: Compliant with ISRI 211 grade, high density and clean metallic composition.</li>
+                        <li><strong>Plate &amp; Structural Scrap</strong>: Clean cut pieces, minimal impurities, ideal for foundry induction furnaces.</li>
+                        <li><strong>Bonus Grade Scrap</strong>: Premium heavy iron/steel plates, rails, and structural steel scrap.</li>
+                    </ul>
                     
                     <div style="margin-top: 2.5rem;">
                         <a href="contact.html?interest=metals" class="btn btn-primary">
@@ -234,50 +310,59 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- SPECIFICATIONS SECTION -->
-    <section class="product-specs-section">
-        <div class="container">
-            <div class="section-header reveal-up" style="text-align: center; margin-bottom: 4rem;">
-                <span class="section-tag" style="background-color: rgba(22, 163, 74, 0.08); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Grades &amp; Specifications</span>
-                <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 1rem;">Our Product Portfolio Includes</h2>
+            
+            <!-- Section Header: Non-Ferrous Metals -->
+            <div class="section-header reveal-up" style="text-align: center; margin-top: 6rem; margin-bottom: 4rem; border-top: 1px solid var(--border-color); padding-top: 5rem;">
+                <span class="section-tag" style="background-color: rgba(22, 163, 74, 0.08); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Product Category 02</span>
+                <h2 style="font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800; color: var(--text-dark); margin-top: 1rem; margin-bottom: 0.5rem;">Non-Ferrous Metals Scrap</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1.05rem; line-height: 1.5;">Recyclable non-ferrous metal grades for secondary smelting and metal refining.</p>
             </div>
             
-            <div class="specs-grid">
-                
-                <!-- Ferrous Metals -->
-                <div class="spec-card reveal-left">
-                    <div class="spec-card-icon">
-                        <i class="fa-solid fa-anchor"></i>
-                    </div>
-                    <h3 class="spec-card-title">Ferrous Metal Scrap</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">High-melting scrap grades for steel manufacturing and iron foundries:</p>
-                    <ul class="spec-list">
-                        <li><strong>HMS 1 &amp; 2 (Heavy Melting Steel)</strong>: Sourced in standard 80:20 ratios, compliant with ISRI 200-206 specifications.</li>
-                        <li><strong>Shredded Scrap</strong>: Compliant with ISRI 211 grade, high density and clean metallic composition.</li>
-                        <li><strong>Plate &amp; Structural Scrap</strong>: Clean cut pieces, minimal impurities, ideal for foundry induction furnaces.</li>
-                        <li><strong>Bonus Grade Scrap</strong>: Premium heavy iron/steel plates, rails, and structural steel scrap.</li>
-                    </ul>
+            <!-- Row 2: Non-Ferrous Metals -->
+            <div class="product-detail-grid">
+                <!-- Left Panel: Slideshow -->
+                <div class="product-slideshow reveal-left" id="nonferrous-slideshow">
+                    <div class="slide active" style="background-image: url('image/new video/new videos and phtos/TM/NF1.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/NF 2.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/NF3.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/NF4.jpg');"></div>
+                    <div class="slide" style="background-image: url('image/new video/new videos and phtos/TM/NF5.jpg');"></div>
+                    
+                    <!-- Navigation Buttons -->
+                    <button class="slide-nav btn-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slide-nav btn-next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 
-                <!-- Non-Ferrous Metals -->
-                <div class="spec-card reveal-right">
-                    <div class="spec-card-icon">
-                        <i class="fa-solid fa-cube"></i>
+                <!-- Right Panel: Description -->
+                <div class="product-info reveal-right">
+                    <span class="product-info-kicker">COMMODITY CATEGORY 01B</span>
+                    <h1 class="product-info-title">Non-Ferrous Metal Scrap</h1>
+                    <div class="products-divider" aria-hidden="true" style="margin-bottom: 2rem;">
+                        <span style="width: 50px; height: 1px; background-color: var(--border-color); display: inline-block;"></span>
+                        <i class="fa-solid fa-leaf" style="color: var(--primary-color); margin: 0 0.5rem;"></i>
+                        <span style="width: 50px; height: 1px; background-color: var(--border-color); display: inline-block;"></span>
                     </div>
-                    <h3 class="spec-card-title">Non-Ferrous Metal Scrap</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">Recyclable non-ferrous metal grades for secondary smelters and metal refiners:</p>
+                    
+                    <p class="product-info-desc">
+                        Recyclable non-ferrous metal grades for secondary smelters and metal refiners:
+                    </p>
+                    
                     <ul class="spec-list">
                         <li><strong>Aluminium Scrap</strong>: Tense (mixed castings), Tabor (sheet aluminium), Extrusions (6063), and clean alloy wheels.</li>
                         <li><strong>Stainless Steel Scrap</strong>: Mainly Grade 304 (18-8 solids) and Grade 316 solids/turnings, sorted and verified.</li>
                         <li><strong>Copper Scrap</strong>: Berry/Candy (No.1 copper wire), Birch/Cliff (No.2 copper), and copper cathodes.</li>
                         <li><strong>Brass Scrap</strong>: Honey grade yellow brass scrap, ocean brass, and rod brass turnings.</li>
                     </ul>
+                    
+                    <div style="margin-top: 2.5rem;">
+                        <a href="contact.html?interest=metals" class="btn btn-primary">
+                            <span>Request Specifications &amp; Pricing</span>
+                            <i class="fa-solid fa-paper-plane" style="margin-left: 0.5rem;"></i>
+                        </a>
+                    </div>
                 </div>
-                
             </div>
+
         </div>
     </section>
 
@@ -316,17 +401,79 @@
     <!-- Slideshow Runner Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.banner-slide');
-            let currentSlide = 0;
-            const slideInterval = 4000; // Change slide every 4 seconds
+            // Hero Banner Slideshow
+            const bannerSlides = document.querySelectorAll('.banner-slide');
+            let currentBannerSlide = 0;
+            const bannerInterval = 4000;
 
-            if (slides.length > 1) {
+            if (bannerSlides.length > 1) {
                 setInterval(() => {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }, slideInterval);
+                    bannerSlides[currentBannerSlide].classList.remove('active');
+                    currentBannerSlide = (currentBannerSlide + 1) % bannerSlides.length;
+                    bannerSlides[currentBannerSlide].classList.add('active');
+                }, bannerInterval);
             }
+
+            // Generic Slideshow Helper with Navigation Buttons
+            function initSlideshow(containerId, intervalTime = 3500) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide');
+                if (slides.length <= 1) return;
+
+                let currentSlide = 0;
+                let slideshowInterval;
+
+                function showSlide(index) {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (index + slides.length) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+
+                function nextSlide() {
+                    showSlide(currentSlide + 1);
+                }
+
+                function prevSlide() {
+                    showSlide(currentSlide - 1);
+                }
+
+                function startAutoplay() {
+                    slideshowInterval = setInterval(nextSlide, intervalTime);
+                }
+
+                function resetAutoplay() {
+                    clearInterval(slideshowInterval);
+                    startAutoplay();
+                }
+
+                // Start autoplay
+                startAutoplay();
+
+                // Button listeners
+                const btnPrev = container.querySelector('.btn-prev');
+                const btnNext = container.querySelector('.btn-next');
+
+                if (btnPrev) {
+                    btnPrev.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        prevSlide();
+                        resetAutoplay();
+                    });
+                }
+
+                if (btnNext) {
+                    btnNext.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        nextSlide();
+                        resetAutoplay();
+                    });
+                }
+            }
+
+            // Initialize both product slideshows
+            initSlideshow('ferrous-slideshow', 3500);
+            initSlideshow('nonferrous-slideshow', 3800); // offset slightly to prevent simultaneous fade transitions
         });
     </script>
 </body>

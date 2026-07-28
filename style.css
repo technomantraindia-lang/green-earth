@@ -8339,11 +8339,18 @@ html, body {
 }
 
 /* --- PRODUCT PAGE STATIC BANNER --- */
+.product-banner-section {
+    height: auto !important;
+    aspect-ratio: auto !important;
+}
 .product-banner-img {
-    object-fit: cover !important;
-    object-position: center !important;
+    position: relative !important;
+    inset: auto !important;
+    object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 
