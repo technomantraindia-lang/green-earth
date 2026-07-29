@@ -74,32 +74,26 @@
         <div class="container">
             <div class="about-wrapper">
                 <div class="about-visual-block reveal-left">
-                    <!-- SVG Clip Path Definition for Responsive Wave Layout (Inset to avoid clipping) -->
-                    <svg width="0" height="0" style="position: absolute;">
-                        <defs>
-                            <clipPath id="about-clip" clipPathUnits="objectBoundingBox">
-                                <path
-                                    d="M 0.015,0.05 Q 0.015,0.015 0.05,0.015 L 0.8,0.015 C 0.89,0.165 0.985,0.335 0.985,0.5 C 0.985,0.665 0.89,0.835 0.8,0.985 L 0.05,0.985 Q 0.015,0.985 0.015,0.95 Z">
-                                </path>
-                            </clipPath>
-                        </defs>
-                    </svg>
-
                     <div class="about-img-container">
                         <div class="about-img-box">
-                            <img src="image/new%20about%20sec.png" alt="Built on Trust, Sourced with Integrity Visual">
+                            <div class="about-globe-slides">
+                                <img class="about-globe-slide" src="image/new%20about%20sec.png" alt="Sustainable global commodity trading">
+                                <img class="about-globe-slide" src="image/recycled_metals.png" alt="Recycled metal commodities">
+                                <img class="about-globe-slide" src="image/recycled_rubber.png" alt="Recycled rubber commodities">
+                                <img class="about-globe-slide" src="image/recycled_plastics.png" alt="Recycled plastic commodities">
+                                <img class="about-globe-slide" src="image/recycled_paper.png" alt="Recycled paper commodities">
+                                <img class="about-globe-slide" src="image/recycled_wood.png" alt="Recycled wood commodities">
+                            </div>
+                            <div class="about-globe-shade" aria-hidden="true"></div>
+                            <div class="about-globe-grid" aria-hidden="true">
+                                <span class="globe-longitude longitude-one"></span>
+                                <span class="globe-longitude longitude-two"></span>
+                                <span class="globe-latitude latitude-one"></span>
+                                <span class="globe-latitude latitude-two"></span>
+                            </div>
                         </div>
-
-                        <!-- Gold Border SVG Overlay following the clipped wave shape (non-scaling-stroke) -->
-                        <svg class="about-border-overlay" width="100%" height="100%" viewBox="0 0 100 100" fill="none"
-                            preserveAspectRatio="none"
-                            style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5;">
-                            <path
-                                d="M 1.5,5 Q 1.5,1.5 5,1.5 L 80,1.5 C 89,16.5 98.5,33.5 98.5,50 C 98.5,66.5 89,83.5 80,98.5 L 5,98.5 Q 1.5,98.5 1.5,95 Z"
-                                stroke="#b89c66" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-                        </svg>
-
-
+                        <span class="about-globe-orbit orbit-one" aria-hidden="true"></span>
+                        <span class="about-globe-orbit orbit-two" aria-hidden="true"></span>
                     </div>
                 </div>
 
