@@ -29,7 +29,22 @@ class CustomHeader extends HTMLElement {
                         <li><a href="index.html#hero" class="nav-link">Home</a></li>
                         <li><a href="about.html" class="nav-link">About Us</a></li>
                         <li><a href="service.html" class="nav-link">Services</a></li>
-                        <li><a href="product.html" class="nav-link">Products</a></li>
+                        <li class="nav-dropdown">
+                            <div class="nav-dropdown-trigger">
+                                <a href="product.html" class="nav-link">Products</a>
+                                <button class="nav-dropdown-toggle" type="button" aria-label="Show product categories" aria-expanded="false">
+                                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <ul class="nav-dropdown-menu">
+                                <li><a href="metals.html">Ferrous &amp; Non Ferrous Metals</a></li>
+                                <li><a href="steel.html">Secondary Steel Coils &amp; Sheets</a></li>
+                                <li><a href="rubber.html">Used Tyre Rubber Scrap</a></li>
+                                <li><a href="plastic.html">Plastic Scrap</a></li>
+                                <li><a href="paper.html">Waste Paper</a></li>
+                                <li><a href="wood.html">Wood Raw Materials</a></li>
+                            </ul>
+                        </li>
                         <li><a href="contact.html" class="nav-link">Contact</a></li>
                     </ul>
                     
@@ -50,6 +65,8 @@ class CustomHeader extends HTMLElement {
         const mobileMenu = this.querySelector('#mobile-menu');
         const navMenu = this.querySelector('#nav-menu');
         const navLinks = this.querySelectorAll('.nav-link');
+        const dropdown = this.querySelector('.nav-dropdown');
+        const dropdownToggle = this.querySelector('.nav-dropdown-toggle');
         
         if (mobileMenu && navMenu) {
             mobileMenu.addEventListener('click', () => {
@@ -63,6 +80,13 @@ class CustomHeader extends HTMLElement {
                     navMenu.classList.remove('active');
                 });
             });
+
+            if (dropdown && dropdownToggle) {
+                dropdownToggle.addEventListener('click', () => {
+                    const isOpen = dropdown.classList.toggle('open');
+                    dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+                });
+            }
         }
     }
 }
