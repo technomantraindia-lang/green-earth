@@ -559,11 +559,10 @@ custom-header {
 }
 
 .logo-text {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 800;
     color: var(--primary-color);
-    letter-spacing: -0.01em;
     margin-left: 0.85rem;
     line-height: 1;
     display: flex;
@@ -580,12 +579,12 @@ custom-header {
 }
 
 .logo-tagline {
-    font-family: inherit !important;
-    font-size: 0.72rem !important;
+    font-family: var(--font-serif) !important;
+    font-size: 0.9rem !important;
     font-weight: 600 !important;
-    color: var(--text-secondary) !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important;
+    color: var(--primary-color) !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
     margin-top: 0.35rem !important;
     line-height: 1.15 !important;
 }
@@ -895,11 +894,52 @@ custom-header {
     height: 100%;
 }
 
+.about-globe-slides {
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.about-real-globe {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    color: #b9e7c7;
+    background:
+        radial-gradient(circle at 29% 23%, rgba(255,255,255,.38), transparent 17%),
+        radial-gradient(circle at 37% 35%, #26965a 0%, #137540 45%, #0b4d2d 72%, #062c1d 100%);
+    box-shadow:
+        inset 22px 16px 34px rgba(255,255,255,.15),
+        inset -38px -24px 56px rgba(2,18,11,.62),
+        0 0 34px rgba(38,150,90,.26);
+}
+
+.about-real-globe::after {
+    content: '';
+    position: absolute;
+    inset: 1.5%;
+    border: 1px solid rgba(218,255,230,.42);
+    border-radius: 50%;
+    box-shadow: inset 0 0 26px rgba(210,255,225,.16);
+}
+
+.about-real-globe i {
+    font-size: clamp(15rem, 27vw, 25rem);
+    line-height: 1;
+    filter: drop-shadow(-8px 12px 14px rgba(2,24,14,.34));
+    animation: aboutRealGlobeDrift 12s ease-in-out infinite alternate;
+}
+
 .about-globe-slide {
     object-fit: cover;
     opacity: 0;
-    transform: scale(1.08);
+    transform: scale(1.06);
     animation: aboutGlobeSlideshow 30s infinite;
+    will-change: opacity, transform;
 }
 
 .about-globe-slide:nth-child(2) { animation-delay: 5s; }
@@ -915,18 +955,24 @@ custom-header {
     border-radius: inherit;
     pointer-events: none;
     background:
-        radial-gradient(circle at 30% 22%, rgba(255,255,255,.3), transparent 25%),
-        radial-gradient(circle at 42% 40%, transparent 42%, rgba(3,20,13,.2) 72%, rgba(3,20,13,.58) 100%);
+        radial-gradient(circle at 29% 20%, rgba(255,255,255,.4), transparent 22%),
+        radial-gradient(circle at 42% 38%, transparent 40%, rgba(3,20,13,.18) 68%, rgba(3,20,13,.68) 100%),
+        linear-gradient(115deg, rgba(255,255,255,.12), transparent 38%, rgba(3,20,13,.2));
+    box-shadow:
+        inset 18px 10px 28px rgba(255,255,255,.1),
+        inset -28px -18px 45px rgba(3,20,13,.36);
 }
 
 .about-globe-grid {
     position: absolute;
-    inset: 3%;
+    inset: 2.5%;
     z-index: 3;
     border-radius: 50%;
     overflow: hidden;
-    opacity: .48;
+    opacity: .38;
     pointer-events: none;
+    border: 1px solid rgba(255,255,255,.3);
+    box-shadow: inset 0 0 24px rgba(255,255,255,.08);
 }
 
 .globe-longitude,
@@ -982,9 +1028,15 @@ custom-header {
 }
 
 @keyframes aboutGlobeSlideshow {
-    0% { opacity: 0; transform: scale(1.08); }
-    4%, 14% { opacity: 1; }
-    18%, 100% { opacity: 0; transform: scale(1); }
+    0% { opacity: 1; transform: scale(1.06); }
+    12.666% { opacity: 1; transform: scale(1.015); }
+    14% { opacity: 0; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes aboutRealGlobeDrift {
+    from { transform: rotate(-4deg) scale(1.01); }
+    to { transform: rotate(4deg) scale(1.035); }
 }
 
 @keyframes aboutOrbitPulse {
@@ -1004,6 +1056,10 @@ custom-header {
     }
 
     .about-globe-orbit {
+        animation: none;
+    }
+
+    .about-real-globe i {
         animation: none;
     }
 }
