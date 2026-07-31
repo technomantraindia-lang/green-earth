@@ -871,7 +871,7 @@ custom-header {
     position: relative;
     z-index: 2;
     isolation: isolate;
-    background: #0f291e;
+    background: #fff;
     border: 3px solid rgba(184, 156, 102, 0.9);
     box-shadow:
         inset -32px -22px 55px rgba(3, 20, 13, 0.54),
@@ -938,7 +938,7 @@ custom-header {
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    animation: aboutGlobeSlideshow 30s infinite;
+    animation: aboutGlobeSlideshow 60s infinite;
     will-change: opacity, transform;
 }
 
@@ -947,6 +947,24 @@ custom-header {
 .about-globe-slide:nth-child(4) { animation-delay: 15s; }
 .about-globe-slide:nth-child(5) { animation-delay: 20s; }
 .about-globe-slide:nth-child(6) { animation-delay: 25s; }
+.about-globe-slide:nth-child(7) { animation-delay: 30s; }
+.about-globe-slide:nth-child(8) { animation-delay: 35s; }
+.about-globe-slide:nth-child(9) { animation-delay: 40s; }
+.about-globe-slide:nth-child(10) { animation-delay: 45s; }
+.about-globe-slide:nth-child(11) { animation-delay: 50s; }
+.about-globe-slide:nth-child(12) { animation-delay: 55s; }
+
+.about-globe-slide.about-globe-logo-slide {
+    z-index: 4;
+    object-fit: contain;
+    box-sizing: border-box;
+    inset: -20%;
+    width: 140%;
+    height: 140%;
+    max-width: none;
+    padding: 0;
+    background: #fff;
+}
 
 .about-globe-shade {
     position: absolute;
@@ -1029,8 +1047,8 @@ custom-header {
 
 @keyframes aboutGlobeSlideshow {
     0% { opacity: 1; transform: scale(1.06); }
-    12.666% { opacity: 1; transform: scale(1.015); }
-    14% { opacity: 0; transform: scale(1); }
+    7.2% { opacity: 1; transform: scale(1.015); }
+    8.333% { opacity: 0; transform: scale(1); }
     100% { opacity: 0; transform: scale(1); }
 }
 
