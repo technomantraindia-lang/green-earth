@@ -347,8 +347,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const textureBase = 'https://threejs.org/examples/textures/planets/';
         const networkLocations = [
             { name: 'USA', lat: 37.0902, lon: -95.7129, labelPos: 'top-left' },
-            { name: 'UK', lat: 55.3781, lon: -3.4360, labelPos: 'top-left' },
+            { name: 'United Kingdom', lat: 55.3781, lon: -3.4360, labelPos: 'top-left' },
             { name: 'Belgium', lat: 50.5039, lon: 4.4699, labelPos: 'top-right' },
+            { name: 'Egypt', lat: 26.8206, lon: 30.8025, labelPos: 'bottom-left' },
+            { name: 'UAE', lat: 23.4241, lon: 53.8478, labelPos: 'top-right' },
+            { name: 'Turkey', lat: 38.9637, lon: 35.2433, labelPos: 'top-left' },
             { name: 'Bangladesh', lat: 23.6850, lon: 90.3563, labelPos: 'top-right' },
             { name: 'India', lat: 20.5937, lon: 78.9629, labelPos: 'bottom-left' },
             { name: 'Pakistan', lat: 30.3753, lon: 69.3451, labelPos: 'top-left' },

@@ -898,6 +898,7 @@ custom-header {
     z-index: 1;
     overflow: hidden;
     border-radius: 50%;
+    background: #0a355f;
 }
 
 .about-real-globe {
@@ -938,21 +939,21 @@ custom-header {
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    animation: aboutGlobeSlideshow 60s infinite;
+    animation: aboutGlobeSlideshow 36s linear infinite;
     will-change: opacity, transform;
 }
 
-.about-globe-slide:nth-child(2) { animation-delay: 5s; }
-.about-globe-slide:nth-child(3) { animation-delay: 10s; }
-.about-globe-slide:nth-child(4) { animation-delay: 15s; }
-.about-globe-slide:nth-child(5) { animation-delay: 20s; }
-.about-globe-slide:nth-child(6) { animation-delay: 25s; }
-.about-globe-slide:nth-child(7) { animation-delay: 30s; }
-.about-globe-slide:nth-child(8) { animation-delay: 35s; }
-.about-globe-slide:nth-child(9) { animation-delay: 40s; }
-.about-globe-slide:nth-child(10) { animation-delay: 45s; }
-.about-globe-slide:nth-child(11) { animation-delay: 50s; }
-.about-globe-slide:nth-child(12) { animation-delay: 55s; }
+.about-globe-slide:nth-child(2) { animation-delay: 3s; }
+.about-globe-slide:nth-child(3) { animation-delay: 6s; }
+.about-globe-slide:nth-child(4) { animation-delay: 9s; }
+.about-globe-slide:nth-child(5) { animation-delay: 12s; }
+.about-globe-slide:nth-child(6) { animation-delay: 15s; }
+.about-globe-slide:nth-child(7) { animation-delay: 18s; }
+.about-globe-slide:nth-child(8) { animation-delay: 21s; }
+.about-globe-slide:nth-child(9) { animation-delay: 24s; }
+.about-globe-slide:nth-child(10) { animation-delay: 27s; }
+.about-globe-slide:nth-child(11) { animation-delay: 30s; }
+.about-globe-slide:nth-child(12) { animation-delay: 33s; }
 
 .about-globe-slide.about-globe-logo-slide {
     z-index: 4;
@@ -963,7 +964,7 @@ custom-header {
     height: 120%;
     max-width: none;
     padding: 0;
-    background: transparent;
+    background: #0a355f;
 }
 
 .about-globe-shade {
@@ -1047,8 +1048,8 @@ custom-header {
 
 @keyframes aboutGlobeSlideshow {
     0% { opacity: 1; transform: scale(1.06); }
-    7.2% { opacity: 1; transform: scale(1.015); }
-    8.333% { opacity: 0; transform: scale(1); }
+    7.5% { opacity: 1; transform: scale(1.015); }
+    9% { opacity: 0; transform: scale(1); }
     100% { opacity: 0; transform: scale(1); }
 }
 
@@ -1165,6 +1166,11 @@ custom-header {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     line-height: 1.5;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    overflow-wrap: break-word;
 }
 
 .about-heading {
@@ -1189,6 +1195,11 @@ custom-header {
     font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.65;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    overflow-wrap: break-word;
 }
 
 /* Features list card */
@@ -1572,6 +1583,10 @@ custom-header {
     margin-bottom: 1.2rem;
     line-height: 1.65;
     text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    overflow-wrap: break-word;
     max-width: 640px;
 }
 
@@ -1581,6 +1596,10 @@ custom-header {
     margin-bottom: 1.2rem;
     line-height: 1.65;
     text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    overflow-wrap: break-word;
     max-width: 640px;
 }
 
@@ -2428,6 +2447,14 @@ custom-header {
 .network-detail-card p {
     font-size: 0.92rem;
     line-height: 1.75;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 .network-visual {
@@ -6146,8 +6173,13 @@ html, body {
     color: #142019;
     font-size: .98rem;
     line-height: 1.55;
-    text-align: left;
-    hyphens: none;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
     overflow-wrap: break-word;
     position: relative;
     z-index: 1;
@@ -6561,6 +6593,14 @@ html, body {
     font-size: 0.92rem;
     color: var(--text-secondary);
     line-height: 1.65;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 /* Icon centered on the waistline boundary */
@@ -6887,6 +6927,14 @@ html, body {
     color: var(--text-dark);
     line-height: 1.75;
     font-weight: 500;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 @media (max-width: 1024px) {
@@ -7282,6 +7330,14 @@ html, body {
     color: var(--text-secondary);
     line-height: 1.85;
     margin-bottom: 2.2rem;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 .services-intro-highlight {
@@ -7292,6 +7348,15 @@ html, body {
     margin-bottom: 1.5rem;
     font-style: italic;
     font-size: 1rem;
+    line-height: 1.8;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    word-spacing: normal;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 @media (max-width: 992px) {
@@ -7596,10 +7661,6 @@ html, body {
 
     .home-page .products-title {
         font-size: clamp(2.15rem, 9vw, 3rem);
-    }
-
-    .home-page :is(.about-text, .sustainability-lead, .sustainability-subtext) {
-        text-align: left;
     }
 
     .home-page .contact-info-panel,
@@ -8383,7 +8444,6 @@ html, body {
 
     :is(.about-page, .services-page) .conclusion-text {
         font-size: 0.92rem;
-        text-align: left;
     }
 
     .services-page .cta-card {
@@ -8625,7 +8685,7 @@ html, body {
 }
 
 .banner-text-left {
-    max-width: 850px;
+    max-width: min(100%, 1180px);
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     opacity: 0;
     transform: translateY(20px);
@@ -8645,11 +8705,12 @@ html, body {
 
 .banner-title {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.4rem, 4.35vw, 4.25rem);
     font-weight: 900;
     color: #b9e87c;
     line-height: 1.1;
     margin-bottom: 1.25rem;
+    white-space: nowrap;
 }
 
 .banner-subtitle {
@@ -8673,6 +8734,10 @@ html, body {
         max-width: 100%;
         text-align: center;
         margin: 0 auto;
+    }
+    .banner-title {
+        font-size: clamp(2.1rem, 9vw, 3rem);
+        white-space: normal;
     }
     .banner-slideshow-content {
         justify-content: center;
