@@ -241,7 +241,9 @@
     <!-- PRODUCT HERO/BANNER SECTION -->
     <section class="about-banner-section product-banner-slideshow">
         <div class="banner-slides">
-            <div class="banner-slide active" style="background-image: url('image/recycled_paper.png');"></div>
+            <div class="banner-slide active" style="background-image: url('image/Smash/paper banner/b1.jpeg');"></div>
+            <div class="banner-slide" style="background-image: url('image/Smash/paper banner/b2.jpeg');"></div>
+            <div class="banner-slide" style="background-image: url('image/Smash/paper banner/b3.jpeg');"></div>
         </div>
         <div class="about-banner-overlay"></div>
         <div class="banner-slideshow-content">
@@ -266,7 +268,11 @@
             <div class="product-detail-grid">
                 <!-- Left Panel: Slideshow -->
                 <div class="product-slideshow reveal-left" id="paper-slideshow">
-                    <div class="slide active" style="background-image: url('image/recycled_paper.png');"></div>
+                    <div class="slide active" style="background-image: url('image/Smash/paper banner/p1.jpeg');"></div>
+                    <div class="slide" style="background-image: url('image/Smash/paper banner/p2.jpeg');"></div>
+                    <div class="slide" style="background-image: url('image/Smash/paper banner/p3.jpeg');"></div>
+                    <div class="slide" style="background-image: url('image/Smash/paper banner/p4.jpeg');"></div>
+                    <div class="slide" style="background-image: url('image/Smash/paper banner/p5.jpeg');"></div>
                     
                     <!-- Navigation Buttons -->
                     <button class="slide-nav btn-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
@@ -342,6 +348,18 @@
     <!-- Slideshow Runner Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Hero Banner Slideshow
+            const bannerSlides = document.querySelectorAll('.banner-slide');
+            let currentBannerSlide = 0;
+
+            if (bannerSlides.length > 1) {
+                setInterval(() => {
+                    bannerSlides[currentBannerSlide].classList.remove('active');
+                    currentBannerSlide = (currentBannerSlide + 1) % bannerSlides.length;
+                    bannerSlides[currentBannerSlide].classList.add('active');
+                }, 4000);
+            }
+
             // Generic Slideshow Helper with Navigation Buttons
             function initSlideshow(containerId, intervalTime = 3500) {
                 const container = document.getElementById(containerId);
