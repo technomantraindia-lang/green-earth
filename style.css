@@ -4496,22 +4496,29 @@ custom-footer {
 
 .footer-logo {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    align-self: flex-start;
+    gap: 0.65rem;
     text-decoration: none;
 }
 
 .footer-logo-img {
-    height: 48px;
+    height: 96px;
     width: auto;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .footer-logo-text {
     font-family: var(--font-heading);
-    font-size: 1.3rem;
+    font-size: 1.55rem;
     font-weight: 800;
     color: var(--text-dark);
-    margin-left: 0.75rem;
-    line-height: 1;
+    margin-left: 0;
+    line-height: 1.1;
+    text-align: center;
+    letter-spacing: 0.02em;
 }
 
 .footer-brand-desc {
@@ -6132,7 +6139,19 @@ html, body {
 .who-card:nth-child(n+3) { border-top: 1px dashed rgba(44, 104, 28, .25); }
 .who-card::before { display: none; }
 .who-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #2c7a1e; background: linear-gradient(135deg, rgba(241,247,233,.94), rgba(223,234,212,.94)); box-shadow: 0 8px 24px rgba(42, 105, 27, .08); font-size: 1.9rem; position: relative; z-index: 1; }
-.who-card p { text-align: left; margin: 0; color: #142019; font-size: .98rem; line-height: 1.55; position: relative; z-index: 1; }
+.who-card p {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    color: #142019;
+    font-size: .98rem;
+    line-height: 1.55;
+    text-align: left;
+    hyphens: none;
+    overflow-wrap: break-word;
+    position: relative;
+    z-index: 1;
+}
 .who-card strong { color: #237019; }
 .who-visual { min-height: 100%; position: relative; overflow: hidden; background: #000000; }
 .who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
@@ -7794,11 +7813,12 @@ html, body {
     }
 
     .footer-logo {
+        align-self: center;
         justify-content: center;
     }
 
     .footer-logo-img {
-        height: clamp(58px, 16vw, 74px);
+        height: clamp(84px, 22vw, 104px);
     }
 
     .footer-logo-text {
