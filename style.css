@@ -8641,6 +8641,31 @@ html, body {
     width: 100%;
 }
 
+.product-inner-page .product-banner-slideshow {
+    width: 100%;
+    height: clamp(520px, 42vw, 650px) !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    margin-top: 126px !important;
+}
+
+.product-inner-page .banner-slide {
+    background-position: center center;
+}
+
+.product-inner-page .banner-text-left {
+    max-width: 780px;
+}
+
+.product-inner-page .banner-title {
+    white-space: normal;
+    text-wrap: balance;
+}
+
+.product-inner-page .banner-subtitle {
+    max-width: 720px;
+}
+
 .product-banner-slideshow .about-banner-overlay {
     z-index: 2;
     background: linear-gradient(90deg, rgba(8, 35, 20, 0.8) 0%, rgba(8, 35, 20, 0.45) 50%, rgba(8, 35, 20, 0.15) 100%);
@@ -8747,17 +8772,361 @@ html, body {
 
 /* --- PRODUCT PAGE STATIC BANNER --- */
 .product-banner-section {
-    height: clamp(480px, 55vw, 750px) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1961 / 802 !important;
+    margin-top: 126px;
     position: relative !important;
+    overflow: hidden;
+    background-color: #f4f6ef;
 }
 .product-banner-img {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    display: block;
     transform: none !important;
     transition: none !important;
+}
+
+/* Product listing and category pages: responsive layout */
+/* Keep every product layout bounded and prevent long content from widening the page. */
+.product-list-page,
+.product-inner-page {
+    overflow-x: clip;
+}
+
+.product-list-page .products-grid,
+.product-inner-page .product-detail-grid,
+.product-inner-page .product-info,
+.product-inner-page .product-slideshow {
+    min-width: 0;
+}
+
+.product-list-page .product-card-img-box video,
+.product-inner-page .product-slideshow .slide {
+    transform: translateZ(0);
+}
+
+@media (min-width: 1201px) {
+    .product-list-page .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+    }
+
+    .product-list-page .product-card-mockup {
+        max-width: 440px;
+        width: 100%;
+        justify-self: center;
+    }
+
+    .product-inner-page .product-detail-grid {
+        grid-template-columns: minmax(380px, 0.82fr) minmax(0, 1.18fr) !important;
+        gap: clamp(3rem, 4vw, 4.5rem) !important;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    .product-list-page .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.75rem;
+    }
+
+    .product-list-page .product-card-mockup {
+        width: 100%;
+        max-width: 520px;
+        justify-self: center;
+    }
+
+    .product-list-page .product-card-img-box {
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .product-list-page .product-card-badge-wrap {
+        top: min(325px, calc(31.25vw - 1rem));
+    }
+
+    .product-inner-page .product-detail-container {
+        padding: 4.5rem 2rem !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(470px, 44vw, 540px) !important;
+        margin-top: 96px !important;
+    }
+
+    .product-inner-page .product-detail-grid {
+        grid-template-columns: minmax(330px, 0.9fr) minmax(0, 1.1fr) !important;
+        gap: 2.5rem !important;
+    }
+
+    .product-inner-page .product-slideshow {
+        height: clamp(450px, 46vw, 540px) !important;
+        margin-top: 7rem !important;
+    }
+
+    .product-inner-page .spec-list {
+        gap: 1rem 1.4rem !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .product-list-page .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-list-page .product-card-img-box {
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .product-list-page .product-card-badge-wrap {
+        top: calc(31.25vw - 1.25rem);
+    }
+
+    .product-inner-page .product-detail-container {
+        padding: 4.5rem 2rem !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(420px, 50vw, 500px) !important;
+        margin-top: 96px !important;
+    }
+
+    .product-inner-page .product-detail-grid {
+        gap: 2.5rem !important;
+    }
+
+    .product-inner-page .product-slideshow {
+        height: clamp(390px, 52vw, 500px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-list-page .product-banner-section {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: 1961 / 802 !important;
+        margin-top: 126px !important;
+    }
+
+    .product-list-page .product-banner-img {
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
+
+    .product-list-page .products-section {
+        padding: 4rem 0 4.5rem !important;
+    }
+
+    .product-list-page .products-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .product-list-page .products-title {
+        font-size: clamp(2rem, 8.5vw, 2.75rem);
+        line-height: 1.14;
+    }
+
+    .product-list-page .products-subtitle {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    .product-list-page .products-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+
+    .product-list-page .product-card-mockup {
+        width: min(100%, 560px);
+        margin-inline: auto;
+        border-radius: 22px;
+    }
+
+    .product-list-page .product-card-img-box {
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .product-list-page .product-card-badge-wrap {
+        top: min(350px, calc(62.5vw - 1.5625rem));
+    }
+
+    .product-list-page .product-card-content {
+        padding: 3.65rem 1.35rem 1.5rem;
+    }
+
+    .product-list-page .product-card-desc {
+        margin-bottom: 1.35rem;
+    }
+
+    .product-list-page .btn-card-more {
+        min-height: 44px;
+        padding: 0.75rem 1.15rem;
+    }
+
+    .product-list-page .about-cta-section {
+        padding-block: 4rem;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(340px, 88vw, 430px) !important;
+        min-height: 0 !important;
+        aspect-ratio: auto !important;
+        margin-top: 126px !important;
+    }
+
+    .product-inner-page .banner-slideshow-content {
+        padding-inline: 1.25rem;
+    }
+
+    .product-inner-page .banner-kicker {
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+    }
+
+    .product-inner-page .banner-title {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+        overflow-wrap: anywhere;
+    }
+
+    .product-inner-page .banner-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .product-inner-page .product-detail-container {
+        padding: 3.5rem 1.25rem !important;
+    }
+
+    .product-inner-page .product-detail-container > .section-header {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .product-inner-page .product-detail-container > .section-header p {
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+        text-align: left !important;
+    }
+
+    .product-inner-page .product-detail-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 2.25rem !important;
+        margin-bottom: 4rem !important;
+    }
+
+    .product-inner-page .product-slideshow {
+        width: 100%;
+        height: clamp(245px, 70vw, 380px) !important;
+        margin-top: 0 !important;
+        border-width: 4px;
+        border-radius: 18px;
+    }
+
+    .product-inner-page .slide-nav {
+        width: 44px;
+        height: 44px;
+        opacity: 0.92;
+    }
+
+    .product-inner-page .product-info-title {
+        font-size: clamp(1.8rem, 7.5vw, 2.35rem);
+        line-height: 1.2;
+        margin-bottom: 1.1rem;
+    }
+
+    .product-inner-page .product-info-desc,
+    .product-inner-page .spec-list li {
+        text-align: left;
+        text-align-last: auto;
+        hyphens: none;
+    }
+
+    .product-inner-page .spec-list {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 0.7rem !important;
+    }
+
+    .product-inner-page .spec-list li {
+        padding-left: 1.5rem;
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .product-inner-page .product-info .btn,
+    .product-inner-page .btn-cta-primary,
+    .product-inner-page .btn-cta-secondary {
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-list-page .container,
+    .product-inner-page .container {
+        padding-inline: 1rem;
+    }
+
+    .product-list-page .product-card-img-box {
+        aspect-ratio: 4 / 3;
+    }
+
+    .product-list-page .product-card-badge-wrap {
+        top: calc(75vw - 1.5rem);
+    }
+
+    .product-list-page .product-card-content {
+        padding: 3.45rem 1.1rem 1.35rem;
+    }
+
+    .product-list-page .product-card-title {
+        font-size: 1.2rem;
+    }
+
+    .product-list-page .product-card-desc {
+        font-size: 0.9rem;
+    }
+
+    .product-inner-page .product-detail-container {
+        padding: 3rem 1rem !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(300px, 82vw, 360px) !important;
+    }
+
+    .product-inner-page .banner-slideshow-content {
+        padding-inline: 1rem;
+    }
+
+    .product-inner-page .banner-title {
+        font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+        margin-bottom: 0.85rem;
+    }
+
+    .product-inner-page .banner-subtitle {
+        font-size: 0.94rem;
+    }
+
+    .product-inner-page .product-slideshow {
+        height: clamp(230px, 72vw, 320px) !important;
+    }
+
+    .product-inner-page .product-info .btn,
+    .product-inner-page .btn-cta-primary,
+    .product-inner-page .btn-cta-secondary {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 
