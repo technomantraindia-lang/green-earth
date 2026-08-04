@@ -8635,7 +8635,8 @@ html, body {
     }
 
     :is(.about-page, .services-page, .contact-page) .about-banner-img {
-        object-fit: fill !important;
+        object-fit: cover !important;
+        object-position: left center !important;
     }
 }
 
@@ -8962,7 +8963,8 @@ html, body {
     }
 
     .product-list-page .product-banner-img {
-        object-fit: fill !important;
+        object-fit: cover !important;
+        object-position: left center !important;
     }
 
     .product-list-page .products-section {
