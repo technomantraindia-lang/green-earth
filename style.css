@@ -7661,7 +7661,8 @@ html, body {
 
     .home-page .hero-bg-video {
         animation: none;
-        transform: scale(1.0);
+        transform: scale(1.4) !important;
+        transform-origin: top center !important;
     }
 
     .home-page .hero-section::after {
@@ -7898,10 +7899,6 @@ html, body {
     custom-footer {
         padding: 4.5rem 0 1.5rem;
         overflow: hidden;
-        background:
-            radial-gradient(circle at 50% 0%, rgba(21, 128, 61, 0.23), transparent 34%),
-            linear-gradient(180deg, #0d1e16 0%, #07110c 100%);
-        border-top: 1px solid rgba(184, 156, 102, 0.28);
     }
 
     custom-footer .container {
@@ -7924,7 +7921,7 @@ html, body {
     .footer-logo {
         align-self: center;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .footer-logo-img {
@@ -7933,6 +7930,7 @@ html, body {
 
     .footer-logo-text {
         color: var(--primary-color);
+        text-align: center;
     }
 
     .footer-logo-subtitle,
@@ -7942,7 +7940,6 @@ html, body {
 
     .footer-brand-desc {
         max-width: 560px;
-        color: rgba(255, 255, 255, 0.7);
         line-height: 1.75;
     }
 
@@ -7954,13 +7951,12 @@ html, body {
     .footer-social-links a {
         width: 44px;
         height: 44px;
-        color: #b89c66;
-        border-color: rgba(184, 156, 102, 0.55);
-        background: rgba(255, 255, 255, 0.025);
+        color: var(--primary-color);
+        border-color: rgba(21, 128, 61, 0.25);
+        background: transparent;
     }
 
     .footer-column-title {
-        color: #d7bf8b;
         margin-bottom: 1.25rem;
         letter-spacing: 0.14em;
     }
@@ -7973,13 +7969,12 @@ html, body {
         display: flex;
         align-items: flex-start;
         gap: 0.55rem;
-        color: rgba(255, 255, 255, 0.72);
         font-size: 0.86rem;
     }
 
     .footer-link-item a::before {
         content: '—';
-        color: #b89c66;
+        color: var(--primary-color);
         flex: 0 0 auto;
     }
 
@@ -7996,9 +7991,8 @@ html, body {
         align-items: center;
         gap: 0.9rem;
         padding: 0.9rem 1rem;
-        color: rgba(255, 255, 255, 0.72);
-        background: rgba(255, 255, 255, 0.035);
-        border: 1px solid rgba(184, 156, 102, 0.2);
+        background: var(--bg-white);
+        border: 1px solid var(--border-color);
         border-radius: 16px;
     }
 
@@ -8015,7 +8009,7 @@ html, body {
     }
 
     .footer-contact-item a {
-        color: rgba(255, 255, 255, 0.76) !important;
+        color: var(--text-secondary) !important;
         overflow-wrap: anywhere;
     }
 
@@ -8023,14 +8017,8 @@ html, body {
         flex-direction: column;
         gap: 1rem;
         padding-top: 1.5rem;
-        border-color: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.52);
+        border-color: var(--border-color);
         text-align: center;
-    }
-
-    .footer-bottom p,
-    .footer-legal-links a {
-        color: rgba(255, 255, 255, 0.52);
     }
 }
 
@@ -8635,15 +8623,19 @@ html, body {
     :is(.about-page, .services-page, .contact-page) .about-banner-section {
         height: auto;
         min-height: 0;
-        margin-top: 126px;
+        margin-top: 80px !important;
     }
 
     :is(.about-page, .services-page) .about-banner-section {
-        aspect-ratio: 2.75 / 1;
+        aspect-ratio: 1.8 / 1;
     }
 
     .contact-page .about-banner-section {
-        aspect-ratio: 2.172 / 1;
+        aspect-ratio: 1.5 / 1;
+    }
+
+    :is(.about-page, .services-page, .contact-page) .about-banner-img {
+        object-fit: fill !important;
     }
 }
 
@@ -8965,13 +8957,12 @@ html, body {
         width: 100% !important;
         height: auto !important;
         min-height: 0 !important;
-        aspect-ratio: 1961 / 802 !important;
-        margin-top: 126px !important;
+        aspect-ratio: 1.8 / 1 !important;
+        margin-top: 80px !important;
     }
 
     .product-list-page .product-banner-img {
-        object-fit: contain !important;
-        object-position: center center !important;
+        object-fit: fill !important;
     }
 
     .product-list-page .products-section {
@@ -9030,10 +9021,14 @@ html, body {
     }
 
     .product-inner-page .product-banner-slideshow {
-        height: clamp(340px, 88vw, 430px) !important;
+        height: clamp(380px, 80vw, 460px) !important;
         min-height: 0 !important;
         aspect-ratio: auto !important;
-        margin-top: 126px !important;
+        margin-top: 80px !important;
+    }
+
+    .product-banner-slideshow .about-banner-overlay {
+        background: rgba(8, 35, 20, 0.6) !important;
     }
 
     .product-inner-page .banner-slideshow-content {
@@ -9047,7 +9042,7 @@ html, body {
 
     .product-inner-page .banner-title {
         font-size: clamp(1.55rem, 6.6vw, 2.8rem);
-        white-space: nowrap;
+        white-space: normal;
         overflow-wrap: normal;
     }
 
@@ -9153,7 +9148,7 @@ html, body {
     }
 
     .product-inner-page .product-banner-slideshow {
-        height: clamp(300px, 82vw, 360px) !important;
+        height: clamp(320px, 75vw, 380px) !important;
     }
 
     .product-inner-page .banner-slideshow-content {
@@ -9163,7 +9158,7 @@ html, body {
     .product-inner-page .banner-title {
         font-size: clamp(1.35rem, 6.5vw, 2.4rem);
         margin-bottom: 0.85rem;
-        white-space: nowrap;
+        white-space: normal;
     }
 
     .product-inner-page .banner-subtitle {
