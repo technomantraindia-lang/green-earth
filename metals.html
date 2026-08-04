@@ -148,31 +148,41 @@
             padding: 0;
             margin: 1.5rem 0 0 0;
         }
-        .spec-list li {
-            position: relative;
-            padding-left: 1.75rem;
-            margin-bottom: 0.85rem;
-            font-size: 0.98rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: left;
-            text-justify: inter-word;
-            word-spacing: normal;
-            hyphens: auto;
-            -webkit-hyphens: auto;
-            word-break: normal;
-            overflow-wrap: break-word;
-        }
-        .spec-list li::before {
-            content: "\f06c";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-size: 0.85rem;
-        }
+         .spec-list li {
+             position: relative;
+             padding-left: 1.75rem;
+             margin-bottom: 0.85rem;
+             font-size: 0.98rem;
+             color: var(--text-secondary);
+             line-height: 1.5;
+             text-align: left;
+             text-align-last: auto;
+             text-justify: auto;
+             word-spacing: normal;
+             hyphens: auto;
+             -webkit-hyphens: auto;
+             word-break: normal;
+             overflow-wrap: break-word;
+         }
+         .spec-list li::before {
+             content: "\f06c";
+             font-family: "Font Awesome 6 Free";
+             font-weight: 900;
+             position: absolute;
+             left: 0;
+             color: var(--primary-color);
+             font-size: 0.85rem;
+         }
+         .spec-list li.spec-list-wide {
+             grid-column: 1 / -1;
+             text-align: left !important;
+             text-align-last: auto !important;
+             text-justify: auto !important;
+             word-spacing: normal !important;
+             letter-spacing: 0 !important;
+             hyphens: none !important;
+             -webkit-hyphens: none !important;
+         }
         
         @media (max-width: 992px) {
             .product-detail-grid {
@@ -406,7 +416,7 @@
                 <div class="cta-content-wrapper">
                     <span class="cta-kicker">GET A QUOTE</span>
                     <h2 class="cta-heading-title">Ready to Settle Your Metal Supply Chain?</h2>
-                    <p class="cta-subtitle-text">Connect with our trading department to discuss specifications, contract volumes, shipping options, and current pricing estimates.</p>
+                    <p class="cta-subtitle-text">Connect with our Trading Department to discuss Specifications, Contract Volumes, Shipping Options, and Current Pricing Estimates.</p>
                     <div class="cta-actions-row">
                         <a href="contact.html?interest=metals" class="btn-cta-primary">
                             <span>Contact Trading Desk</span>

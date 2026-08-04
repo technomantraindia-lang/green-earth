@@ -102,6 +102,7 @@ class CustomFooter extends HTMLElement {
                             <div class="footer-logo-text">
                                 GREEN EARTH
                                 <div class="footer-logo-subtitle">Commodity FZ LLC</div>
+                                <div class="footer-logo-tagline">Sustainable Global Commodity Trading Partner</div>
                             </div>
                         </a>
                         <p class="footer-brand-desc">
