@@ -579,7 +579,7 @@ custom-header {
 }
 
 .logo-tagline {
-    font-family: var(--font-serif) !important;
+    font-family: var(--font-heading) !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     color: var(--primary-color) !important;
@@ -939,7 +939,7 @@ custom-header {
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    animation: aboutGlobeSlideshow 36s linear infinite;
+    animation: aboutGlobeSlideshow 42s linear infinite;
     will-change: opacity, transform;
 }
 
@@ -954,6 +954,8 @@ custom-header {
 .about-globe-slide:nth-child(10) { animation-delay: 27s; }
 .about-globe-slide:nth-child(11) { animation-delay: 30s; }
 .about-globe-slide:nth-child(12) { animation-delay: 33s; }
+.about-globe-slide:nth-child(13) { animation-delay: 36s; }
+.about-globe-slide:nth-child(14) { animation-delay: 39s; }
 
 .about-globe-slide.about-globe-logo-slide {
     z-index: 4;
@@ -965,6 +967,13 @@ custom-header {
     max-width: none;
     padding: 0;
     background: #0a355f;
+}
+
+.about-globe-slide.about-globe-paper-slide {
+    object-fit: cover;
+    object-position: right center;
+    padding: 0;
+    background: #f8f6ef;
 }
 
 .about-globe-shade {
@@ -1515,10 +1524,12 @@ custom-header {
 
 .product-card-title {
     font-family: var(--font-heading);
-    font-size: 1.35rem;
+    font-size: clamp(0.92rem, 1.08vw, 1.28rem);
     font-weight: 800;
     color: var(--primary-color);
     margin-bottom: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .product-card-divider {
@@ -4531,7 +4542,7 @@ custom-footer {
 }
 
 .footer-logo-img {
-    height: 96px;
+    height: 190px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
@@ -4541,11 +4552,21 @@ custom-footer {
     font-family: var(--font-heading);
     font-size: 1.55rem;
     font-weight: 800;
-    color: var(--text-dark);
+    color: var(--primary-color);
     margin-left: 0;
     line-height: 1.1;
     text-align: center;
     letter-spacing: 0.02em;
+}
+
+.footer-logo-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
 }
 
 .footer-brand-desc {
@@ -6185,6 +6206,13 @@ html, body {
     z-index: 1;
 }
 .who-card strong { color: #237019; }
+.who-card p.who-card-readable {
+    text-align: left;
+    text-align-last: auto;
+    text-justify: auto;
+    word-spacing: normal;
+    letter-spacing: 0;
+}
 .who-visual { min-height: 100%; position: relative; overflow: hidden; background: #000000; }
 .who-visual img, .who-visual video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; position: absolute; inset: 0; }
 .who-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(8, 35, 20, .7) 100%); }
@@ -6601,6 +6629,13 @@ html, body {
     -webkit-hyphens: auto;
     word-break: normal;
     overflow-wrap: break-word;
+}
+
+.pillar-desc-compact {
+    font-size: 0.88rem;
+    letter-spacing: -0.012em;
+    word-spacing: -0.025em;
+    hyphenate-limit-chars: 6 3 3;
 }
 
 /* Icon centered on the waistline boundary */
@@ -7704,7 +7739,8 @@ html, body {
     }
 
     .home-page .product-card-title {
-        font-size: 1.2rem;
+        font-size: clamp(0.78rem, 3.5vw, 1.05rem);
+        white-space: nowrap;
     }
 
     .home-page .product-card-desc {
@@ -7879,15 +7915,15 @@ html, body {
     }
 
     .footer-logo-img {
-        height: clamp(84px, 22vw, 104px);
+        height: clamp(150px, 38vw, 180px);
     }
 
     .footer-logo-text {
-        color: #ffffff;
+        color: var(--primary-color);
     }
 
     .footer-logo-text > div {
-        color: rgba(255, 255, 255, 0.6) !important;
+        color: var(--primary-color) !important;
     }
 
     .footer-brand-desc {
@@ -8654,12 +8690,13 @@ html, body {
 }
 
 .product-inner-page .banner-text-left {
-    max-width: 780px;
+    max-width: 1080px;
 }
 
 .product-inner-page .banner-title {
-    white-space: normal;
-    text-wrap: balance;
+    font-size: clamp(2.15rem, 3.55vw, 4rem);
+    white-space: nowrap;
+    text-wrap: nowrap;
 }
 
 .product-inner-page .banner-subtitle {
@@ -8995,8 +9032,9 @@ html, body {
     }
 
     .product-inner-page .banner-title {
-        font-size: clamp(2rem, 9vw, 2.8rem);
-        overflow-wrap: anywhere;
+        font-size: clamp(1.55rem, 6.6vw, 2.8rem);
+        white-space: nowrap;
+        overflow-wrap: normal;
     }
 
     .product-inner-page .banner-subtitle {
@@ -9088,7 +9126,8 @@ html, body {
     }
 
     .product-list-page .product-card-title {
-        font-size: 1.2rem;
+        font-size: clamp(0.78rem, 3.5vw, 1.05rem);
+        white-space: nowrap;
     }
 
     .product-list-page .product-card-desc {
@@ -9108,8 +9147,9 @@ html, body {
     }
 
     .product-inner-page .banner-title {
-        font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+        font-size: clamp(1.35rem, 6.5vw, 2.4rem);
         margin-bottom: 0.85rem;
+        white-space: nowrap;
     }
 
     .product-inner-page .banner-subtitle {

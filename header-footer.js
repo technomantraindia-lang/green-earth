@@ -101,7 +101,7 @@ class CustomFooter extends HTMLElement {
                             <img src="image/NEWST%20LOGO.png" alt="Green Earth Logo" class="footer-logo-img">
                             <div class="footer-logo-text">
                                 GREEN EARTH
-                                <div style="font-size: 0.6rem; font-weight: 600; color: #475569; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.25rem;">Commodity FZ LLC</div>
+                                <div class="footer-logo-subtitle">Commodity FZ LLC</div>
                             </div>
                         </a>
                         <p class="footer-brand-desc">
@@ -111,7 +111,7 @@ class CustomFooter extends HTMLElement {
                             <a href="mailto:Office@greenearthcommodity.com" aria-label="Email Green Earth">
                                 <i class="fa-solid fa-envelope"></i>
                             </a>
-                            <a href="https://wa.me/971562050163" target="_blank" rel="noopener noreferrer" aria-label="Chat with Green Earth on WhatsApp">
+                            <a href="https://wa.me/447308409476" target="_blank" rel="noopener noreferrer" aria-label="Chat with Green Earth on WhatsApp">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
@@ -145,7 +145,7 @@ class CustomFooter extends HTMLElement {
                         <ul class="footer-contact-list">
                             <li class="footer-contact-item">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <span>VUNE1239, Compass Building<br>Al Hulaila Industrial Zone – FZ<br>Ras Al Khaimah, United Arab Emirates</span>
+                                <span>VUNE1239, Compass Building<br>Al Hulaila Industrial Zone &ndash; FZ<br>Ras Al Khaimah, United Arab Emirates</span>
                             </li>
                             <li class="footer-contact-item">
                                 <i class="fa-solid fa-envelope"></i>
@@ -153,7 +153,7 @@ class CustomFooter extends HTMLElement {
                             </li>
                             <li class="footer-contact-item">
                                 <i class="fa-brands fa-whatsapp"></i>
-                                <a href="https://wa.me/971562050163" target="_blank" style="color: #475569; text-decoration: none;">+971 56 2050163</a>
+                                <a href="https://wa.me/447308409476" target="_blank" style="color: #475569; text-decoration: none;">+44 7308 409476</a>
                             </li>
                         </ul>
                     </div>
@@ -169,7 +169,7 @@ class CustomFooter extends HTMLElement {
             </div>
 
             <!-- Floating WhatsApp Button -->
-            <a href="https://wa.me/971562050163" target="_blank" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
+            <a href="https://wa.me/447308409476" target="_blank" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
                 <i class="fa-brands fa-whatsapp"></i>
                 <span class="whatsapp-tooltip">Chat with Us!</span>
             </a>
