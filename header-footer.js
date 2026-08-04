@@ -162,10 +162,6 @@ class CustomFooter extends HTMLElement {
                 
                 <div class="footer-bottom">
                     <p>&copy; 2026 Green Earth Commodity FZ LLC. All Rights Reserved.</p>
-                    <div class="footer-legal-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms & Conditions</a>
-                    </div>
                 </div>
             </div>
 

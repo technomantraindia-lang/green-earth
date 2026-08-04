@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formAlert = document.getElementById('form-alert');
     
     if (contactForm && formAlert) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -221,29 +221,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 resetBtnState(submitBtn, originalBtnHtml);
                 return;
             }
-            
-            // Simulate API request (delay)
-            setTimeout(() => {
-                // Successful submission mockup
+
+            const formData = new FormData(contactForm);
+            formData.append('page_url', window.location.href);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'Unable to send inquiry right now.');
+                }
+
                 showNotification(`
                     <i class="fa-solid fa-circle-check" style="margin-right: 10px; font-size: 1.25rem;"></i>
                     <strong>Thank you, ${name}!</strong> Your inquiry has been sent successfully. Our team will contact you shortly at ${email}.
                 `, 'success');
                 
-                // Clear input fields
                 contactForm.reset();
                 resetBtnState(submitBtn, originalBtnHtml);
                 
-                // Smooth scroll back to form notification
                 formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Clear alert after 8 seconds
                 setTimeout(() => {
                     formAlert.style.display = 'none';
                     formAlert.className = 'form-notification';
                 }, 8000);
-                
-            }, 1800); // 1.8 seconds processing time simulation
+            } catch (error) {
+                showNotification(`
+                    <i class="fa-solid fa-circle-exclamation" style="margin-right: 10px; font-size: 1.25rem;"></i>
+                    ${error.message || 'Error: Unable to send inquiry. Please try again.'}
+                `, 'error');
+                resetBtnState(submitBtn, originalBtnHtml);
+            }
         });
     }
     

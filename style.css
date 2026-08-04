@@ -9190,6 +9190,137 @@ html, body {
     -webkit-hyphens: none !important;
 }
 
+/* --- MOBILE PAGE BANNER NORMALIZATION --- */
+.about-page:not(.product-inner-page) .about-banner-section,
+.services-page .about-banner-section,
+.contact-page .about-banner-section,
+.product-list-page .product-banner-section {
+    isolation: isolate;
+    background: #f4f6ef;
+}
+
+.about-page:not(.product-inner-page) .about-banner-img,
+.services-page .about-banner-img,
+.contact-page .about-banner-img,
+.product-list-page .product-banner-img {
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+
+.product-inner-page .product-banner-slideshow {
+    background: #112218;
+}
+
+.product-inner-page .banner-slide {
+    background-size: cover;
+    background-position: center center;
+}
+
+@media (max-width: 768px) {
+    .about-page:not(.product-inner-page) .about-banner-section,
+    .services-page .about-banner-section,
+    .contact-page .about-banner-section,
+    .product-list-page .product-banner-section {
+        height: auto !important;
+        min-height: 0 !important;
+        margin-top: 126px !important;
+    }
+
+    .about-page:not(.product-inner-page) .about-banner-section,
+    .services-page .about-banner-section {
+        aspect-ratio: 2.45 / 1 !important;
+    }
+
+    .product-list-page .product-banner-section {
+        aspect-ratio: 2.25 / 1 !important;
+    }
+
+    .contact-page .about-banner-section {
+        aspect-ratio: 2.05 / 1 !important;
+    }
+
+    .about-page:not(.product-inner-page) .about-banner-img,
+    .services-page .about-banner-img,
+    .contact-page .about-banner-img,
+    .product-list-page .product-banner-img {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .contact-page .about-banner-img {
+        object-position: center bottom !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(390px, 92svw, 520px) !important;
+        margin-top: 126px !important;
+    }
+
+    .product-inner-page .banner-slide {
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    .product-inner-page .banner-slideshow-content {
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 0 1.15rem clamp(2rem, 8vw, 3rem);
+    }
+
+    .product-inner-page .banner-text-left {
+        max-width: 100%;
+        margin: 0;
+        text-align: left;
+    }
+
+    .product-inner-page .banner-title {
+        font-size: clamp(1.45rem, 6.2vw, 2.35rem);
+        line-height: 1.14;
+    }
+
+    .product-inner-page .banner-subtitle {
+        max-width: 36rem;
+        font-size: clamp(0.9rem, 3.9vw, 1rem);
+    }
+
+    .product-inner-page .product-banner-slideshow .about-banner-overlay {
+        background: linear-gradient(180deg, rgba(8, 35, 20, 0.18) 0%, rgba(8, 35, 20, 0.34) 44%, rgba(8, 35, 20, 0.82) 100%) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-inner-page .product-banner-slideshow {
+        height: clamp(340px, 96svw, 430px) !important;
+    }
+
+    .product-inner-page .banner-kicker {
+        font-size: 0.68rem;
+    }
+
+    .product-inner-page .banner-title {
+        font-size: clamp(1.28rem, 6vw, 1.9rem);
+        margin-bottom: 0.75rem;
+    }
+
+    .product-inner-page .banner-subtitle {
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 380px) {
+    .product-inner-page .banner-subtitle {
+        display: none;
+    }
+}
+
 .services-intro-readable {
     display: block;
     visibility: visible;
