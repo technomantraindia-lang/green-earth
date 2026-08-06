@@ -976,6 +976,18 @@ custom-header {
     background: #f8f6ef;
 }
 
+.about-globe-slide.about-globe-rubber-slide {
+    animation-name: aboutGlobeRubberSlideshow;
+    object-fit: cover;
+}
+
+@keyframes aboutGlobeRubberSlideshow {
+    0% { opacity: 1; transform: scale(0.92); }
+    7.5% { opacity: 1; transform: scale(0.87); }
+    9% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 0; transform: scale(0.85); }
+}
+
 .about-globe-shade {
     position: absolute;
     inset: 0;
@@ -1177,9 +1189,11 @@ custom-header {
     line-height: 1.5;
     text-align: justify;
     text-align-last: left;
-    text-justify: inter-word;
+    text-justify: auto;
     word-spacing: normal;
     overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 .about-heading {
@@ -4878,9 +4892,9 @@ custom-footer {
     }
 
     .hero-section {
-        min-height: calc(72vh - 80px);
-        height: calc(72vh - 80px);
-        margin-top: 80px;
+        min-height: calc(72vh - 68px);
+        height: calc(72vh - 68px);
+        margin-top: 68px;
     }
 
     .menu-toggle {
@@ -6259,6 +6273,12 @@ html, body {
     background: linear-gradient(120deg, #fff 0%, #fbfcf8 72%, #eef4e6 100%);
     position: relative;
     overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .about-details-section {
+        padding: 4rem 0;
+    }
 }
 
 .about-watermark {
@@ -7656,7 +7676,7 @@ html, body {
     .home-page .hero-section {
         min-height: clamp(360px, 64svh, 620px);
         height: clamp(360px, 64svh, 620px);
-        margin-top: 80px;
+        margin-top: 68px;
     }
 
     .home-page .hero-bg-video {
@@ -7863,6 +7883,85 @@ html, body {
 
 /* --- MOBILE HEADER, SUSTAINABILITY VISUAL & FOOTER POLISH --- */
 @media (max-width: 768px) {
+
+    /* ---- HEADER / NAVBAR MOBILE FIX ---- */
+    custom-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .navbar-container {
+        padding: 0 1rem !important;
+    }
+
+    .navbar {
+        height: 68px !important;
+        min-height: 68px !important;
+    }
+
+    .header-active .navbar {
+        height: 62px !important;
+    }
+
+    /* Logo image: much smaller on mobile */
+    .logo-img {
+        height: 52px !important;
+        width: auto !important;
+    }
+
+    .header-active .logo-img {
+        height: 46px !important;
+    }
+
+    /* Brand stack: tighten spacing */
+    .logo-brand-stack {
+        margin-left: 0.5rem !important;
+        gap: 0 !important;
+    }
+
+    /* Company name: smaller */
+    .logo-text {
+        font-size: 1.05rem !important;
+        line-height: 1.1 !important;
+        margin-left: 0 !important;
+    }
+
+    /* "Commodity FZ LLC" sub-label */
+    .logo-text span {
+        font-size: 0.6rem !important;
+        letter-spacing: 0.1em !important;
+        margin-top: 0.1rem !important;
+    }
+
+    /* Hide tagline on mobile to save space */
+    .logo-tagline {
+        display: none !important;
+    }
+
+    /* Hero section: push down to match new header height */
+    .hero-section {
+        margin-top: 68px !important;
+    }
+
+    /* About banner pages */
+    .about-banner-section {
+        margin-top: 68px !important;
+    }
+
+    /* Product banner pages */
+    .product-banner-section {
+        margin-top: 68px !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        margin-top: 68px !important;
+    }
+
+    /* ---- END HEADER MOBILE FIX ---- */
+
     .menu-toggle {
         width: 26px;
         height: auto;
@@ -8024,7 +8123,36 @@ html, body {
 
 @media (max-width: 480px) {
     .navbar-container {
-        padding-inline: 1rem;
+        padding-inline: 0.75rem !important;
+    }
+
+    .navbar {
+        height: 62px !important;
+        min-height: 62px !important;
+    }
+
+    .logo-img {
+        height: 46px !important;
+    }
+
+    .logo-text {
+        font-size: 0.95rem !important;
+    }
+
+    .hero-section {
+        margin-top: 62px !important;
+    }
+
+    .about-banner-section {
+        margin-top: 62px !important;
+    }
+
+    .product-banner-section {
+        margin-top: 62px !important;
+    }
+
+    .product-inner-page .product-banner-slideshow {
+        margin-top: 62px !important;
     }
 
     :is(.home-page, .about-page) .sustainability-wrapper {
@@ -8264,7 +8392,7 @@ html, body {
 }
 
 .about-page .about-banner-img {
-    object-position: 25% center;
+    object-position: center center;
 }
 
 .services-page .about-banner-img {
@@ -8367,7 +8495,7 @@ html, body {
 
     :is(.about-page, .services-page) .about-banner-section {
         height: clamp(300px, 58vw, 420px);
-        margin-top: 80px;
+        margin-top: 68px;
     }
 
     :is(.about-page, .services-page) .about-banner-img {
@@ -8613,17 +8741,28 @@ html, body {
     width: 100%;
     height: 100%;
     max-width: none;
-    object-fit: contain;
-    object-position: center;
+    object-fit: cover;
+    object-position: center center;
     transform: none !important;
     transition: none !important;
+}
+
+.about-page .about-banner-img,
+.js-enabled .about-page .about-banner-img,
+.page-loaded .about-page .about-banner-img {
+    object-position: center center !important;
 }
 
 @media (max-width: 768px) {
     :is(.about-page, .services-page, .contact-page) .about-banner-section {
         height: auto;
         min-height: 0;
-        margin-top: 80px !important;
+        margin-top: 68px !important;
+    }
+
+    /* About page: taller aspect ratio on mobile for a proper looking banner */
+    .about-page .about-banner-section {
+        aspect-ratio: 16 / 9 !important;
     }
 
     :is(.about-page, .services-page) .about-banner-section {
@@ -8636,7 +8775,19 @@ html, body {
 
     :is(.about-page, .services-page, .contact-page) .about-banner-img {
         object-fit: cover !important;
-        object-position: left center !important;
+        object-position: center center !important;
+    }
+
+    /* Reduce gap between banner and WHO WE ARE section on mobile */
+    .about-page .about-details-section {
+        padding-top: 2.5rem !important;
+        padding-bottom: 3.5rem !important;
+    }
+
+    .about-page .about-details-section .section-header {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        margin-bottom: 1.5rem !important;
     }
 }
 
@@ -8959,7 +9110,7 @@ html, body {
         height: auto !important;
         min-height: 0 !important;
         aspect-ratio: 1.8 / 1 !important;
-        margin-top: 80px !important;
+        margin-top: 68px !important;
     }
 
     .product-list-page .product-banner-img {
@@ -9026,7 +9177,7 @@ html, body {
         height: clamp(380px, 80vw, 460px) !important;
         min-height: 0 !important;
         aspect-ratio: auto !important;
-        margin-top: 80px !important;
+        margin-top: 68px !important;
     }
 
     .product-banner-slideshow .about-banner-overlay {
@@ -9203,7 +9354,7 @@ html, body {
 .services-page .about-banner-img,
 .contact-page .about-banner-img,
 .product-list-page .product-banner-img {
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center center !important;
 }
 
@@ -9223,20 +9374,20 @@ html, body {
     .product-list-page .product-banner-section {
         height: auto !important;
         min-height: 0 !important;
-        margin-top: 126px !important;
+        margin-top: 68px !important;
     }
 
     .about-page:not(.product-inner-page) .about-banner-section,
     .services-page .about-banner-section {
-        aspect-ratio: 2.45 / 1 !important;
+        aspect-ratio: 2.75 / 1 !important;
     }
 
     .product-list-page .product-banner-section {
-        aspect-ratio: 2.25 / 1 !important;
+        aspect-ratio: 1961 / 802 !important;
     }
 
     .contact-page .about-banner-section {
-        aspect-ratio: 2.05 / 1 !important;
+        aspect-ratio: 2.172 / 1 !important;
     }
 
     .about-page:not(.product-inner-page) .about-banner-img,
@@ -9260,7 +9411,7 @@ html, body {
 
     .product-inner-page .product-banner-slideshow {
         height: clamp(390px, 92svw, 520px) !important;
-        margin-top: 126px !important;
+        margin-top: 68px !important;
     }
 
     .product-inner-page .banner-slide {
@@ -9296,6 +9447,14 @@ html, body {
 }
 
 @media (max-width: 480px) {
+    .about-page:not(.product-inner-page) .about-banner-section,
+    .services-page .about-banner-section,
+    .contact-page .about-banner-section,
+    .product-list-page .product-banner-section,
+    .product-inner-page .product-banner-slideshow {
+        margin-top: 62px !important;
+    }
+
     .product-inner-page .product-banner-slideshow {
         height: clamp(340px, 96svw, 430px) !important;
     }
